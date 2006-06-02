@@ -1,0 +1,16 @@
+KNNL
+
+Kohonen Neural Network Library
+
+This library is written in modern C++, using boost library.
+To compile is needed boost version 1.33.
+
+In special case it is possble to reduce code and force 
+to use library without boost. 
+
+For details look on http::/leto.homedns.org/~sevi/.
+
+To conpile demo run:
+
+make 
+
