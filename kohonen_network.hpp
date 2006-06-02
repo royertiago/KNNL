@@ -1,0 +1,143 @@
+/*
+ * Copyright (c) 2006, Seweryn Habdank-Wojewodzki
+ * Copyright (c) 2006, Janusz Rybarski
+ *
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms,
+ * with or without modification, are permitted provided
+ * that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above
+ * copyright notice, this list of conditions and the
+ * following disclaimer.
+ *
+ * Redistributions in binary form must reproduce the
+ * above copyright notice, this list of conditions
+ * and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS
+ * AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
+ * THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+ * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/*
+ * e-mail: habdank AT megapolis DOT pl
+ * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
+ *
+ * File created: Tue 18 Apr 2006 19:25:15 CEST
+ * Last modified: Mon 22 May 2006 22:52:58 CEST
+ */
+
+#ifndef KOHONEN_NETWORK_HPP_INCLUDED
+#define KOHONEN_NETWORK_HPP_INCLUDED
+
+#include "ranges.hpp"
+
+#include <cstdlib>
+#include <vector>
+#include <ctime>
+
+/**
+ * \file kohonen_network.hpp
+ * \brief File contains template functions for preparing
+ * Kohonen neural networks.
+ * \ingroup neural_net
+ */
+
+namespace neural_net
+{
+	/**
+	* \addtogroup neural_net
+	*/
+	/*\@{*/
+
+	/**
+	 * Function generates randomly distributed weights for neural network.
+	 * Distribution is uniform and weights are generated based on
+	 * multidimensional ranges of training data.
+	 * \param no_rows is a number of rows that will be created in neural network.
+	 * \param no_columns is a number of columns that will be created in neural network.
+	 * \param activation_function is activation function that will be set.
+	 * \param binary_operation is a function tat will be set under activation function.
+	 * \param data is a reference to data container.
+	 * \param kohonen_network is a reference to the network.
+	 * \param randomize_policy is a policy class for setting up random number generator.
+	 * \todo TODO: When Rectangular_container will be changed then this class should be repaired too.
+	 */
+	template
+	<
+		typename Data_container_type,
+		typename Kohonen_network_type,
+		typename Randomize_policy
+	>
+	void generate_kohonen_network
+	(
+		const size_t & no_rows,
+		const size_t & no_columns,
+		const typename Kohonen_network_type::value_type::activation_function_type & activation_function,
+		const typename Kohonen_network_type::value_type::binary_operation_type & binary_operation,
+		Data_container_type & data,
+		Kohonen_network_type & kohonen_network,
+		const Randomize_policy & randomize_policy
+	)
+	{
+		randomize_policy();
+
+		typedef typename Kohonen_network_type::value_type Neuron_type;
+
+		typename Neuron_type::weights_type weights;
+
+		std::vector < Neuron_type > tmp_neuron_vector;
+
+		size_t K = data.begin()->size();
+
+		Ranges < Data_container_type > data_ranges ( *data.begin() );
+		data_ranges ( data );
+
+		for ( size_t i = 0; i < no_rows; ++i )
+		{
+			for ( size_t j = 0; j < no_columns; ++j )
+			{
+				for ( size_t k = 0; k < K; ++k )
+				{
+					weights.push_back (
+						static_cast < typename Data_container_type::value_type::value_type >
+						( ( data_ranges.get_max().at ( k )
+							- data_ranges.get_min().at ( k ) )
+						 * ( rand() / ( 1.0 + RAND_MAX ) )
+						 + data_ranges.get_min().at ( k ) ) );
+				}
+
+				Neuron_type my_neuron
+				(
+					weights,
+					activation_function,
+					binary_operation
+				);
+				weights.clear();
+				tmp_neuron_vector.push_back ( my_neuron );
+			}
+			kohonen_network.objects.push_back ( tmp_neuron_vector );
+			tmp_neuron_vector.clear();
+		}
+	}
+	/*\@}*/
+
+} // namespace neural_net
+
+#endif // KOHONEN_NETWORK_HPP_INCLUDED
+
