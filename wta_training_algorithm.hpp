@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 21 Apr 2006 17:33:34 CEST
- * Last modified: Fri 02 Jun 2006 15:36:41 CEST
+ * Last modified: Sat 03 Jun 2006 13:55:58 CEST
  */
 
 #ifndef WTA_TRAINING_ALGORITM_HPP_INCLUDED
@@ -173,7 +173,8 @@ namespace neural_net
 		{
 			network = network_;
 
-			assert ( network != NULL );
+			// check if pointer is not null
+			assert ( network != static_cast < Network_type* > ( 0 ) );
 
 			// for each data train neural network
 			std::for_each

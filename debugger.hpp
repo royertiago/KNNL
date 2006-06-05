@@ -15,7 +15,7 @@
  * e-mail: habdank{AT}megapolis{dot}pl
  *
  * File created: Sat 05 Nov 2005 14:20:28 CET
- * Last modified: Tue 23 May 2006 23:49:49 CEST
+ * Last modified: Mon 05 Jun 2006 08:53:20 CEST
  */
 
 /**
@@ -39,9 +39,39 @@
  * \param name is name of debugged variable.
  * \par Usage:
  *
- * D ( my_variable_name );
+ * In the main file e.g. main.cpp in global scope should be placed:
  *
- * Remember to put semicolon at the end.
+ * #ifdef FTDEBUG
+ * std::auto_ptr < std::ofstream > DEBUGGER_STREAM;
+ * #endif //FTDEGUG
+ *
+ * And at the very beginnig of the main function should be placed:
+ *
+ * #ifdef FTDEBUG
+ * 	DEBUGGER_STREAM =
+ * 		std::auto_ptr < std::ofstream >
+ * 		( new std::ofstream ( "_debugger.out" ) );
+ * #endif //FTDEBUG
+ *
+ * if we suppose to use file to make logs.
+ *
+ * And in the application we have to include this header and just use macro:
+ *
+ * Available for all cases including compilation
+ * without any flag:
+ *
+ * D ( my_variable_name ); or D ( "I am here" );
+ *
+ * If are sure that debugger will work by default any of flag TDEBUG, ETDEBUG and FTDEBUG is set:
+ *
+ * D ( ) << "Send other information to the stream." << std::endl;
+ *
+ * Or just work on if we are sure about existence of the log file FTDEBUG is set:
+ *
+ * *DEBUGGER_STREAM << any_function_that_returns_reference_to_ostream ( ) << std::endl;
+ *
+ * \par Remark:
+ * Remember to put semicolon at the end!
  *
  * \par Flags:
  *
@@ -61,18 +91,18 @@
 	#include <memory>
 	#include <fstream>
 
-	#define D(name) *DEBUGGER_STREAM << __FILE__ << " [" << __LINE__ << "] : " << #name << " = " << name << std::endl
+	#define D(name) *DEBUGGER_STREAM << __FILE__ << " [" << __LINE__ << "] : " << #name << " = " << (name) << std::endl
 	extern std::auto_ptr < std::ofstream > DEBUGGER_STREAM;
 
 #elif defined(TDEBUG)
 
 	#include <iostream>
-	#define D(name) std::cout << __FILE__ << " [" << __LINE__ << "] : " << #name << " = " << name << std::endl
+	#define D(name) std::cout << __FILE__ << " [" << __LINE__ << "] : " << #name << " = " << (name) << std::endl
 
 #elif defined(ETDEBUG)
 
 	#include <iostream>
-	#define D(name) std::cerr << __FILE__ << " [" << __LINE__ << "] : " << #name << " = " << name << std::endl
+	#define D(name) std::cerr << __FILE__ << " [" << __LINE__ << "] : " << #name << " = " << (name) << std::endl
 
 #else
 
