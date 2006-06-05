@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Thu 10 Apr 2006 11:05:06 CEST
- * Last modified: Fri 02 Jun 2006 15:48:51 CEST
+ * Last modified: Sat 03 Jun 2006 14:40:22 CEST
  */
 
 #include "debugger.hpp"
@@ -80,7 +80,7 @@
  * \author Seweryn Habdank-Wojewodzki
  * \author Janusz Rybarski
  * \version 0.1.0
- * \date 2006.05.18
+ * \date 2006.06.03
  */
 
 /**

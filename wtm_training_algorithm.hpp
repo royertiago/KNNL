@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 02 May 2006 11:39:22 CEST
- * Last modified: Wed 31 May 2006 03:33:00 CEST
+ * Last modified: Mon 05 Jun 2006 15:41:39 CEST
  */
 
 #ifndef WTM_TRAINING_ALGORITM_HPP_INCLUDED
@@ -155,9 +155,9 @@ namespace neural_net
 			>
 			& wtm_training_alg_
 		)
-		: iteration_step ( wtm_training_alg.iteration_step ),
-		training_functional ( wtm_training_alg.training_functional ),
-		iteration ( wtm_training_alg.iteration )
+		: iteration_step ( wtm_training_alg_.iteration_step ),
+		training_functional ( wtm_training_alg_.training_functional ),
+		iteration ( wtm_training_alg_.iteration )
 		{
 			network = wtm_training_alg_.network;
 		}
