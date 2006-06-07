@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Thu 10 Apr 2006 11:05:06 CEST
- * Last modified: Sat 03 Jun 2006 14:40:22 CEST
+ * Last modified: Thu 08 Jun 2006 00:10:22 CEST
  */
 
 #include "debugger.hpp"
@@ -222,11 +222,11 @@ int main ( int argc, char * argv[] )
 
 			/* examples how to construct single neuron */
 			// here Cauchy activation function and euclidean distance is chosen
-			typedef neural_net::Basic_neuron < C_a_f, E_d_t, V_d, V_d > Kohonen_neuron;
+			typedef neural_net::Basic_neuron < C_a_f, E_d_t, V_d > Kohonen_neuron;
 			Kohonen_neuron my_neuron ( *(data.begin()), c_a_f, e_d );
 
 			// here Gauss activation function and weighted euclidean distance is chosen
-			typedef neural_net::Basic_neuron < G_a_f, We_d_t, V_d, V_d > Kohonen_neuron_w;
+			typedef neural_net::Basic_neuron < G_a_f, We_d_t, V_d > Kohonen_neuron_w;
 			Kohonen_neuron_w my_neuron_w ( *(data.begin()), g_a_f, we_d );
 
 			/* neural networks parametrized by different neurons */

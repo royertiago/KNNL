@@ -91,18 +91,18 @@ namespace distance
 		{}
 
 		/** Copy constructor. */
-		template 
+		template
 		<
 			typename Value_type_2,
 			typename Result_type_2
 		>
 		Basic_weak_distance_function
-		( 
-			const Basic_weak_distance_function 
+		(
+			const Basic_weak_distance_function
 			<
 				Value_type_2,
 				Result_type_2
-			> 
+			>
 			& weak_distance_function_
 		)
 		{}
