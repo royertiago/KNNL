@@ -15,7 +15,7 @@
  * e-mail: habdank{AT}megapolis{dot}pl
  *
  * File created: Sat 05 Nov 2005 14:20:28 CET
- * Last modified: Mon 05 Jun 2006 08:53:20 CEST
+ * Last modified: Sun 18 Jun 2006 10:24:44 CEST
  */
 
 /**
@@ -60,7 +60,7 @@
  * Available for all cases including compilation
  * without any flag:
  *
- * D ( my_variable_name ); or D ( "I am here" );
+ * D ( my_variable_name ); or D ( "I am here." );
  *
  * If are sure that debugger will work by default any of flag TDEBUG, ETDEBUG and FTDEBUG is set:
  *

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 18 Apr 2006 19:25:15 CEST
- * Last modified: Mon 22 May 2006 22:52:58 CEST
+ * Last modified: Sat 17 Jun 2006 17:45:18 CEST
  */
 
 #ifndef KOHONEN_NETWORK_HPP_INCLUDED
@@ -122,14 +122,14 @@ namespace neural_net
 						 + data_ranges.get_min().at ( k ) ) );
 				}
 
-				Neuron_type my_neuron
+				Neuron_type local_neuron
 				(
 					weights,
 					activation_function,
 					binary_operation
 				);
 				weights.clear();
-				tmp_neuron_vector.push_back ( my_neuron );
+				tmp_neuron_vector.push_back ( local_neuron );
 			}
 			kohonen_network.objects.push_back ( tmp_neuron_vector );
 			tmp_neuron_vector.clear();

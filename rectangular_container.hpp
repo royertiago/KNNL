@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:37:57 CEST
- * Last modified: Fri 02 Jun 2006 15:34:48 CEST
+ * Last modified: Thu 08 Jun 2006 01:59:34 CEST
  */
 
 #ifndef RECTANGULAR_CONTAINER_HPP_INCLUDED
@@ -102,17 +102,17 @@ namespace neural_net
 		: objects ( rectangular_container.objects )
 		{}
 
-		inline size_t get_no_columns() const
+		inline const size_t get_no_columns() const
 		{
 			return objects.begin()->size();
 		}
 
-		inline size_t get_no_rows() const
+		inline const size_t get_no_rows() const
 		{
 			return objects.size();
 		}
 
-		inline Matrix_index get_size() const
+		inline const Matrix_index get_size() const
 		{
 			Matrix_index idx;
 			idx.first = objects.size();

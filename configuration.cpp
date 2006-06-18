@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 06 Feb 2006 17:51:24 CET
- * Last modified: Fri 02 Jun 2006 15:48:32 CEST
+ * Last modified: Fri 09 Jun 2006 15:15:47 CEST
  */
 
 #include "configuration.hpp"
@@ -86,6 +86,11 @@ namespace config
 				"no-columns,c",
 				bpo::value<size_t> ( &conf_.parameters.no_columns )->default_value ( 5 ),
 				"number of columns in kohonen network"
+			)
+			(
+				"no-epochs,e",
+				bpo::value<unsigned long> ( &conf_.parameters.no_epochs )->default_value ( 20 ),
+				"number of training epochs"
 			);
 
 		// add options
@@ -166,6 +171,11 @@ namespace config
 				if ( vm.count ( "no-columns" ) )
 				{
 					std::cout << "Number of columns in kohonen network is: " << conf_.parameters.no_columns << "\n";
+				}
+				
+				if ( vm.count ( "no-epochs" ) )
+				{
+					std::cout << "Number of epochs of the training algorithm is: " << conf_.parameters.no_epochs << "\n";
 				}
 			}
 		}

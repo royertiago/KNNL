@@ -4,7 +4,7 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 PROJECT_NAME           = "Kohonen Neural Network Library Demo"
-PROJECT_NUMBER         = 0.1.0
+PROJECT_NUMBER         = 0.1.1
 OUTPUT_DIRECTORY       = ../Documents
 CREATE_SUBDIRS         = YES
 OUTPUT_LANGUAGE        = English

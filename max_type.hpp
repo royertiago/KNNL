@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 23 May 2006 23:53:14 CEST
- * Last modified: Fri 02 Jun 2006 12:32:39 CEST
+ * Last modified: Thu 08 Jun 2006 01:27:08 CEST
  */
 
 #ifndef MAX_TYPE_HPP_INCLUDED
@@ -64,12 +64,12 @@ namespace operators
 	template < typename T >
 	struct Max_type_private < T, T >
 	{
-		typedef T RET;
+		typedef T type;
 	};
 
 	#define MAX_TYPE(T1,T2,T3) template <>\
 	struct Max_type_private < T1, T2 >\
-	{ typedef T3 RET; };
+	{ typedef T3 type; };
 	MAX_TYPE(double,int,double)
 	MAX_TYPE(double,short,double)
 	MAX_TYPE(double,unsigned char,double)
@@ -107,7 +107,7 @@ namespace operators
 		typedef typename boost::remove_all_extents < T_2 >::type T_2_t;
 
 	public:
-		typedef typename Max_type_private < T_1_t, T_2_t >::RET type;
+		typedef typename Max_type_private < T_1_t, T_2_t >::type type;
 	};
 } // namespace operators
 /*\@}*/

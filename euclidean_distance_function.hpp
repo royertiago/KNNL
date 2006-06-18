@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:42:31 CEST
- * Last modified: Tue 23 May 2006 22:24:45 CEST
+ * Last modified: Fri 09 Jun 2006 00:02:54 CEST
  */
 
 #ifndef EUCLIDEAN_DISTANCE_FUNCTION_HPP_INCLUDED
@@ -49,6 +49,8 @@
 
 #include "operators.hpp"
 #include "basic_weak_distance_function.hpp"
+
+#include "value_type.hpp"
 
 /**
  * \file euclidean_distance_function.hpp
@@ -89,7 +91,7 @@ namespace distance
 		* \param init is an initial value.
 		* \result sqare of euclidean distance.
 		*/
-		inner_type euclidean_distance_square
+		const inner_type euclidean_distance_square
 		(
 			typename Value_type::const_iterator begin_1,
 			typename Value_type::const_iterator end_1,
@@ -123,7 +125,7 @@ namespace distance
 		 * \param y second input value for the function.
 		 * \return square of the euclidean distance function.
 		 */
-		typename Value_type::value_type operator()
+		const typename Value_type::value_type operator()
 		(
 			const Value_type & x,
 			const Value_type & y
@@ -136,7 +138,7 @@ namespace distance
 					x.begin(),
 					x.end(),
 					y.begin(),
-					static_cast < typename Value_type::value_type > ( 0 )
+					static_cast < const typename Value_type::value_type & > ( 0 )
 				)
 			);
 		}

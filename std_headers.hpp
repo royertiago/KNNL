@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 12 May 2006 14:39:01 CEST
- * Last modified: Tue 23 May 2006 22:17:54 CEST
+ * Last modified: Sun 18 Jun 2006 09:44:28 CEST
  */
 
 #ifndef STD_HEADERS_HPP_INCLUDED
@@ -59,6 +59,7 @@
 #include <functional>
 #include <iostream>
 #include <iterator>
+#include <list>
 #include <sstream>
 #include <utility>
 #include <vector>

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 29 Jan 2006 11:35:05 CET
- * Last modified: Fri 02 Jun 2006 15:49:50 CEST
+ * Last modified: Fri 09 Jun 2006 15:13:18 CEST
  */
 
 #ifndef CONFIGURATION_HPP_INCLUDED
@@ -132,6 +132,14 @@ namespace config
 		 * Number of columns in kohonen network.
 		 */
 		size_t no_columns;
+
+		/**
+		 * Number of epochs of the training algorithm.
+		 * In this demo program the <b>one</b> epoch is
+		 * <b>one</b> pass through the all training data.
+		 */
+		unsigned long no_epochs;
+
 	};
 	
 	/**
