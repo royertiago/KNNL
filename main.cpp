@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Thu 10 Apr 2006 11:05:06 CEST
- * Last modified: Thu 08 Jun 2006 00:10:22 CEST
+ * Last modified: Sun 18 Jun 2006 13:57:48 CEST
  */
 
 #include "debugger.hpp"
@@ -73,14 +73,14 @@
  *
  * - -c number of columns in neural martix
  *
+ * - -e number of epochs that training process will pass
+ *
  * \par Hidden options:
  *
  * - -i [ --input-file ] arg input file name
  *
  * \author Seweryn Habdank-Wojewodzki
  * \author Janusz Rybarski
- * \version 0.1.0
- * \date 2006.06.03
  */
 
 /**
@@ -162,7 +162,7 @@ int main ( int argc, char * argv[] )
 			// std::cout << CONF.parameters.input_file_name << std::endl;
 			if ( !file_ptr )
 			{
-				std::cout << "Error in reading file" << std::endl;
+				std::cout << "Error in reading file." << std::endl;
 				std::exit ( EXIT_FAILURE );
 			}
 		}
@@ -176,8 +176,6 @@ int main ( int argc, char * argv[] )
 		// start random generator
 		std::srand ( time ( NULL ) );
 
-		typedef double data_type;
-
 		// it could cause problems
 		try
 		{
@@ -186,11 +184,25 @@ int main ( int argc, char * argv[] )
 			// set number of columns for network
 			int C = CONF.parameters.no_columns;
 
+			// set number of the the training epochs
+			// one epoch it is training through all data stored in container
+			int no_epochs = CONF.parameters.no_epochs;
+
+			// example of using macro for debugging
+			D ( no_epochs );
+
+			typedef double data_type;
+
 			// type of the single data vector
-			// for example if we have pairs of the data like { (1,2), (2,3), (3,4)}
-			// V_d describes type of (1,2)
+			// for example if we have pairs of the data like { (1,2.4), (2,3.2), (3,4.7) }
+			// data_type describes a type of the single element
+			// V_d describes type of (1,2.4)
 			typedef std::vector < data_type > V_d;
+			// type below describes type of the container of all data
 			typedef std::vector < V_d > V_v_d;
+			// list container is quite good for storing data,
+			// but thare is no possibility to use std::random_shuffle()
+			//typedef std::list < V_d > V_v_d;
 
 			V_v_d data;
 
@@ -200,12 +212,12 @@ int main ( int argc, char * argv[] )
 			// configure Cauchy hat function
 			typedef neural_net::Cauchy_function < V_d::value_type, V_d::value_type, int > C_a_f;
 			// Activation function for neurons
-			C_a_f c_a_f ( 2.0, 2 );
+			C_a_f c_a_f ( 2.0, 1 );
 
 			// configure Gauss hat function
 			typedef neural_net::Gauss_function < V_d::value_type, V_d::value_type, int > G_a_f;
 			// Activation function for neurons
-			G_a_f g_a_f ( 2.0, 2 );
+			G_a_f g_a_f ( 2.0, 1 );
 
 			// prepare euclidean distance function
 			typedef distance::Euclidean_distance_function < V_d > E_d_t;
@@ -251,31 +263,29 @@ int main ( int argc, char * argv[] )
 
 			// generate networks initialized by data
 			neural_net::generate_kohonen_network
-			<
-				V_v_d,
-				Kohonen_network,
-				neural_net::Internal_randomize
-			> ( R, C, c_a_f, e_d, data, kohonen_network, IR );
+			//<
+			//	V_v_d,
+			//	Kohonen_network,
+			//	neural_net::Internal_randomize
+			//>
+			( R, C, c_a_f, e_d, data, kohonen_network, IR );
 
 			neural_net::generate_kohonen_network
-			<
-				V_v_d,
-				Kohonen_network_w,
-				neural_net::External_randomize
-			> ( R, C, g_a_f, we_d, data, kohonen_network_w, ER );
+			//<
+			//	V_v_d,
+			//	Kohonen_network_w,
+			//	neural_net::External_randomize
+			//>
+			( R, C, g_a_f, we_d, data, kohonen_network_w, ER );
 
 			// construct WTA training functional
 			typedef neural_net::Wta_proportional_training_functional < V_d, double, int > Wta_train_func;
 
-			// construct WTA training algoritm
-			typedef neural_net::Wta_training_algorithm < Kohonen_network, V_d, V_v_d::iterator, Wta_train_func, int > Learning_algorithm;
-			typedef neural_net::Wta_training_algorithm < Kohonen_network_w, V_d, V_v_d::iterator, Wta_train_func, int > Learning_algorithm_w;
-
 			// define proper functionals
 			// Wta_train_func wta_train_func_0 ( static_cast < double > ( R * C ) / static_cast < double > ( data.size() ), 0 );
 			// Wta_train_func wta_train_func_2 ( 0.3, 1.0 / static_cast<double> (data.size()) );
-			Wta_train_func wta_train_func ( 0.2 , 0 );
-			Wta_train_func wta_train_func_1 ( 0.8 , 0 );
+			Wta_train_func wta_train_func ( 0.2, 0 );
+			Wta_train_func wta_train_func_1 ( 0.8, 0 );
 
 			// make copy of network
 			kohonen_network_1 = kohonen_network;
@@ -285,7 +295,7 @@ int main ( int argc, char * argv[] )
 
 			// print weights before training process
 			//std::cout << "kohonen_network" << std::endl;
-			neural_net::print_network_weights ( std::cout, kohonen_network );
+//			neural_net::print_network_weights ( std::cout, kohonen_network );
 			//std::cout << std::endl;
 			
 			//std::cout << "kohonen_network_1" << std::endl;
@@ -293,19 +303,18 @@ int main ( int argc, char * argv[] )
 			//std::cout << std::endl;
 
 			//std::cout << "kohonen_network_m" << std::endl;
-			neural_net::print_network_weights ( std::cout, kohonen_network_w );
+//			neural_net::print_network_weights ( std::cout, kohonen_network_w );
 			//std::cout << std::endl;
 
+			// construct WTA training algoritm
+			typedef neural_net::Wta_training_algorithm < Kohonen_network, V_d, V_v_d::iterator, Wta_train_func > Learning_algorithm;
+			typedef neural_net::Wta_training_algorithm < Kohonen_network_w, V_d, V_v_d::iterator, Wta_train_func > Learning_algorithm_w;
+
+			neural_net::linear_numeric_iterator l_n_i;
+
 			// define training algorithm
-			Learning_algorithm training_alg ( wta_train_func, 0, 1 );
+			Learning_algorithm training_alg ( wta_train_func, l_n_i );
 			
-			// set number of the the training epochs
-			// one epoch it is training through all data stored in container
-			const int no_epochs = 30;
-
-			// example of using macro for debugging
-			D ( no_epochs );
-
 			// train network
 			for ( int i = 0; i < no_epochs; ++i )
 			{
@@ -320,8 +329,11 @@ int main ( int argc, char * argv[] )
 			neural_net::print_network_weights ( std::cout, kohonen_network );
 			//std::cout << std::endl;
 
+			//reset numeric iterator
+			l_n_i.reset();
+
 			// define another training algorithm
-			Learning_algorithm training_alg_1 ( wta_train_func_1, 0, 1 );
+			Learning_algorithm training_alg_1 ( wta_train_func_1, l_n_i );
 
 			// train network
 			for ( int i = 0; i < no_epochs; ++i )
@@ -337,8 +349,11 @@ int main ( int argc, char * argv[] )
 			neural_net::print_network_weights ( std::cout, kohonen_network_1 );
 			//std::cout << std::endl;
 
+			//reset numeric iterator
+			l_n_i.reset();
+
 			// define another algorithm for another network
-			Learning_algorithm_w training_alg_w ( wta_train_func_1, 0, 1 );
+			Learning_algorithm_w training_alg_w ( wta_train_func_1, l_n_i );
 
 			// train network
 			for ( int i = 0; i < no_epochs; ++i )
@@ -487,8 +502,11 @@ int main ( int argc, char * argv[] )
 			Wtm_e_l_f_co wtm_e_l_f_co ( experimental_weight_co, 0.3 );
 
 			//std::cout << "kohonen_network_2" << std::endl;
-			neural_net::print_network_weights ( std::cout, kohonen_network_2 );
+//			neural_net::print_network_weights ( std::cout, kohonen_network_2 );
 			//std::cout << std::endl;
+
+			//reset numeric iterator
+			l_n_i.reset();
 
 			// construction of algorithm
 			typedef neural_net::Wtm_training_algorithm
@@ -497,12 +515,11 @@ int main ( int argc, char * argv[] )
 				V_d,
 				V_v_d::iterator,
 				Wtm_c_l_f,
-				int,
 				size_t
 			> Wtm_c_training_alg;
 
 			// definition
-			Wtm_c_training_alg wtm_c_train_alg ( wtm_c_l_f, 0, 1 );
+			Wtm_c_training_alg wtm_c_train_alg ( wtm_c_l_f, l_n_i );
 
 			// tricky training
 			for ( int i = 0; i < no_epochs; ++i )
@@ -523,8 +540,11 @@ int main ( int argc, char * argv[] )
 			//std::cout << std::endl;
 
 			//std::cout << "kohonen_network_3" << std::endl;
-			neural_net::print_network_weights ( std::cout, kohonen_network_3 );
+//			neural_net::print_network_weights ( std::cout, kohonen_network_3 );
 			//std::cout << std::endl;
+
+			//reset numeric iterator
+			l_n_i.reset();
 
 			// construct another algorithm
 			typedef neural_net::Wtm_training_algorithm
@@ -533,12 +553,11 @@ int main ( int argc, char * argv[] )
 				V_d,
 				V_v_d::iterator,
 				Wtm_e_l_f,
-				int,
 				size_t
 			> Wtm_c_training_alg_e;
 
 			// definition
-			Wtm_c_training_alg_e wtm_c_train_alg_e ( wtm_e_l_f, 0, 1 );
+			Wtm_c_training_alg_e wtm_c_train_alg_e ( wtm_e_l_f, l_n_i );
 
 			// small helping constant
 			const int border = 3;
@@ -580,8 +599,11 @@ int main ( int argc, char * argv[] )
 			//std::cout << std::endl;
 
 			//std::cout << "kohonen_network_4" << std::endl;
-			neural_net::print_network_weights ( std::cout, kohonen_network_4 );
+//			neural_net::print_network_weights ( std::cout, kohonen_network_4 );
 			//std::cout << std::endl;
+
+			//reset numeric iterator
+			l_n_i.reset();
 
 			// construct another algorithm
 			typedef neural_net::Wtm_training_algorithm
@@ -590,12 +612,11 @@ int main ( int argc, char * argv[] )
 				V_d,
 				V_v_d::iterator,
 				Wtm_e_l_f_co,
-				int,
 				size_t
 			> Wtm_c_training_alg_e_co;
 
 			// definition
-			Wtm_c_training_alg_e_co wtm_c_train_alg_e_co ( wtm_e_l_f_co, 0, 1 );
+			Wtm_c_training_alg_e_co wtm_c_train_alg_e_co ( wtm_e_l_f_co, l_n_i );
 
 			// similar training
 			for ( int i = 0; i < no_epochs; ++i )

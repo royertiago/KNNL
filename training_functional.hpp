@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Wed 26 Apr 2006 14:55:28 CEST
- * Last modified: Tue 23 May 2006 23:51:29 CEST
+ * Last modified: Sun 18 Jun 2006 13:24:16 CEST
  */
 
 #ifndef TRAINING_FUNCTIONAL_HPP_INCLUDED

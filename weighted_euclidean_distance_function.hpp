@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 17 Apr 2006 23:54:20 CEST
- * Last modified: Tue 23 May 2006 23:51:39 CEST
+ * Last modified: Thu 08 Jun 2006 02:01:04 CEST
  */
 
 #ifndef WEIGHTED_EUCLIDEAN_DISTANCE_FUNCTION_HPP_INCLUDED
@@ -47,6 +47,8 @@
 
 #include "operators.hpp"
 #include "basic_weak_distance_function.hpp"
+
+#include "value_type.hpp"
 
 /**
  * \file weighted_euclidean_distance_function.hpp
@@ -100,7 +102,7 @@ namespace distance
 		 * w is given through Input_iterator_3,
 		 * \f$d_0\f$ is initial value (init).
 		 */
-		inner_type weighted_euclidean_distance_square
+		const inner_type weighted_euclidean_distance_square
 		(
 			typename Value_type::const_iterator begin_1,
 			typename Value_type::const_iterator end_1,
@@ -144,7 +146,7 @@ namespace distance
 		 * \f]
 		 * where: w are parameters given in constructor.
 		 */
-		inner_type operator()
+		const inner_type operator()
 		(
 			const Value_type & x,
 			const Value_type & y
@@ -158,7 +160,7 @@ namespace distance
 					x.end(),
 					y.begin(),
 					parameters.begin(),
-					static_cast < inner_type > (0)
+					static_cast < const inner_type & > (0)
 				)
 			);
 		}

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 21 Apr 2006 17:33:34 CEST
- * Last modified: Sat 03 Jun 2006 13:55:58 CEST
+ * Last modified: Sun 18 Jun 2006 13:50:39 CEST
  */
 
 #ifndef WTA_TRAINING_ALGORITM_HPP_INCLUDED
@@ -53,6 +53,7 @@
 #include <boost/bind.hpp>
 
 #include "training_functional.hpp"
+#include "numeric_iterator.hpp"
 
 /**
  * \file wta_training_algorithm.hpp
@@ -77,8 +78,7 @@ namespace neural_net
 	 * \param Data_iterator_type is is iterator for container
 	 * with training data.
 	 * \param Training_functional_type is a type of functional.
-	 * \param Iteration_type is a type is value that will iterate training.
-	 * It could be int or double or any type that has overloaded operator+.
+	 * \param Numeric_iterator_type is a type of numeric iterator.
 	 */
 	template
 	<
@@ -86,45 +86,37 @@ namespace neural_net
 		typename Value_type,
 		typename Data_iterator_type,
 		typename Training_functional_type,
-		typename Iteration_type
+		typename Numeric_iterator_type 
+			= Linear_numeric_iterator < 
+				typename Training_functional_type::iteration_type 
+			>
 	>
 	class Wta_training_algorithm
 	{
 	public:
 
-		typedef Iteration_type iteration_type;
+		typedef typename Training_functional_type::iteration_type iteration_type;
+		typedef Numeric_iterator_type numeric_iterator_type;
 		typedef Network_type network_type;
 		typedef Value_type value_type;
 		typedef Data_iterator_type data_iterator_type;
 		typedef Training_functional_type training_functional_type;
 
-		/** Pointer to the network. */
-		Network_type * network;
-
 		/** Training functional. */
 		Training_functional_type training_functional;
 
-		/** Constructor.
-		 * \param training_functional_ is a training funktor.
-		 * \param iteration_begin_ is a value that starts iteration.
-		 * \param iteration_step_ is a step of iteration value.
-		 * \note Warning: iteration value and step it is just numerical representation
-		 * of the training proces, this value is not directly conected with iterators
-		 * through the data container. For example Iteration_type could be double,
-		 * iteration_begin_ could be -2.0, and iteration_step_ could be -PI/10. And this
-		 * assumptions will not change direction of data iterator.
+		/** 
+		 * Constructor.
+		 * \param training_functional_ is a training functor.
+		 * \param numeric_iterator_ is a numeric iterator.
 		 */
 		Wta_training_algorithm
 		(
 			const Training_functional_type & training_functional_,
-			const Iteration_type & iteration_begin_
-				= static_cast < Iteration_type > ( 0 ),
-			const Iteration_type & iteration_step_
-				= static_cast < Iteration_type > ( 1 )
+			Numeric_iterator_type & numeric_iterator_
 		)
 		: training_functional ( training_functional_ ),
-		iteration ( iteration_begin_ ),
-		iteration_step ( iteration_step_ )
+		numeric_iterator ( numeric_iterator_ )
 		{
 			network = static_cast < Network_type* > ( 0 );
 		}
@@ -139,7 +131,7 @@ namespace neural_net
 			typename Value_type_2,
 			typename Data_iterator_type_2,
 			typename Training_functional_type_2,
-			typename Iteration_type_2
+			typename Numeric_iterator_type_2
 		>
 		Wta_training_algorithm
 		(
@@ -149,12 +141,12 @@ namespace neural_net
 				Value_type_2,
 				Data_iterator_type_2,
 				Training_functional_type_2,
-				Iteration_type_2
+				Numeric_iterator_type_2
 			>
 			& wta_training_alg_
 		)
-		: iteration_step ( wta_training_alg_.iteration_step ),
-		training_functional ( wta_training_alg_.training_functional ),
+		: training_functional ( wta_training_alg_.training_functional ),
+		numeric_iterator ( wta_training_alg_.numeric_iterator ),
 		iteration ( wta_training_alg_.iteration )
 		{
 			network = wta_training_alg_.network;
@@ -167,14 +159,16 @@ namespace neural_net
 		 * \param data_end is end iterator.
 		 * \return error code.
 		 */
-		int operator() ( Data_iterator_type data_begin,
-						 Data_iterator_type data_end,
-						 Network_type * network_ )
+		const int operator() ( 
+			Data_iterator_type data_begin,
+			Data_iterator_type data_end,
+			Network_type * network_ 
+		)
 		{
 			network = network_;
 
 			// check if pointer is not null
-			assert ( network != static_cast < Network_type* > ( 0 ) );
+			assert ( network != static_cast < Network_type * > ( 0 ) );
 
 			// for each data train neural network
 			std::for_each
@@ -188,7 +182,7 @@ namespace neural_net
 						Value_type,
 						Data_iterator_type,
 						Training_functional_type,
-						Iteration_type
+						Numeric_iterator_type
 					>::train,
 					this,
 					_1
@@ -198,9 +192,13 @@ namespace neural_net
 			return 0;
 		}
 
-	private:
-		Iteration_type iteration;
-		Iteration_type iteration_step;
+	protected:
+		/** Pointer to the network. */
+		Network_type * network;
+
+		iteration_type iteration;
+
+		Numeric_iterator_type numeric_iterator;
 
 		/**
 		 * Function trains neural network using single value.
@@ -267,9 +265,9 @@ namespace neural_net
 			);
 
 			// increase iteration
-			iteration += iteration_step;
+			++numeric_iterator;
+			iteration = numeric_iterator();
 		}
-
 	};
 	/*\@}*/
 

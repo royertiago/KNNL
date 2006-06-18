@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 17:47:44 CEST
- * Last modified: Tue 30 May 2006 21:34:29 CEST
+ * Last modified: Thu 08 Jun 2006 01:57:24 CEST
  */
 
 #ifndef OPERATORS_HPP_INCLUDED
@@ -125,7 +125,7 @@ namespace operators
 		 * \f]
 		 * where: f is OP1 type, g is OP2 type
 		 */
-		typename OP1::result_type
+		const typename OP1::result_type
 		operator()
 		(
 			const typename OP2::first_argument_type& x,
@@ -322,7 +322,7 @@ namespace operators
 	public:
 		typedef typename Max_type < T, E >::type result_type;
 
-		result_type operator() ( const T & value_, const E & exp_ ) const
+		const result_type operator() ( const T & value_, const E & exp_ ) const
 		{
 			if ( exp_ == 0 )
 			{
@@ -400,7 +400,7 @@ namespace operators
 		 * \f]
 		 * where: x is value_, y is exp_.
 		 */
-		result_type operator() ( const T & value_, const E & exp_ ) const
+		const result_type operator() ( const T & value_, const E & exp_ ) const
 		{
 			return std::pow ( static_cast < result_type > ( value_ ), exp_ );
 		}

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 15:01:26 CEST
- * Last modified: Thu 08 Jun 2006 00:08:50 CEST
+ * Last modified: Sat 17 Jun 2006 17:51:59 CEST
  */
 
 #ifndef BASIC_NEURON_HPP_INCLUDED
@@ -73,7 +73,6 @@ namespace neural_net
 	 * \param Activation_function_type is a functor type of activation function.
 	 * \param Binary_operation_type is a type of binary operation used in neuron values.
 	 * \param Weigths_type is type of weights.
-	 * \param Value_type is a type of neuron input value.
 	 */
 	template
 	<
@@ -120,7 +119,7 @@ namespace neural_net
 			const Weights_type & weights_,
 			const Activation_function_type & activation_function_,
 			const Binary_operation_type & binary_operation_
-		)
+		) throw()
 		: activation_function ( activation_function_ ),
 		binary_operation ( binary_operation_ ),
 		weights ( weights_ )
@@ -138,7 +137,7 @@ namespace neural_net
 		 */
 		const typename Activation_function_type::result_type
 		//operator() ( const Value_type & x ) const
-		operator() ( const typename Binary_operation_type::value_type & x ) const
+		operator() ( const value_type & x ) const throw()
 		{
 			// calculate output of the neuron as activation fuction
 			// working on results from binary operation on weights and value
@@ -164,7 +163,7 @@ namespace neural_net
 				//Value_type_2
 			>
 			& neuron_
-		)
+		) throw()
 		{}
 	};
 } // namespace neural_net

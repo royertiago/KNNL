@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Wed 03 May 2006 13:18:41 CEST
- * Last modified: Tue 23 May 2006 23:52:01 CEST
+ * Last modified: Thu 08 Jun 2006 02:03:08 CEST
  */
 
 #ifndef WTM_TOPOLOGY_HPP_INCLUDED
@@ -106,7 +106,7 @@ namespace neural_net
 		 * \f]
 		 * where: n is first neuron, m is second neuron.
 		 */
-		inline Index_type operator()
+		inline const Index_type operator()
 		(
 			const Index_type & index_1_1,
 			const Index_type & index_1_2,
@@ -147,7 +147,7 @@ namespace neural_net
 		 * \f]
 		 * where: n is first neuron, m is second neuron.
 		 */
-		inline Index_type operator()
+		inline const Index_type operator()
 		(
 			const Index_type & index_1_1,
 			const Index_type & index_1_2,
@@ -223,7 +223,7 @@ namespace neural_net
 		 * \f}
 		 * where: n is firs neuron, m is second.
 		 */
-		Index_type operator()
+		const Index_type operator()
 		(
 			const Index_type & index_1_1,
 			const Index_type & index_1_2,
@@ -258,7 +258,7 @@ namespace neural_net
 			// ( -1, 0 ); ( 0, -1 ); ( 1, 0 ); ( 0, 1 ).
 			if ( tmp_hex_index_1 == 0 && tmp_hex_index_2 == 0 )
 			{
-				return static_cast < Index_type > ( 0 );
+				return static_cast < const Index_type > ( 0 );
 			}
 
 			// check if values have the same direction if yes it means that we have to use
@@ -274,7 +274,7 @@ namespace neural_net
 				return operators::abs ( tmp_hex_index_1 ) + operators::abs ( tmp_hex_index_2 );
 			}
 
-			return static_cast < Index_type > ( 0 );
+			return static_cast < const Index_type > ( 0 );
 		}
 
 	protected:

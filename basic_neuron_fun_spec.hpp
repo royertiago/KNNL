@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 15:01:26 CEST
- * Last modified: Thu 08 Jun 2006 00:08:50 CEST
+ * Last modified: Sat 17 Jun 2006 17:52:37 CEST
  */
 
 #ifndef BASIC_NEURON_FUN_SPEC_HPP_INCLUDED
@@ -68,7 +68,6 @@ namespace neural_net
 	 * \param Activation_function_type is a <b>function</b> of activation.
 	 * \param Binary_operation_type is a type of binary operation e.g. distance function.
 	 * \param Weigths_type is type of weights.
-	 * \param Value_type is a type of neuron input value.
 	 */
 	template
 	<
@@ -136,7 +135,7 @@ namespace neural_net
 				Binary_operation_type ( value_type, value_type )
 			>
 			& binary_operation_
-		)
+		) throw()
 		: activation_function ( activation_function_ ),
 		binary_operation ( binary_operation_ ),
 		weights ( weights_ )
@@ -152,8 +151,8 @@ namespace neural_net
 		 * where: f is activation function, g is binary operation,
 		 * w is weight and x is input value.
 		 */
-		typename Activation_function_type::result_type
-		operator() ( const value_type & x ) const
+		const typename Activation_function_type::result_type
+		operator() ( const value_type & x ) const throw()
 		{
 			// calculate output of the neuron as activation fuction
 			// working on results from binary operation on weights and value
@@ -178,7 +177,7 @@ namespace neural_net
 				Weights_type_2//,
 				//Value_type_2
 			> & neuron_
-		)
+		) throw()
 		{}
 	};
 	/*\@}*/
