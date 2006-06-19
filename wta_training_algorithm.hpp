@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 21 Apr 2006 17:33:34 CEST
- * Last modified: Sun 18 Jun 2006 13:50:39 CEST
+ * Last modified: Mon 19 Jun 2006 07:14:42 CEST
  */
 
 #ifndef WTA_TRAINING_ALGORITM_HPP_INCLUDED
@@ -86,9 +86,9 @@ namespace neural_net
 		typename Value_type,
 		typename Data_iterator_type,
 		typename Training_functional_type,
-		typename Numeric_iterator_type 
-			= Linear_numeric_iterator < 
-				typename Training_functional_type::iteration_type 
+		typename Numeric_iterator_type
+			= Linear_numeric_iterator <
+				typename Training_functional_type::iteration_type
 			>
 	>
 	class Wta_training_algorithm
@@ -105,7 +105,7 @@ namespace neural_net
 		/** Training functional. */
 		Training_functional_type training_functional;
 
-		/** 
+		/**
 		 * Constructor.
 		 * \param training_functional_ is a training functor.
 		 * \param numeric_iterator_ is a numeric iterator.
@@ -113,7 +113,7 @@ namespace neural_net
 		Wta_training_algorithm
 		(
 			const Training_functional_type & training_functional_,
-			Numeric_iterator_type & numeric_iterator_
+			Numeric_iterator_type numeric_iterator_ = linear_numeric_iterator()
 		)
 		: training_functional ( training_functional_ ),
 		numeric_iterator ( numeric_iterator_ )
@@ -159,10 +159,10 @@ namespace neural_net
 		 * \param data_end is end iterator.
 		 * \return error code.
 		 */
-		const int operator() ( 
+		const int operator() (
 			Data_iterator_type data_begin,
 			Data_iterator_type data_end,
-			Network_type * network_ 
+			Network_type * network_
 		)
 		{
 			network = network_;
