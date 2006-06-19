@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Thu 10 Apr 2006 11:05:06 CEST
- * Last modified: Sun 18 Jun 2006 13:57:48 CEST
+ * Last modified: Mon 19 Jun 2006 07:19:01 CEST
  */
 
 #include "debugger.hpp"
@@ -310,10 +310,8 @@ int main ( int argc, char * argv[] )
 			typedef neural_net::Wta_training_algorithm < Kohonen_network, V_d, V_v_d::iterator, Wta_train_func > Learning_algorithm;
 			typedef neural_net::Wta_training_algorithm < Kohonen_network_w, V_d, V_v_d::iterator, Wta_train_func > Learning_algorithm_w;
 
-			neural_net::linear_numeric_iterator l_n_i;
-
 			// define training algorithm
-			Learning_algorithm training_alg ( wta_train_func, l_n_i );
+			Learning_algorithm training_alg ( wta_train_func );
 			
 			// train network
 			for ( int i = 0; i < no_epochs; ++i )
@@ -328,12 +326,9 @@ int main ( int argc, char * argv[] )
 			//std::cout << "kohonen_network" << std::endl;
 			neural_net::print_network_weights ( std::cout, kohonen_network );
 			//std::cout << std::endl;
-
-			//reset numeric iterator
-			l_n_i.reset();
-
+			
 			// define another training algorithm
-			Learning_algorithm training_alg_1 ( wta_train_func_1, l_n_i );
+			Learning_algorithm training_alg_1 ( wta_train_func_1 );
 
 			// train network
 			for ( int i = 0; i < no_epochs; ++i )
@@ -349,8 +344,7 @@ int main ( int argc, char * argv[] )
 			neural_net::print_network_weights ( std::cout, kohonen_network_1 );
 			//std::cout << std::endl;
 
-			//reset numeric iterator
-			l_n_i.reset();
+			neural_net::linear_numeric_iterator l_n_i ( 0, 2 );
 
 			// define another algorithm for another network
 			Learning_algorithm_w training_alg_w ( wta_train_func_1, l_n_i );
@@ -505,9 +499,6 @@ int main ( int argc, char * argv[] )
 //			neural_net::print_network_weights ( std::cout, kohonen_network_2 );
 			//std::cout << std::endl;
 
-			//reset numeric iterator
-			l_n_i.reset();
-
 			// construction of algorithm
 			typedef neural_net::Wtm_training_algorithm
 			<
@@ -519,7 +510,7 @@ int main ( int argc, char * argv[] )
 			> Wtm_c_training_alg;
 
 			// definition
-			Wtm_c_training_alg wtm_c_train_alg ( wtm_c_l_f, l_n_i );
+			Wtm_c_training_alg wtm_c_train_alg ( wtm_c_l_f );
 
 			// tricky training
 			for ( int i = 0; i < no_epochs; ++i )
@@ -543,9 +534,6 @@ int main ( int argc, char * argv[] )
 //			neural_net::print_network_weights ( std::cout, kohonen_network_3 );
 			//std::cout << std::endl;
 
-			//reset numeric iterator
-			l_n_i.reset();
-
 			// construct another algorithm
 			typedef neural_net::Wtm_training_algorithm
 			<
@@ -557,7 +545,7 @@ int main ( int argc, char * argv[] )
 			> Wtm_c_training_alg_e;
 
 			// definition
-			Wtm_c_training_alg_e wtm_c_train_alg_e ( wtm_e_l_f, l_n_i );
+			Wtm_c_training_alg_e wtm_c_train_alg_e ( wtm_e_l_f );
 
 			// small helping constant
 			const int border = 3;
@@ -602,9 +590,6 @@ int main ( int argc, char * argv[] )
 //			neural_net::print_network_weights ( std::cout, kohonen_network_4 );
 			//std::cout << std::endl;
 
-			//reset numeric iterator
-			l_n_i.reset();
-
 			// construct another algorithm
 			typedef neural_net::Wtm_training_algorithm
 			<
@@ -616,7 +601,7 @@ int main ( int argc, char * argv[] )
 			> Wtm_c_training_alg_e_co;
 
 			// definition
-			Wtm_c_training_alg_e_co wtm_c_train_alg_e_co ( wtm_e_l_f_co, l_n_i );
+			Wtm_c_training_alg_e_co wtm_c_train_alg_e_co ( wtm_e_l_f_co );
 
 			// similar training
 			for ( int i = 0; i < no_epochs; ++i )
