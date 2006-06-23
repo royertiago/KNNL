@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Wed 10 May 2006 11:16:03 CEST
- * Last modified: Thu 08 Jun 2006 01:55:39 CEST
+ * Last modified: Mon 19 Jun 2006 16:56:18 CEST
  */
 
 #ifndef FUNCTORS_HPP_INCLUDED
@@ -79,7 +79,7 @@ namespace neural_net
 	 * \brief Functor that compute Gauss hat function.
 	 * \param Value_type is a type of values.
 	 * \param Scalar_type is a type of scaling factor which multiplies values.
-	 * \param Power_type is a type of exponential factor.
+	 * \param Exponent_type is a type of exponential factor.
 	 * \f[
 	 * y = e ^{-\frac{1}{2}\left (\frac{v}{\sigma}\right)^p}
 	 * \f]
@@ -88,19 +88,19 @@ namespace neural_net
 	<
 		typename Value_type,
 		typename Scalar_type,
-		typename Power_type
+		typename Exponent_type
 	>
 	class Gauss_function
 	: public Basic_function < Value_type >,
 	public Basic_activation_function
 	<
-		typename operators::Max_type < Scalar_type, Power_type >::type,
+		typename operators::Max_type < Scalar_type, Exponent_type >::type,
 		Value_type,
 		typename operators::Max_type
 		<
 			typename operators::Max_type
 			<
-				typename operators::Max_type < Scalar_type, Power_type >::type,
+				typename operators::Max_type < Scalar_type, Exponent_type >::type,
 				Value_type
 			>::type,
 			double
@@ -110,14 +110,14 @@ namespace neural_net
 	public:
 
 		typedef Scalar_type scalar_type;
-		typedef Power_type power_type;
+		typedef Exponent_type exponent_type;
 		typedef Value_type value_type;
 
 		typedef typename operators::Max_type
 		<
 			typename operators::Max_type
 			<
-				typename operators::Max_type < Scalar_type, Power_type >::type,
+				typename operators::Max_type < Scalar_type, Exponent_type >::type,
 				Value_type
 			>::type,
 			double
@@ -127,15 +127,15 @@ namespace neural_net
 		Scalar_type sigma;
 
 		/** Exponential factor. */
-		Power_type power;
+		Exponent_type exponent;
 
 		/**
 		 * Constructor.
 		 * \param sigma_ is sigma coefficient in Gauss hat function.
-		 * \param power_ is exponential factor in Gauss hat function.
+		 * \param exp_ is exponential factor in Gauss hat function.
 		 */
-		Gauss_function ( const Scalar_type & sigma_, const Power_type & power_ )
-		: sigma ( sigma_ ), power ( power_ )
+		Gauss_function ( const Scalar_type & sigma_, const Exponent_type & exp_ ) throw()
+		: sigma ( sigma_ ), exponent ( exp_ )
 		{}
 
 		/**
@@ -147,9 +147,9 @@ namespace neural_net
 		 * \f]
 		 * where: v is value.
 		 */
-		const result_type operator() ( const Value_type & value ) const
+		const result_type operator() ( const Value_type & value ) const throw()
 		{
-			operators::power < result_type, Power_type > power_v;
+			operators::power < result_type, Exponent_type > power_v;
 
 			// calculate result
 			return
@@ -160,7 +160,7 @@ namespace neural_net
 					* (power_v)
 					(
 						operators::inverse ( sigma ) * value,
-						power
+						exponent
 					)
 				)
 			);
@@ -171,7 +171,7 @@ namespace neural_net
 		<
 			typename Value_type_2,
 			typename Scalar_type_2,
-			typename Power_type_2
+			typename Exponent_type_2
 		>
 		Gauss_function
 		(
@@ -179,11 +179,11 @@ namespace neural_net
 			<
 				Value_type_2,
 				Scalar_type_2,
-				Power_type_2
+				Exponent_type_2
 			>
 			& gauss_function
-		)
-		: sigma ( gauss_function.sigma ), power ( gauss_function.power )
+		) throw()
+		: sigma ( gauss_function.sigma ), exponent ( gauss_function.exponent )
 		{}
 	};
 
@@ -201,17 +201,17 @@ namespace neural_net
 	<
 		typename Value_type,
 		typename Scalar_type,
-		typename Power_type
+		typename Exponent_type
 	>
 	class Cauchy_function
 	: public Basic_function < Value_type >,
 	public Basic_activation_function
 	<
-		typename operators::Max_type < Scalar_type, Power_type >::type,
+		typename operators::Max_type < Scalar_type, Exponent_type >::type,
 		Value_type,
 		typename operators::Max_type
 		<
-			typename operators::Max_type < Scalar_type, Power_type >::type,
+			typename operators::Max_type < Scalar_type, Exponent_type >::type,
 			Value_type
 		>::type
 	>
@@ -219,12 +219,12 @@ namespace neural_net
 	public:
 
 		typedef Scalar_type scalar_type;
-		typedef Power_type power_type;
+		typedef Exponent_type exponent_type;
 		typedef Value_type value_type;
 
 		typedef typename operators::Max_type
 		<
-			typename operators::Max_type < Scalar_type, Power_type >::type,
+			typename operators::Max_type < Scalar_type, Exponent_type >::type,
 			Value_type
 		>::type result_type;
 
@@ -232,15 +232,15 @@ namespace neural_net
 		Scalar_type sigma;
 
 		/** Exponential factor. */
-		Power_type power;
+		Exponent_type exponent;
 
 		/**
 		 * Constuctor.
 		 * \param sigma_ is scailing coefficient.
 		 * \param power_ is exponential factor.
 		 */
-		Cauchy_function ( const Scalar_type & sigma_, const Power_type & power_ )
-		: sigma ( sigma_ ),power ( power_ )
+		Cauchy_function ( const Scalar_type & sigma_, const Exponent_type & exp_ ) throw()
+		: sigma ( sigma_ ), exponent ( exp_ )
 		{}
 		
 		/**
@@ -252,9 +252,9 @@ namespace neural_net
 		 * \f]
 		 * where: x is value.
 		 */
-		const result_type operator() ( const Value_type & value ) const
+		const result_type operator() ( const Value_type & value ) const throw()
 		{
-			operators::power < result_type, Power_type > power_v;
+			operators::power < result_type, Exponent_type > power_v;
 
 			// calculate result
 			return
@@ -264,7 +264,7 @@ namespace neural_net
 					(power_v)
 					(
 						operators::inverse ( sigma ) * value,
-						power
+						exponent
 					) + 1
 				)
 			);
@@ -275,7 +275,7 @@ namespace neural_net
 		<
 			typename Value_type_2,
 			typename Scalar_type_2,
-			typename Power_type_2
+			typename Exponent_type_2
 		>
 		Cauchy_function
 		(
@@ -283,11 +283,11 @@ namespace neural_net
 			<
 				Value_type_2,
 				Scalar_type_2,
-				Power_type_2
+				Exponent_type_2
 			>
 			& cauchy_function
-		)
-		: sigma ( cauchy_function.sigma ), power ( cauchy_function.power )
+		) throw()
+		: sigma ( cauchy_function.sigma ), exponent ( cauchy_function.exponent )
 		{}
 	};
 	
@@ -320,7 +320,7 @@ namespace neural_net
 		 * Constuctor.
 		 * \param sigma_ is constant value.
 		 */
-		Constant_function ( const Scalar_type & sigma_ )
+		Constant_function ( const Scalar_type & sigma_ ) throw()
 		: sigma ( sigma_ )
 		{}
 
@@ -337,7 +337,7 @@ namespace neural_net
 				Value_type_2,
 				Scalar_type_2
 			> & constant_function
-		)
+		) throw()
 		: sigma ( constant_function.sigma )
 		{}
 
@@ -350,7 +350,7 @@ namespace neural_net
 		 * \f]
 		 * where: x is value.
 		 */
-		const result_type operator() ( const Value_type & value )
+		const result_type operator() ( const Value_type & value ) const throw()
 		{
 			// result
 			return ( sigma );

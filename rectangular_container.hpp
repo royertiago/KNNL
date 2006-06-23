@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:37:57 CEST
- * Last modified: Thu 08 Jun 2006 01:59:34 CEST
+ * Last modified: Mon 19 Jun 2006 15:25:54 CEST
  */
 
 #ifndef RECTANGULAR_CONTAINER_HPP_INCLUDED
@@ -97,22 +97,24 @@ namespace neural_net
 
 		/** Copy constructor. */
 		template < typename Object_type_2 >
-		Rectangular_container (
-		const Rectangular_container < Object_type_2 > & rectangular_container )
+		Rectangular_container 
+		( 
+			const Rectangular_container < Object_type_2 > & rectangular_container 
+		) throw()
 		: objects ( rectangular_container.objects )
 		{}
 
-		inline const size_t get_no_columns() const
+		inline const size_t get_no_columns() const throw()
 		{
 			return objects.begin()->size();
 		}
 
-		inline const size_t get_no_rows() const
+		inline const size_t get_no_rows() const throw()
 		{
 			return objects.size();
 		}
 
-		inline const Matrix_index get_size() const
+		inline const Matrix_index get_size() const throw()
 		{
 			Matrix_index idx;
 			idx.first = objects.size();

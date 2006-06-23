@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Thu 10 Apr 2006 11:05:06 CEST
- * Last modified: Mon 19 Jun 2006 07:19:01 CEST
+ * Last modified: Fri 23 Jun 2006 15:34:51 CEST
  */
 
 #include "debugger.hpp"
@@ -194,7 +194,8 @@ int main ( int argc, char * argv[] )
 			typedef double data_type;
 
 			// type of the single data vector
-			// for example if we have pairs of the data like { (1,2.4), (2,3.2), (3,4.7) }
+			// for example if we have pairs of the data like:
+			// { (1,2.4), (2,3.2), (3,4.7) }
 			// data_type describes a type of the single element
 			// V_d describes type of (1,2.4)
 			typedef std::vector < data_type > V_d;
@@ -226,19 +227,32 @@ int main ( int argc, char * argv[] )
 			// and weighted euclidean distance function
 			typedef distance::Weighted_euclidean_distance_function < V_d, V_d > We_d_t;
 			V_d coefs;
-			coefs.push_back ( 0.4 );	// weight for first axis
-			coefs.push_back ( 1 );		// weight for second axis
+			neural_net::Ranges < V_v_d > data_ranges ( *data.begin() );
+			data_ranges ( data );
+
+			//preparing proper parameters for weighted distance
+			V_d::iterator pos_max;
+			V_d::iterator pos_min;
+
+			for ( pos_max = data_ranges.get_max().begin(),
+				  pos_min = data_ranges.get_min().begin();
+				  pos_max != data_ranges.get_max().end();
+				  ++pos_max, ++pos_min
+			)
+			{
+				coefs.push_back ( operators::inverse ( ( *pos_max - *pos_min ) * ( *pos_max - *pos_min ) ) ); // weight for i-th axis
+			}
 			We_d_t we_d ( coefs );
 
 			/* prepare different variants of neurons */
 
 			/* examples how to construct single neuron */
 			// here Cauchy activation function and euclidean distance is chosen
-			typedef neural_net::Basic_neuron < C_a_f, E_d_t, V_d > Kohonen_neuron;
+			typedef neural_net::Basic_neuron < C_a_f, E_d_t > Kohonen_neuron;
 			Kohonen_neuron my_neuron ( *(data.begin()), c_a_f, e_d );
 
 			// here Gauss activation function and weighted euclidean distance is chosen
-			typedef neural_net::Basic_neuron < G_a_f, We_d_t, V_d > Kohonen_neuron_w;
+			typedef neural_net::Basic_neuron < G_a_f, We_d_t > Kohonen_neuron_w;
 			Kohonen_neuron_w my_neuron_w ( *(data.begin()), g_a_f, we_d );
 
 			/* neural networks parametrized by different neurons */
@@ -270,6 +284,10 @@ int main ( int argc, char * argv[] )
 			//>
 			( R, C, c_a_f, e_d, data, kohonen_network, IR );
 
+			// !!! very important remark !!!
+			// somewhere have to inserted checking procedure
+			// if size of parameters of the weighted euclidean distance
+			// is the same as size of single data
 			neural_net::generate_kohonen_network
 			//<
 			//	V_v_d,

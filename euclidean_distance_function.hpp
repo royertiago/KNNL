@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:42:31 CEST
- * Last modified: Fri 09 Jun 2006 00:02:54 CEST
+ * Last modified: Mon 19 Jun 2006 16:35:05 CEST
  */
 
 #ifndef EUCLIDEAN_DISTANCE_FUNCTION_HPP_INCLUDED
@@ -80,9 +80,40 @@ namespace distance
 		Value_type
 	>
 	{
+	public:
+		/**
+		 * Constructor.
+		 */
+		Euclidean_distance_function() throw()
+		{}
+
+		/**
+		 * Calculation function.
+		 * \param x first input value for the function.
+		 * \param y second input value for the function.
+		 * \return square of the euclidean distance function.
+		 */
+		const typename Value_type::value_type operator()
+		(
+			const Value_type & x,
+			const Value_type & y
+		) const throw()
+		{
+			return
+			(
+				euclidean_distance_square
+				(
+					x.begin(),
+					x.end(),
+					y.begin(),
+					static_cast < const typename Value_type::value_type & > ( 0 )
+				)
+			);
+		}
+
 	private:
 		typedef typename Value_type::value_type inner_type;
-
+		
 		/**
 		* Function calculates euclidean distance between two containers.
 		* \param begin_1 is a begin iterator for the first container.
@@ -97,7 +128,7 @@ namespace distance
 			typename Value_type::const_iterator end_1,
 			typename Value_type::const_iterator begin_2,
 			const inner_type & init
-		) const
+		) const throw()
 		{
 			return std::inner_product
 			(
@@ -112,36 +143,6 @@ namespace distance
 			);
 		}
 
-	public:
-		/**
-		 * Constructor.
-		 */
-		Euclidean_distance_function()
-		{}
-
-		/**
-		 * Calculation function.
-		 * \param x first input value for the function.
-		 * \param y second input value for the function.
-		 * \return square of the euclidean distance function.
-		 */
-		const typename Value_type::value_type operator()
-		(
-			const Value_type & x,
-			const Value_type & y
-		) const
-		{
-			return
-			(
-				euclidean_distance_square
-				(
-					x.begin(),
-					x.end(),
-					y.begin(),
-					static_cast < const typename Value_type::value_type & > ( 0 )
-				)
-			);
-		}
 	};
 	/*\@}*/
 

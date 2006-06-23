@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 17:47:44 CEST
- * Last modified: Thu 08 Jun 2006 01:57:24 CEST
+ * Last modified: Mon 19 Jun 2006 15:08:25 CEST
  */
 
 #ifndef OPERATORS_HPP_INCLUDED
@@ -79,7 +79,7 @@ namespace operators
 	 * \return absolute value.
 	 */
 	template < typename T >
-	inline T abs ( const T & value )
+	inline T abs ( const T & value ) throw()
 	{
 		return ( value > 0 ? value : -value );
 	}
@@ -112,7 +112,7 @@ namespace operators
 		(
 			const OP1& o1,
 			const OP2& o2
-		)
+		) throw()
 		: op1 ( o1 ), op2 ( o2 )
 		{}
 
@@ -130,7 +130,7 @@ namespace operators
 		(
 			const typename OP2::first_argument_type& x,
 			const typename OP2::second_argument_type& y
-		) const
+		) const throw()
 		{
 			return op1 ( op2 ( x, y ),op2 ( x, y ) );
 		}
@@ -155,7 +155,7 @@ namespace operators
 	(
 		const OP1& o1,
 		const OP2& o2
-	)
+	) throw()
 	{
 		return compose_f_gxy_gxy_t < OP1, OP2 > ( o1, o2 );
 	}
@@ -181,7 +181,7 @@ namespace operators
 	(
 		const CONT < T, Alloc_type <T> > & lhs,
 		const CONT < T, Alloc_type <T> > & rhs
-	)
+	) throw()
 	{
 		CONT < T, Alloc_type <T> > result = lhs;
 
@@ -218,7 +218,7 @@ namespace operators
 	(
 		const CONT < T, Alloc_type <T> > & lhs,
 		const CONT < T, Alloc_type <T> > & rhs
-	)
+	) throw()
 	{
 		CONT < T , Alloc_type <T> > result = lhs;
 
@@ -256,7 +256,7 @@ namespace operators
 	(
 		const K & a,
 		const CONT < T, Alloc_type <T> > & rhs
-	)
+	) throw()
 	{
 		CONT < T , Alloc_type <T> > result = rhs;
 
@@ -283,7 +283,7 @@ namespace operators
 	 */
 	template < typename Value_type >
 	inline typename Max_type < double, Value_type >::type
-	inverse ( const Value_type & x )
+	inverse ( const Value_type & x ) throw()
 	{
 		typedef typename Max_type < double, Value_type >::type internal_type;
 
@@ -322,7 +322,7 @@ namespace operators
 	public:
 		typedef typename Max_type < T, E >::type result_type;
 
-		const result_type operator() ( const T & value_, const E & exp_ ) const
+		const result_type operator() ( const T & value_, const E & exp_ ) const throw()
 		{
 			if ( exp_ == 0 )
 			{
@@ -350,7 +350,7 @@ namespace operators
 		 * \f]
 		 * where: x is value_, y is exp_.
 		 */
-		result_type power_int ( const T & value_, const E & exp_ ) const
+		result_type power_int ( const T & value_, const E & exp_ ) const throw()
 		{
 			T z = value_;
 			result_type y;
@@ -400,7 +400,7 @@ namespace operators
 		 * \f]
 		 * where: x is value_, y is exp_.
 		 */
-		const result_type operator() ( const T & value_, const E & exp_ ) const
+		const result_type operator() ( const T & value_, const E & exp_ ) const throw()
 		{
 			return std::pow ( static_cast < result_type > ( value_ ), exp_ );
 		}

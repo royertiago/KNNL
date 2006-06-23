@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 23 May 2006 23:53:14 CEST
- * Last modified: Thu 08 Jun 2006 01:27:08 CEST
+ * Last modified: Mon 19 Jun 2006 18:16:56 CEST
  */
 
 #ifndef MAX_TYPE_HPP_INCLUDED
@@ -86,6 +86,8 @@ namespace operators
 	MAX_TYPE(unsigned int,double,double)
 	MAX_TYPE(unsigned long,double,double)
 	MAX_TYPE(unsigned short,double,double)
+	// and example where explicitly we can use three different types
+	// MAX_TYPE(std::complex < int >, double, std::complex < double >)
 
 	/**
 	 * \class Max_type

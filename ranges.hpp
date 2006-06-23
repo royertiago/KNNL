@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 24 Apr 2006 12:11:38 CEST
- * Last modified: Tue 23 May 2006 23:51:06 CEST
+ * Last modified: Mon 19 Jun 2006 16:23:31 CEST
  */
 
 #ifndef RANGES_HPP_INCLUDED
@@ -70,22 +70,17 @@ namespace neural_net
 	class Ranges
 	{
 	public:
-//		Ranges()
-//			: ranges.first ( Value_type() ),
-//			ranges.second ( Value_type() )
-//			{}
-
 		/**
 		 * Constructor.
 		 * \param value_ is a value that will be set at he begining.
 		 */
-		explicit Ranges ( const typename Container_type::value_type & value_ )
+		explicit Ranges ( const typename Container_type::value_type & value_ ) throw()
 		:ranges ( value_, value_ )
 		{}
 
 		/** Copy constructor. */
 		template < typename Container_type_2 >
-		Ranges ( const Ranges < Container_type_2 > & ranges_ )
+		Ranges ( const Ranges < Container_type_2 > & ranges_ ) throw()
 		: ranges ( ranges_.ranges )
 		{}
 
@@ -93,7 +88,7 @@ namespace neural_net
 		 * Function that is going through the all container.
 		 * \param value is a reference to the container.
 		 */
-		void operator() ( Container_type & value )
+		void operator() ( Container_type & value ) throw()
 		{
 			typename Container_type::iterator pos;
 
@@ -101,8 +96,12 @@ namespace neural_net
 			typename Container_type::value_type::iterator pos_min_range;
 			typename Container_type::value_type::iterator pos_max_range;
 
+			// go through the all data in container and ...
 			for ( pos = value.begin(); pos != value.end(); ++pos )
 			{
+				// look for the highest and lowest values to set ranges.
+				// iterate through position of the container and ranges type to compare
+				// proper values and set ranges.
 				for
 				(
 					pos_min_range = ranges.first.begin(),
@@ -123,7 +122,7 @@ namespace neural_net
 		 * This value could not exests in container, because is created from
 		 * all maximums of data e.g. { (1,2), (2,1) } -> (2,2)
 		 */
-		typename Container_type::value_type get_max() const
+		typename Container_type::value_type get_max() const throw()
 		{
 			return ranges.second;
 		}
@@ -133,10 +132,13 @@ namespace neural_net
 		 * This value could not exests in container, because is created from
 		 * all minimums of data e.g. { (1,2), (2,1) } -> (1,1)
 		 */
-		typename Container_type::value_type get_min() const
+		typename Container_type::value_type get_min() const throw()
 		{
 			return ranges.first;
 		}
+
+	protected:
+		Ranges();
 
 	private:
 		std::pair
