@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 07 May 2006 13:51:04 CEST
- * Last modified: Thu 08 Jun 2006 01:56:18 CEST
+ * Last modified: Mon 19 Jun 2006 15:04:45 CEST
  */
 
 #ifndef GENERALIZED_TRAINING_WEIGHT_HPP_INCLUDED
@@ -165,7 +165,7 @@ namespace neural_net
 			const Space_function_type & s_f,
 			const Network_topology & n_t,
 			const Space_topology & s_t
-		)
+		) throw()
 		: Basic_generalized_training_weight
 		<
 			Value_type,
@@ -206,7 +206,7 @@ namespace neural_net
 				Index_type_2
 			>
 			& classic_training_weight
-		)
+		) throw()
 		: Basic_generalized_training_weight
 		<
 			 Value_type_2,
@@ -239,7 +239,7 @@ namespace neural_net
 		 * \f]
 		 * where x is value and w is neuron weight.
 		 */
-		const typename Space_function_type::value_type operator()
+		const typename Space_function_type::value_type operator() 
 		(
 			Value_type & weight,
 			const Value_type & value,
@@ -248,7 +248,7 @@ namespace neural_net
 			const Index_type & c_2,
 			const Index_type & v_1,
 			const Index_type & v_2
-		)
+		) throw()
 		{
 			// calculate result
 			return
@@ -339,7 +339,7 @@ namespace neural_net
 			const Space_topology & s_t,
 			const Parameter_type & parameter_0_,
 			const Parameter_type & parameter_1_
-		)
+		) throw()
 		: parameter_1 ( parameter_1_),
 		parameter_0 ( parameter_0_),
 		network_function ( n_f ),
@@ -374,7 +374,7 @@ namespace neural_net
 				Parameter_type_2
 			>
 			& experimental_training_weight
-		)
+		) throw()
 		: Basic_generalized_training_weight
 		<
 			Value_type_2,
@@ -409,7 +409,7 @@ namespace neural_net
 		 * \f]
 		 * where x is value, w is neuron weight, \f$p_1\f$ is scaling parameter, \f$p_0\f$ is shifting parameter.
 		 */
-		const typename Space_function_type::value_type operator()
+		const typename Space_function_type::value_type operator() 
 		(
 			Value_type & weight,
 			const Value_type & value,
@@ -418,7 +418,7 @@ namespace neural_net
 			const Index_type & c_2,
 			const Index_type & v_1,
 			const Index_type & v_2
-		)
+		) throw()
 		{
 			// calculate result
 			return

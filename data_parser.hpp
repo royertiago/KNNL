@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sat 29 Apr 2006 19:10:50 CEST
- * Last modified: Tue 23 May 2006 23:48:51 CEST
+ * Last modified: Mon 19 Jun 2006 14:50:44 CEST
  */
 
 #ifndef DATA_PARSER_HPP_INCLUDED
@@ -82,7 +82,7 @@ namespace data_parser
 	{
 	public:
 		/** Constructor. */
-		Data_parser()
+		Data_parser() throw()
 		{}
 
 		/**
@@ -134,7 +134,7 @@ namespace data_parser
 		(
 			typename Data_container::value_type & container,
 			std::string & str
-		)
+		) throw()
 		{
 			std::stringstream tmp_sstr ( str );
 

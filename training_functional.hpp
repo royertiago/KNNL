@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Wed 26 Apr 2006 14:55:28 CEST
- * Last modified: Sun 18 Jun 2006 13:24:16 CEST
+ * Last modified: Mon 19 Jun 2006 16:45:40 CEST
  */
 
 #ifndef TRAINING_FUNCTIONAL_HPP_INCLUDED
@@ -155,12 +155,12 @@ namespace neural_net
 		 * \param parameter_1_ is a scaling parameter for linear function
 		 * used for training.
 		 */
-		explicit Wta_proportional_training_functional
+		Wta_proportional_training_functional
 		(
 			const Parameters_type & parameter_0_,
 			const Parameters_type & parameter_1_
-		)
-			: parameter_0 ( parameter_0_ ), parameter_1 ( parameter_1_ )
+		) throw()
+		: parameter_0 ( parameter_0_ ), parameter_1 ( parameter_1_ )
 		{}
 
 		/** Copy constructor. */
@@ -179,7 +179,7 @@ namespace neural_net
 				Iteration_type_2
 			>
 			& training_functional_
-		)
+		) throw()
 		: Basic_wta_training_functional < Value_type, Parameters_type >(),
 		parameter_0 ( training_functional_.parameter_0 ),
 		parameter_1 ( training_functional_.parameter_1 )
@@ -201,10 +201,16 @@ namespace neural_net
 			Value_type & weight,
 			const Value_type & value,
 			const iteration_type & s
-		)
+		) throw()
 		{
 			using namespace operators;
-			return ( weight = weight + ( parameter_0 + parameter_1 * s ) * ( value - weight ) );
+			return 
+			( 
+				weight 
+					= weight 
+					+ ( parameter_0 + parameter_1 * s ) 
+					* ( value - weight ) 
+			);
 		}
 	};
 
@@ -253,7 +259,7 @@ namespace neural_net
 		(
 			const Generalized_training_weight_type & generalized_weight,
 			const Parameters_type & parameter_
-		)
+		) throw()
 		: Basic_wtm_training_functional
 		<
 			Value_type,
@@ -286,7 +292,7 @@ namespace neural_net
 				Generalized_training_weight_type_2
 			>
 			& training_functional_
-		)
+		) throw()
 		: Basic_wtm_training_functional
 		<
 			Value_type,
@@ -322,7 +328,7 @@ namespace neural_net
 			const Index_type & center_j,
 			const Index_type & i_,
 			const Index_type & j_
-		)
+		) throw()
 		{
 			using namespace operators;
 

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 15:01:26 CEST
- * Last modified: Sat 17 Jun 2006 17:51:59 CEST
+ * Last modified: Mon 19 Jun 2006 16:26:15 CEST
  */
 
 #ifndef BASIC_NEURON_HPP_INCLUDED
@@ -70,23 +70,23 @@ namespace neural_net
 	/**
 	 * \class Basic_neuron
 	 * \brief Basic_neuron template class.
-	 * \param Activation_function_type is a functor type of activation function.
-	 * \param Binary_operation_type is a type of binary operation used in neuron values.
+	 * \param Activation_function_type
+	 * is a functor type of activation function.
+	 * \param Binary_operation_type 
+	 * is a type of binary operation used in neuron values.
 	 * \param Weigths_type is type of weights.
 	 */
 	template
 	<
 		typename Activation_function_type,
-		typename Binary_operation_type,
-		typename Weights_type//,
-		//typename Value_type
+		typename Binary_operation_type
 	>
 	class Basic_neuron
 	{
 	public:
 
 		/** Weights type. */
-		typedef Weights_type weights_type;
+		typedef typename Binary_operation_type::value_type weights_type;
 		
 		/** Activation function type. */
 		typedef Activation_function_type activation_function_type;
@@ -103,7 +103,7 @@ namespace neural_net
 		Binary_operation_type binary_operation;
 
 		/** Weights. */
-		Weights_type weights;
+		weights_type weights;
 
 		/**
 		 * Constructor.
@@ -116,7 +116,7 @@ namespace neural_net
 		 */
 		Basic_neuron
 		(
-			const Weights_type & weights_,
+			const weights_type & weights_,
 			const Activation_function_type & activation_function_,
 			const Binary_operation_type & binary_operation_
 		) throw()
@@ -136,7 +136,6 @@ namespace neural_net
 		 * w is weight and x is input value.
 		 */
 		const typename Activation_function_type::result_type
-		//operator() ( const Value_type & x ) const
 		operator() ( const value_type & x ) const throw()
 		{
 			// calculate output of the neuron as activation fuction
@@ -149,8 +148,8 @@ namespace neural_net
 		template
 		<
 			typename Activation_function_type_2,
-			typename Binary_operation_type_2,
-			typename Weights_type_2//,
+			typename Binary_operation_type_2//,
+			//typename Weights_type_2//,
 			//typename Value_type_2
 		>
 		Basic_neuron
@@ -158,13 +157,16 @@ namespace neural_net
 			const Basic_neuron
 			<
 				Activation_function_type_2,
-				Binary_operation_type_2,
-				Weights_type_2//,
+				Binary_operation_type_2//,
+				//Weights_type_2//,
 				//Value_type_2
 			>
 			& neuron_
 		) throw()
 		{}
+
+	protected:
+		Basic_neuron();
 	};
 } // namespace neural_net
 /*\@}*/

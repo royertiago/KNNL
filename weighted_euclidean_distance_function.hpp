@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 17 Apr 2006 23:54:20 CEST
- * Last modified: Thu 08 Jun 2006 02:01:04 CEST
+ * Last modified: Fri 23 Jun 2006 15:15:46 CEST
  */
 
 #ifndef WEIGHTED_EUCLIDEAN_DISTANCE_FUNCTION_HPP_INCLUDED
@@ -85,56 +85,24 @@ namespace distance
 	{
 	private:
 		typedef typename Value_type::value_type inner_type;
-
-		/**
-		 * Function calculates weighted euclidean distance between two containers.
-		 * \param begin_1 is a begin iterator for the first container.
-		 * \param end_1 is an end iterator for the first container.
-		 * \param begin_2 is a begin iterator for the second container.
-		 * \param begin_3 is a bagin iterator for the parameters.
-		 * \param init is an initial value.
-		 * \result sqare of weighted euclidean distance.
-		 * \f[
-		 * d (x,y,w) = d_0 + \sum\limits_{i=0}^{N} w_i\cdot (x_i-y_i)^2
-		 * \f]
-		 * where: x is given by range of Input_iterator_1,
-		 * y is given through Input_iterator_2,
-		 * w is given through Input_iterator_3,
-		 * \f$d_0\f$ is initial value (init).
-		 */
-		const inner_type weighted_euclidean_distance_square
-		(
-			typename Value_type::const_iterator begin_1,
-			typename Value_type::const_iterator end_1,
-			typename Value_type::const_iterator begin_2,
-			typename Parameters_type::const_iterator begin_3,
-			const inner_type & init
-		) const
-		{
-			inner_type tmp_val;
-			inner_type result = init;
-
-			for ( ; begin_1 != end_1; ++begin_1, ++begin_2, ++begin_3 )
-			{
-				tmp_val = *begin_1 - *begin_2;
-				result = result + *begin_3 * ( tmp_val * tmp_val );
-			}
-			return result;
-		}
-
-	public:
-
-		typedef Parameters_type parameters_type;
-
+		
 		/** Parameters. */
 		Parameters_type parameters;
+
+		/** Parameters size. */
+		size_t parameters_size;
+
+	public:
+		typedef Parameters_type parameters_type;
 
 		/**
 		 * Constructor.
 		 */
-		explicit Weighted_euclidean_distance_function ( const Value_type & weights )
+		explicit Weighted_euclidean_distance_function ( const Value_type & weights ) throw()
 		: parameters ( weights )
-		{}
+		{
+			parameters_size = parameters.size();
+		}
 
 		/**
 		 * Calculation function.
@@ -150,7 +118,7 @@ namespace distance
 		(
 			const Value_type & x,
 			const Value_type & y
-		) const
+		) const throw()
 		{
 			return
 			(
@@ -179,9 +147,46 @@ namespace distance
 				Value_type_2
 			>
 			& weighted_euclidean_distance
-		)
+		) throw()
 		: parameters ( weighted_euclidean_distance.parameters )
 		{}
+
+	private:
+		/**
+		 * Function calculates weighted euclidean distance between two containers.
+		 * \param begin_1 is a begin iterator for the first container.
+		 * \param end_1 is an end iterator for the first container.
+		 * \param begin_2 is a begin iterator for the second container.
+		 * \param begin_3 is a bagin iterator for the parameters.
+		 * \param init is an initial value.
+		 * \result sqare of weighted euclidean distance.
+		 * \f[
+		 * d (x,y,w) = d_0 + \sum\limits_{i=0}^{N} w_i\cdot (x_i-y_i)^2
+		 * \f]
+		 * where: x is given by range of Input_iterator_1,
+		 * y is given through Input_iterator_2,
+		 * w is given through Input_iterator_3,
+		 * \f$d_0\f$ is initial value (init).
+		 */
+		const inner_type weighted_euclidean_distance_square
+		(
+			typename Value_type::const_iterator begin_1,
+			typename Value_type::const_iterator end_1,
+			typename Value_type::const_iterator begin_2,
+			typename Parameters_type::const_iterator begin_3,
+			const inner_type & init
+		) const throw()
+		{
+			inner_type tmp_val;
+			inner_type result = init;
+
+			for ( ; begin_1 != end_1 ; ++begin_1, ++begin_2, ++begin_3 )
+			{
+				tmp_val = *begin_1 - *begin_2;
+				result = result + *begin_3 * ( tmp_val * tmp_val );
+			}
+			return result;
+		}
 	};
 	/*\@}*/
 

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 06 Feb 2006 17:51:24 CET
- * Last modified: Fri 09 Jun 2006 15:15:47 CEST
+ * Last modified: Mon 19 Jun 2006 14:50:12 CEST
  */
 
 #include "configuration.hpp"
@@ -56,7 +56,7 @@ namespace config
 	(
 		int argc, char * argv[],
 		Configuration & conf_
-	)
+	) throw()
 	{
 		namespace bpo = boost::program_options;
 

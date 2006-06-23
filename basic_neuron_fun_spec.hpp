@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 15:01:26 CEST
- * Last modified: Sat 17 Jun 2006 17:52:37 CEST
+ * Last modified: Mon 19 Jun 2006 12:46:38 CEST
  */
 
 #ifndef BASIC_NEURON_FUN_SPEC_HPP_INCLUDED
@@ -67,27 +67,26 @@ namespace neural_net
 	 * of functors.
 	 * \param Activation_function_type is a <b>function</b> of activation.
 	 * \param Binary_operation_type is a type of binary operation e.g. distance function.
-	 * \param Weigths_type is type of weights.
 	 */
 	template
 	<
 		typename Activation_function_type,
-		typename Binary_operation_type,
-		typename Weights_type//,
+		typename Binary_operation_type//,
+		//typename Weights_type//,
 		//typename Value_type
 	>
 	class Basic_neuron
 	<
 		Activation_function_type ( typename Binary_operation_type::result_type ),
-		Binary_operation_type ( Value_type, Value_type ),
-		Weights_type//,
+		Binary_operation_type ( Value_type, Value_type )//,
+		//Weights_type//,
 		//Value_type
 	>
 	{
 	public:
 
 		/** Weights type. */
-		typedef Weights_type weights_type;
+		typedef typename Binary_operation_type::value_type weights_type;
 
 		/** Activation function type. */
 		typedef Activation_function_type activation_function_type;
@@ -109,7 +108,7 @@ namespace neural_net
 		> binary_operation;
 
 		/** Weights. */
-		Weights_type weights;
+		weights_type weights;
 
 		/**
 		 * Constructor.
@@ -122,7 +121,7 @@ namespace neural_net
 		 */
 		Basic_neuron
 		(
-			const Weights_type & weights_,
+			const weights_type & weights_,
 		
 			const boost::function
 			<
@@ -164,8 +163,8 @@ namespace neural_net
 		template
 		<
 			typename Activation_function_type_2,
-			typename Binary_operation_type_2,
-			typename Weights_type_2//,
+			typename Binary_operation_type_2//,
+			//typename Weights_type_2//,
 			//typename Value_type_2
 		>
 		Basic_neuron
@@ -173,8 +172,8 @@ namespace neural_net
 			const Basic_neuron
 			<
 				Activation_function_type_2 ( typename Binary_operation_type_2::result_type ),
-				Binary_operation_type_2 ( value_type, value_type ),
-				Weights_type_2//,
+				Binary_operation_type_2 ( value_type, value_type )//,
+				//Weights_type_2//,
 				//Value_type_2
 			> & neuron_
 		) throw()

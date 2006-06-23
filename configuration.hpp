@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 29 Jan 2006 11:35:05 CET
- * Last modified: Fri 09 Jun 2006 15:13:18 CEST
+ * Last modified: Mon 19 Jun 2006 14:49:50 CEST
  */
 
 #ifndef CONFIGURATION_HPP_INCLUDED
@@ -161,7 +161,7 @@ namespace config
 		 * Set program name.
 		 * \param program_name_ containg string e.g. "Pattern Finder".
 		 */
-		void set_program_name ( std::string program_name_ )
+		void set_program_name ( std::string program_name_ ) throw()
 		{
 			program_name = program_name_;
 		}
@@ -172,7 +172,7 @@ namespace config
 		 * program_version is concatenated and
 		 * version_number is calculated.
 		 */
-		void set_version_number ( Version_struct & version_struct_ )
+		void set_version_number ( Version_struct & version_struct_ ) throw()
 		{
 			version_struct = version_struct_;
 
@@ -198,7 +198,7 @@ namespace config
 		 * \param version_string_ contains string e.g. "1.2.3".
 		 * version_struct and version_number are calculated.
 		 */
-		void set_version_number ( std::string version_string_ )
+		void set_version_number ( std::string version_string_ ) throw()
 		{
 			version_string = version_string_;
 
@@ -241,7 +241,7 @@ namespace config
 		 * Get program name.
 		 * \return std::string.
 		 */
-		inline std::string get_program_name()
+		inline std::string get_program_name() throw()
 		{
 			return program_name;
 		}
@@ -250,7 +250,7 @@ namespace config
 		 * Get version number as a struct.
 		 * \return Version_struct with version.
 		 */
-		inline Version_struct get_version_struct()
+		inline Version_struct get_version_struct() throw()
 		{
 			return version_struct;
 		}
@@ -259,7 +259,7 @@ namespace config
 		 * Get version number as a string.
 		 * \return std::string e.g. 0.1.2.
 		 */
-		inline std::string get_version_string()
+		inline std::string get_version_string() throw()
 		{
 			return version_string;
 		}
@@ -268,7 +268,7 @@ namespace config
 		 * Get version number.
 		 * \return unsigned int it is needed by the boost::serialisation package.
 		 */
-		inline unsigned int get_version_number()
+		inline unsigned int get_version_number() throw()
 		{
 			return version_number;
 		}
@@ -296,7 +296,7 @@ namespace config
 		 * \param version_struct_ contains version information.
 		 * \return unsigned int value of the version.
 		 */
-		inline unsigned int calculate_version_number ( Version_struct & version_struct_ )
+		inline unsigned int calculate_version_number ( Version_struct & version_struct_ ) throw()
 		{
 			// calculate version as a unsigned int number
 			return version_struct.major * BASE_MAJOR
@@ -309,7 +309,7 @@ namespace config
 		 * \param ch character for transformation.
 		 * \return char transformed character.
 		 */
-		static char dot_eraser ( char ch )
+		static char dot_eraser ( char ch ) throw()
 		{
 			return ( ch == '.' ? ' ' : ch );
 		}
@@ -334,7 +334,7 @@ namespace config
 	 * \param conf_ is a configuration object.
 	 * \return exit status.
 	 */
-	int do_program_options ( int argc, char * argv[], Configuration & conf_ );
+	int do_program_options ( int argc, char * argv[], Configuration & conf_ ) throw();
 
 } // namespace config
 /*\@}*/
