@@ -46,7 +46,8 @@ CFLAGS+= $(shell ./gcccpuopt.sh)
 ## example:
 # CFLAGS+=$(shell pkg-config --cflags gtkmm-2.4)
 
-## Debugging flags
+## Debugging and profiling flags
+#GFLAGS+= -p
 #GFLAGS+= -pg
 #GFLAGS+= -ggdb3
 #GFLAGS+= -DFTDEBUG

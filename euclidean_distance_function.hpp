@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:42:31 CEST
- * Last modified: Mon 19 Jun 2006 16:35:05 CEST
+ * Last modified: Fri 07 Jul 2006 19:07:12 CEST
  */
 
 #ifndef EUCLIDEAN_DISTANCE_FUNCTION_HPP_INCLUDED
@@ -68,6 +68,9 @@ namespace distance
 	/**
 	 * Euclidean_distance_function template class.
 	 * \param Value_type is a type of values.
+	 * \f[
+	 * d (x,y) = \sum\limits_{i=0}^{N} cdot (x_i-y_i)^2
+	 * \f]
 	 */
 	template
 	<
@@ -91,7 +94,10 @@ namespace distance
 		 * Calculation function.
 		 * \param x first input value for the function.
 		 * \param y second input value for the function.
-		 * \return square of the euclidean distance function.
+		 * \return square of the Euclidean distance function.
+		 * \f[
+		 * d (x,y) = \sum\limits_{i=0}^{N} cdot (x_i-y_i)^2
+		 * \f]
 		 */
 		const typename Value_type::value_type operator()
 		(
@@ -115,12 +121,12 @@ namespace distance
 		typedef typename Value_type::value_type inner_type;
 		
 		/**
-		* Function calculates euclidean distance between two containers.
+		* Function calculates Euclidean distance between two containers.
 		* \param begin_1 is a begin iterator for the first container.
 		* \param end_1 is an end iterator for the first container.
 		* \param begin_2 is an begin iterator for the second container.
 		* \param init is an initial value.
-		* \result sqare of euclidean distance.
+		* \result sqare of Euclidean distance.
 		*/
 		const inner_type euclidean_distance_square
 		(

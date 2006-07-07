@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 21 Apr 2006 19:30:09 CEST
- * Last modified: Mon 19 Jun 2006 15:11:52 CEST
+ * Last modified: Fri 07 Jul 2006 16:17:11 CEST
  */
 
 #ifndef PRINT_NETWORK_HPP_INCLUDED
@@ -122,7 +122,10 @@ namespace neural_net
 				);
 				os << " ( ";
 				value_to_ostream ( os, value );
-				os << " ) == " << network.objects[i][j] ( value );
+				os << " ) == ";
+				//os << network.objects[i][j] ( value );
+				//os << " == "; 
+				os << network ( i, j )( value );
 				os << std::endl;
 			}
 			os << std::endl;

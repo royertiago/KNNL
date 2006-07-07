@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Thu 10 Apr 2006 11:05:06 CEST
- * Last modified: Fri 23 Jun 2006 15:34:51 CEST
+ * Last modified: Fri 07 Jul 2006 16:21:14 CEST
  */
 
 #include "debugger.hpp"
@@ -220,38 +220,42 @@ int main ( int argc, char * argv[] )
 			// Activation function for neurons
 			G_a_f g_a_f ( 2.0, 1 );
 
-			// prepare euclidean distance function
+			// prepare Euclidean distance function
 			typedef distance::Euclidean_distance_function < V_d > E_d_t;
 			E_d_t e_d;
 
-			// and weighted euclidean distance function
+			// and weighted Euclidean distance function
 			typedef distance::Weighted_euclidean_distance_function < V_d, V_d > We_d_t;
+
 			V_d coefs;
+
 			neural_net::Ranges < V_v_d > data_ranges ( *data.begin() );
 			data_ranges ( data );
 
 			//preparing proper parameters for weighted distance
-			V_d::iterator pos_max;
-			V_d::iterator pos_min;
+			V_d::const_iterator pos_max = data_ranges.get_max().begin();
+			V_d::const_iterator pos_min = data_ranges.get_min().begin();
 
-			for ( pos_max = data_ranges.get_max().begin(),
-				  pos_min = data_ranges.get_min().begin();
+			for ( ;
 				  pos_max != data_ranges.get_max().end();
 				  ++pos_max, ++pos_min
 			)
 			{
+				D ( *pos_max );
+				D ( *pos_min );
 				coefs.push_back ( operators::inverse ( ( *pos_max - *pos_min ) * ( *pos_max - *pos_min ) ) ); // weight for i-th axis
 			}
-			We_d_t we_d ( coefs );
+
+			We_d_t we_d ( &coefs );
 
 			/* prepare different variants of neurons */
 
 			/* examples how to construct single neuron */
-			// here Cauchy activation function and euclidean distance is chosen
+			// here Cauchy activation function and Euclidean distance is chosen
 			typedef neural_net::Basic_neuron < C_a_f, E_d_t > Kohonen_neuron;
 			Kohonen_neuron my_neuron ( *(data.begin()), c_a_f, e_d );
 
-			// here Gauss activation function and weighted euclidean distance is chosen
+			// here Gauss activation function and weighted Euclidean distance is chosen
 			typedef neural_net::Basic_neuron < G_a_f, We_d_t > Kohonen_neuron_w;
 			Kohonen_neuron_w my_neuron_w ( *(data.begin()), g_a_f, we_d );
 
@@ -270,6 +274,7 @@ int main ( int argc, char * argv[] )
 			Kohonen_network kohonen_network_2;
 			Kohonen_network kohonen_network_3;
 			Kohonen_network kohonen_network_4;
+			Kohonen_network kohonen_network_5;
 
 			// prepare randomization policy
 			neural_net::Internal_randomize IR;
@@ -286,7 +291,7 @@ int main ( int argc, char * argv[] )
 
 			// !!! very important remark !!!
 			// somewhere have to inserted checking procedure
-			// if size of parameters of the weighted euclidean distance
+			// if size of parameters of the weighted Euclidean distance
 			// is the same as size of single data
 			neural_net::generate_kohonen_network
 			//<
@@ -310,6 +315,7 @@ int main ( int argc, char * argv[] )
 			kohonen_network_2 = kohonen_network;
 			kohonen_network_3 = kohonen_network;
 			kohonen_network_4 = kohonen_network;
+			kohonen_network_5 = kohonen_network;
 
 			// print weights before training process
 			//std::cout << "kohonen_network" << std::endl;
@@ -344,7 +350,9 @@ int main ( int argc, char * argv[] )
 			//std::cout << "kohonen_network" << std::endl;
 			neural_net::print_network_weights ( std::cout, kohonen_network );
 			//std::cout << std::endl;
-			
+
+			neural_net::print_network ( std::cout, kohonen_network, *(data.begin()) );
+
 			// define another training algorithm
 			Learning_algorithm training_alg_1 ( wta_train_func_1 );
 
@@ -536,12 +544,12 @@ int main ( int argc, char * argv[] )
 				// train network using data
 				wtm_c_train_alg ( data.begin(), data.end(), &kohonen_network_2 );
 
-				// shuffle data
-				std::random_shuffle ( data.begin(), data.end() );
-
 				// decrease sigma parameter in network will make training proces more sharpen with each epoch,
 				// but it have to be done slowly :-)
 				wtm_c_train_alg.training_functional.generalized_training_weight.network_function.sigma *= 2.0/3.0;
+
+				// shuffle data
+				std::random_shuffle ( data.begin(), data.end() );
 			}
 
 			//std::cout << "kohonen_network_2" << std::endl;
@@ -551,6 +559,9 @@ int main ( int argc, char * argv[] )
 			//std::cout << "kohonen_network_3" << std::endl;
 //			neural_net::print_network_weights ( std::cout, kohonen_network_3 );
 			//std::cout << std::endl;
+
+			// small helping constant
+			const int border = 3;
 
 			// construct another algorithm
 			typedef neural_net::Wtm_training_algorithm
@@ -564,9 +575,6 @@ int main ( int argc, char * argv[] )
 
 			// definition
 			Wtm_c_training_alg_e wtm_c_train_alg_e ( wtm_e_l_f );
-
-			// small helping constant
-			const int border = 3;
 
 			for ( int i = 0; i < no_epochs; ++i )
 			{
@@ -597,11 +605,38 @@ int main ( int argc, char * argv[] )
 					*= 2.0 / 3.0;
 
 				// shuffle data
-				std::random_shuffle ( data.begin(), data.end() );
+				//std::random_shuffle ( data.begin(), data.end() );
 			}
 
 			//std::cout << "kohonen_network_3" << std::endl;
 			neural_net::print_network_weights ( std::cout, kohonen_network_3 );
+			//std::cout << std::endl;
+
+			// definition
+			Wtm_c_training_alg_e wtm_c_train_alg_e_c ( wtm_e_l_f );
+
+			// test case for non repel functional
+			// set "normal" parameters for training functors
+			wtm_c_train_alg_e_c.training_functional.generalized_training_weight.parameter_1
+				= 1;
+			wtm_c_train_alg_e_c.training_functional.generalized_training_weight.parameter_0
+				= 0;
+
+			for ( int i = 0; i < no_epochs; ++i )
+			{
+				// train
+				wtm_c_train_alg_e_c ( data.begin(), data.end(), &kohonen_network_5 );
+
+				// sharpen training proces
+				wtm_c_train_alg_e_c.training_functional.generalized_training_weight.network_function.sigma
+					*= 2.0 / 3.0;
+
+				// shuffle data
+				//std::random_shuffle ( data.begin(), data.end() );
+			}
+
+			//std::cout << "kohonen_network_3" << std::endl;
+			neural_net::print_network_weights ( std::cout, kohonen_network_5 );
 			//std::cout << std::endl;
 
 			//std::cout << "kohonen_network_4" << std::endl;
@@ -621,30 +656,19 @@ int main ( int argc, char * argv[] )
 			// definition
 			Wtm_c_training_alg_e_co wtm_c_train_alg_e_co ( wtm_e_l_f_co );
 
+			wtm_c_train_alg_e_co.training_functional.generalized_training_weight.parameter_1
+				= 1;
+			wtm_c_train_alg_e_co.training_functional.generalized_training_weight.parameter_0
+				= 0;
+
 			// similar training
 			for ( int i = 0; i < no_epochs; ++i )
 			{
-				if ( i < border )
-				{
-					wtm_c_train_alg_e_co.training_functional.generalized_training_weight.parameter_1
-						= - 1.0 / static_cast<double> (border - 1) * static_cast<double> (i) + 2.0;
-					wtm_c_train_alg_e_co.training_functional.generalized_training_weight.parameter_0
-						= wtm_c_train_alg_e_co.training_functional.generalized_training_weight.parameter_1
-							- 1.0;
-				}
-				else
-				{
-					wtm_c_train_alg_e_co.training_functional.generalized_training_weight.parameter_1
-						= 1;
-					wtm_c_train_alg_e_co.training_functional.generalized_training_weight.parameter_0
-						= 0;
-				}
-
 				wtm_c_train_alg_e_co ( data.begin(), data.end(), &kohonen_network_4 );
 
 				wtm_c_train_alg_e.training_functional.generalized_training_weight.network_function.sigma *= 2.0/3.0;
 
-				std::random_shuffle ( data.begin(), data.end() );
+				//std::random_shuffle ( data.begin(), data.end() );
 			}
 
 			//std::cout << "kohonen_network_4" << std::endl;
