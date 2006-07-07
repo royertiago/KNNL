@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 02 May 2006 11:39:22 CEST
- * Last modified: Mon 19 Jun 2006 16:47:22 CEST
+ * Last modified: Wed 28 Jun 2006 14:37:57 CEST
  */
 
 #ifndef WTM_TRAINING_ALGORITM_HPP_INCLUDED
@@ -106,7 +106,8 @@ namespace neural_net
 		/** Training functional. */
 		Training_functional_type training_functional;
 
-		/** Constructor.
+		/** 
+		 * Constructor.
 		 * \param training_functional_ is a training functor.
 		 * \param numeric_iterator_ is a numeric iterator.
 		 */

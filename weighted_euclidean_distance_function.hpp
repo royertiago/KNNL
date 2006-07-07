@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 17 Apr 2006 23:54:20 CEST
- * Last modified: Fri 23 Jun 2006 15:15:46 CEST
+ * Last modified: Fri 07 Jul 2006 14:30:34 CEST
  */
 
 #ifndef WEIGHTED_EUCLIDEAN_DISTANCE_FUNCTION_HPP_INCLUDED
@@ -47,6 +47,7 @@
 
 #include "operators.hpp"
 #include "basic_weak_distance_function.hpp"
+#include <cassert>
 
 #include "value_type.hpp"
 
@@ -66,7 +67,7 @@ namespace distance
 	/**
 	 * Weighted_euclidean_distance_function template class.
 	 * \param Value_type is a type of values.
-	 * \param Parameters_type is a type of parameters (weights) used in weighted euclidean distance.
+	 * \param Parameters_type is a type of parameters (weights) used in weighted Euclidean distance.
 	 * \f[
 	 * d (x,y,w) = \sum\limits_{i=0}^{N} w_i\cdot (x_i-y_i)^2
 	 * \f]
@@ -87,7 +88,7 @@ namespace distance
 		typedef typename Value_type::value_type inner_type;
 		
 		/** Parameters. */
-		Parameters_type parameters;
+		const Parameters_type * parameters;
 
 		/** Parameters size. */
 		size_t parameters_size;
@@ -98,17 +99,18 @@ namespace distance
 		/**
 		 * Constructor.
 		 */
-		explicit Weighted_euclidean_distance_function ( const Value_type & weights ) throw()
+		explicit Weighted_euclidean_distance_function ( const Parameters_type * weights ) throw()
 		: parameters ( weights )
 		{
-			parameters_size = parameters.size();
+			assert ( parameters != static_cast < Parameters_type * > ( 0 ) );
+			parameters_size = parameters->size();
 		}
 
 		/**
 		 * Calculation function.
 		 * \param x input value for the function.
 		 * \param y input value for the function.
-		 * \return square of the weighted euclidean distance function.
+		 * \return square of the weighted Euclidean distance function.
 		 * \f[
 		 * d (x,y,w) = \sum\limits_{i=0}^{N} w_i\cdot (x_i-y_i)^2
 		 * \f]
@@ -127,7 +129,7 @@ namespace distance
 					x.begin(),
 					x.end(),
 					y.begin(),
-					parameters.begin(),
+					parameters->begin(),
 					static_cast < const inner_type & > (0)
 				)
 			);
@@ -153,13 +155,13 @@ namespace distance
 
 	private:
 		/**
-		 * Function calculates weighted euclidean distance between two containers.
+		 * Function calculates weighted Euclidean distance between two containers.
 		 * \param begin_1 is a begin iterator for the first container.
 		 * \param end_1 is an end iterator for the first container.
 		 * \param begin_2 is a begin iterator for the second container.
 		 * \param begin_3 is a bagin iterator for the parameters.
 		 * \param init is an initial value.
-		 * \result sqare of weighted euclidean distance.
+		 * \result sqare of weighted Euclidean distance.
 		 * \f[
 		 * d (x,y,w) = d_0 + \sum\limits_{i=0}^{N} w_i\cdot (x_i-y_i)^2
 		 * \f]

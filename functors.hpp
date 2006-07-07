@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Wed 10 May 2006 11:16:03 CEST
- * Last modified: Mon 19 Jun 2006 16:56:18 CEST
+ * Last modified: Wed 28 Jun 2006 14:39:50 CEST
  */
 
 #ifndef FUNCTORS_HPP_INCLUDED
@@ -237,7 +237,7 @@ namespace neural_net
 		/**
 		 * Constuctor.
 		 * \param sigma_ is scailing coefficient.
-		 * \param power_ is exponential factor.
+		 * \param exp_ is exponential factor.
 		 */
 		Cauchy_function ( const Scalar_type & sigma_, const Exponent_type & exp_ ) throw()
 		: sigma ( sigma_ ), exponent ( exp_ )

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 24 Apr 2006 12:11:38 CEST
- * Last modified: Mon 19 Jun 2006 16:23:31 CEST
+ * Last modified: Fri 07 Jul 2006 16:15:05 CEST
  */
 
 #ifndef RANGES_HPP_INCLUDED
@@ -88,11 +88,11 @@ namespace neural_net
 		 * Function that is going through the all container.
 		 * \param value is a reference to the container.
 		 */
-		void operator() ( Container_type & value ) throw()
+		void operator() ( const Container_type & value ) throw()
 		{
-			typename Container_type::iterator pos;
+			typename Container_type::const_iterator pos;
 
-			typename Container_type::value_type::iterator pos_range;
+			typename Container_type::value_type::const_iterator pos_range;
 			typename Container_type::value_type::iterator pos_min_range;
 			typename Container_type::value_type::iterator pos_max_range;
 
@@ -122,7 +122,7 @@ namespace neural_net
 		 * This value could not exests in container, because is created from
 		 * all maximums of data e.g. { (1,2), (2,1) } -> (2,2)
 		 */
-		typename Container_type::value_type get_max() const throw()
+		const typename Container_type::value_type & get_max() const throw()
 		{
 			return ranges.second;
 		}
@@ -132,7 +132,7 @@ namespace neural_net
 		 * This value could not exests in container, because is created from
 		 * all minimums of data e.g. { (1,2), (2,1) } -> (1,1)
 		 */
-		typename Container_type::value_type get_min() const throw()
+		const typename Container_type::value_type & get_min() const throw()
 		{
 			return ranges.first;
 		}

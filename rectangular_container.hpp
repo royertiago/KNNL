@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:37:57 CEST
- * Last modified: Mon 19 Jun 2006 15:25:54 CEST
+ * Last modified: Fri 07 Jul 2006 16:19:55 CEST
  */
 
 #ifndef RECTANGULAR_CONTAINER_HPP_INCLUDED
@@ -89,6 +89,17 @@ namespace neural_net
 		/** Objects. */
 		row_type objects;
 
+		/** 
+		 * Get object.
+		 * \param i is the row number.
+		 * \param j is the column number.
+		 * \return const reference to the (i,j)-th object.
+		 */
+		const Object_type & operator() ( size_t & i, size_t & j ) const
+		{
+			return objects[i][j];
+		}
+
 		/**
 		 * Constructor.
 		 */
@@ -97,9 +108,9 @@ namespace neural_net
 
 		/** Copy constructor. */
 		template < typename Object_type_2 >
-		Rectangular_container 
-		( 
-			const Rectangular_container < Object_type_2 > & rectangular_container 
+		Rectangular_container
+		(
+			const Rectangular_container < Object_type_2 > & rectangular_container
 		) throw()
 		: objects ( rectangular_container.objects )
 		{}
