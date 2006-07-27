@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 22 May 2006 20:03:59 CEST
- * Last modified: Sat 17 Jun 2006 17:54:46 CEST
+ * Last modified: Wed 12 Jul 2006 18:24:06 CEST
  */
 
 #ifndef RANDOMIZE_POLICY_HPP_INCLUDED
@@ -77,7 +77,7 @@ namespace neural_net
 		typedef External_randomize this_type;
 
 		/** Do nothing :-). */
-		void operator() ( void ) const throw()
+		void operator() ( void ) const
 		{
 			return;
 		}
@@ -94,7 +94,7 @@ namespace neural_net
 		typedef Internal_randomize this_type;
 
 		/** Initialize random number generator using srand(). */
-		void operator() ( void ) const throw()
+		void operator() ( void ) const
 		{
 			std::srand ( time ( NULL ) );
 			return;

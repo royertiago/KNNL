@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 17:47:44 CEST
- * Last modified: Mon 19 Jun 2006 16:25:17 CEST
+ * Last modified: Mon 22 May 2006 13:28:47 CEST
  */
 
 #ifndef BASIC_ACTIVATION_FUNCTION_HPP_INCLUDED

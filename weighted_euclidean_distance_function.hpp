@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 17 Apr 2006 23:54:20 CEST
- * Last modified: Fri 07 Jul 2006 14:30:34 CEST
+ * Last modified: Thu 27 Jul 2006 15:42:25 CEST
  */
 
 #ifndef WEIGHTED_EUCLIDEAN_DISTANCE_FUNCTION_HPP_INCLUDED
@@ -99,7 +99,7 @@ namespace distance
 		/**
 		 * Constructor.
 		 */
-		explicit Weighted_euclidean_distance_function ( const Parameters_type * weights ) throw()
+		explicit Weighted_euclidean_distance_function ( const Parameters_type * weights )
 		: parameters ( weights )
 		{
 			assert ( parameters != static_cast < Parameters_type * > ( 0 ) );
@@ -120,7 +120,7 @@ namespace distance
 		(
 			const Value_type & x,
 			const Value_type & y
-		) const throw()
+		) const
 		{
 			return
 			(
@@ -149,10 +149,43 @@ namespace distance
 				Value_type_2
 			>
 			& weighted_euclidean_distance
-		) throw()
+		)
 		: parameters ( weighted_euclidean_distance.parameters )
 		{}
 
+		/** Operator= */
+		template
+		<
+			typename Parameters_type_2,
+			typename Value_type_2
+		>
+		Weighted_euclidean_distance_function
+		<
+			Parameters_type,
+			Value_type
+		> &
+		operator=
+		(
+			const Weighted_euclidean_distance_function
+			<
+				Parameters_type_2,
+				Value_type_2
+			>
+			& weighted_euclidean_distance
+		)
+		{
+			// Handle self-assignment:
+			if ( this == &weighted_euclidean_distance )
+			{
+				return *this;
+			}
+
+			parameters = weighted_euclidean_distance.parameters;
+			parameters_size = weighted_euclidean_distance.parameters_size;
+
+			return *this;
+		}
+	
 	private:
 		/**
 		 * Function calculates weighted Euclidean distance between two containers.
@@ -177,7 +210,7 @@ namespace distance
 			typename Value_type::const_iterator begin_2,
 			typename Parameters_type::const_iterator begin_3,
 			const inner_type & init
-		) const throw()
+		) const
 		{
 			inner_type tmp_val;
 			inner_type result = init;

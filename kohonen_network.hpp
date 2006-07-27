@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 18 Apr 2006 19:25:15 CEST
- * Last modified: Mon 19 Jun 2006 14:59:25 CEST
+ * Last modified: Sat 17 Jun 2006 17:45:18 CEST
  */
 
 #ifndef KOHONEN_NETWORK_HPP_INCLUDED
@@ -93,7 +93,7 @@ namespace neural_net
 		Data_container_type & data,
 		Kohonen_network_type & kohonen_network,
 		const Randomize_policy & randomize_policy
-	) throw()
+	)
 	{
 		randomize_policy();
 

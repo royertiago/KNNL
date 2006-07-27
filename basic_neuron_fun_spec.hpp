@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 15:01:26 CEST
- * Last modified: Mon 19 Jun 2006 12:46:38 CEST
+ * Last modified: Wed 12 Jul 2006 19:22:42 CEST
  */
 
 #ifndef BASIC_NEURON_FUN_SPEC_HPP_INCLUDED
@@ -71,16 +71,12 @@ namespace neural_net
 	template
 	<
 		typename Activation_function_type,
-		typename Binary_operation_type//,
-		//typename Weights_type//,
-		//typename Value_type
+		typename Binary_operation_type
 	>
 	class Basic_neuron
 	<
 		Activation_function_type ( typename Binary_operation_type::result_type ),
-		Binary_operation_type ( Value_type, Value_type )//,
-		//Weights_type//,
-		//Value_type
+		Binary_operation_type ( Value_type, Value_type )
 	>
 	{
 	public:
@@ -134,7 +130,7 @@ namespace neural_net
 				Binary_operation_type ( value_type, value_type )
 			>
 			& binary_operation_
-		) throw()
+		)
 		: activation_function ( activation_function_ ),
 		binary_operation ( binary_operation_ ),
 		weights ( weights_ )
@@ -151,7 +147,7 @@ namespace neural_net
 		 * w is weight and x is input value.
 		 */
 		const typename Activation_function_type::result_type
-		operator() ( const value_type & x ) const throw()
+		operator() ( const value_type & x ) const
 		{
 			// calculate output of the neuron as activation fuction
 			// working on results from binary operation on weights and value
@@ -163,20 +159,16 @@ namespace neural_net
 		template
 		<
 			typename Activation_function_type_2,
-			typename Binary_operation_type_2//,
-			//typename Weights_type_2//,
-			//typename Value_type_2
+			typename Binary_operation_type_2
 		>
 		Basic_neuron
 		(
 			const Basic_neuron
 			<
 				Activation_function_type_2 ( typename Binary_operation_type_2::result_type ),
-				Binary_operation_type_2 ( value_type, value_type )//,
-				//Weights_type_2//,
-				//Value_type_2
+				Binary_operation_type_2 ( value_type, value_type )
 			> & neuron_
-		) throw()
+		)
 		{}
 	};
 	/*\@}*/

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 07 May 2006 13:51:04 CEST
- * Last modified: Mon 19 Jun 2006 15:04:45 CEST
+ * Last modified: Wed 12 Jul 2006 19:32:25 CEST
  */
 
 #ifndef GENERALIZED_TRAINING_WEIGHT_HPP_INCLUDED
@@ -151,6 +151,41 @@ namespace neural_net
 
 		/** Functor computes generalized distance in data space. */
 		Space_topology space_topology;
+		
+		/**
+		 * Function computes generalized weight for training proces.
+		 * This weight is not the same as weights in neural network.
+		 * \param weight is a weight from neural network.
+		 * \param value is a input value (value that trains network).
+		 * \param iteration is a number of training steps could be
+		 * number of training data sample.
+		 * \param c_1 is a row number (position) in the network of the central neuron.
+		 * \param c_2 is a column number (position) in the network of the central neuron.
+		 * \param v_1 is a row number (position) in the network of the trained neuron.
+		 * \param v_2 is a column number (position) in the network of the trained neuron.
+		 * \f[
+		 * y=n_f (n_t (c_1,c_2,v_1,v_2)) \cdot s_f (s_t (x,w))
+		 * \f]
+		 * where x is value and w is neuron weight.
+		 */
+		const typename Space_function_type::value_type operator()
+		(
+			Value_type & weight,
+			const Value_type & value,
+			const Iteration_type & iteration,
+			const Index_type & c_1,
+			const Index_type & c_2,
+			const Index_type & v_1,
+			const Index_type & v_2
+		)
+		{
+			// calculate result
+			return
+			(
+				(network_function) ( (network_topology) ( c_1, c_2, v_1, v_2 ) )
+				* (space_function) ( (space_topology) ( value, weight ) )
+			);
+		}
 
 		/**
 		 * Constructor.
@@ -165,7 +200,7 @@ namespace neural_net
 			const Space_function_type & s_f,
 			const Network_topology & n_t,
 			const Space_topology & s_t
-		) throw()
+		)
 		: Basic_generalized_training_weight
 		<
 			Value_type,
@@ -206,7 +241,7 @@ namespace neural_net
 				Index_type_2
 			>
 			& classic_training_weight
-		) throw()
+		)
 		: Basic_generalized_training_weight
 		<
 			 Value_type_2,
@@ -223,40 +258,6 @@ namespace neural_net
 		space_topology ( classic_training_weight.space_topology )
 		{}
 
-		/**
-		 * Function computes generalized weight for training proces.
-		 * This weight is not the same as weights in neural network.
-		 * \param weight is a weight from neural network.
-		 * \param value is a input value (value that trains network).
-		 * \param iteration is a number of training steps could be
-		 * number of training data sample.
-		 * \param c_1 is a row number (position) in the network of the central neuron.
-		 * \param c_2 is a column number (position) in the network of the central neuron.
-		 * \param v_1 is a row number (position) in the network of the trained neuron.
-		 * \param v_2 is a column number (position) in the network of the trained neuron.
-		 * \f[
-		 * y=n_f (n_t (c_1,c_2,v_1,v_2)) \cdot s_f (s_t (x,w))
-		 * \f]
-		 * where x is value and w is neuron weight.
-		 */
-		const typename Space_function_type::value_type operator() 
-		(
-			Value_type & weight,
-			const Value_type & value,
-			const Iteration_type & iteration,
-			const Index_type & c_1,
-			const Index_type & c_2,
-			const Index_type & v_1,
-			const Index_type & v_2
-		) throw()
-		{
-			// calculate result
-			return
-			(
-				(network_function) ( (network_topology) ( c_1, c_2, v_1, v_2 ) )
-				* (space_function) ( (space_topology) ( value, weight ) )
-			);
-		}
 	};
 
 	/**
@@ -339,7 +340,7 @@ namespace neural_net
 			const Space_topology & s_t,
 			const Parameter_type & parameter_0_,
 			const Parameter_type & parameter_1_
-		) throw()
+		)
 		: parameter_1 ( parameter_1_),
 		parameter_0 ( parameter_0_),
 		network_function ( n_f ),
@@ -374,7 +375,7 @@ namespace neural_net
 				Parameter_type_2
 			>
 			& experimental_training_weight
-		) throw()
+		)
 		: Basic_generalized_training_weight
 		<
 			Value_type_2,
@@ -409,7 +410,7 @@ namespace neural_net
 		 * \f]
 		 * where x is value, w is neuron weight, \f$p_1\f$ is scaling parameter, \f$p_0\f$ is shifting parameter.
 		 */
-		const typename Space_function_type::value_type operator() 
+		const typename Space_function_type::value_type operator()
 		(
 			Value_type & weight,
 			const Value_type & value,
@@ -418,7 +419,7 @@ namespace neural_net
 			const Index_type & c_2,
 			const Index_type & v_1,
 			const Index_type & v_2
-		) throw()
+		) const
 		{
 			// calculate result
 			return

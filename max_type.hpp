@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 23 May 2006 23:53:14 CEST
- * Last modified: Mon 19 Jun 2006 18:16:56 CEST
+ * Last modified: Wed 12 Jul 2006 18:43:42 CEST
  */
 
 #ifndef MAX_TYPE_HPP_INCLUDED
@@ -66,28 +66,40 @@ namespace operators
 	{
 		typedef T type;
 	};
-
-	#define MAX_TYPE(T1,T2,T3) template <>\
+	
+	// just some examples to set up results for Max_type
+	// if anyone would like to add his/her types they just have to use
+	// macro MAX_TYPE_3( argument_1_type, argument_2_type, result_type )
+	#define MAX_TYPE_3(T1,T2,T3) template <>\
 	struct Max_type_private < T1, T2 >\
 	{ typedef T3 type; };
-	MAX_TYPE(double,int,double)
-	MAX_TYPE(double,short,double)
-	MAX_TYPE(double,unsigned char,double)
-	MAX_TYPE(double,unsigned int,double)
-	MAX_TYPE(double,unsigned long,double)
-	MAX_TYPE(double,unsigned short,double)
-	MAX_TYPE(int,double,double)
-	MAX_TYPE(int,long,long)
-	MAX_TYPE(long,int,long)
-	MAX_TYPE(long,short,long)
-	MAX_TYPE(short,double,double)
-	MAX_TYPE(short,long,long)
-	MAX_TYPE(unsigned char,double,double)
-	MAX_TYPE(unsigned int,double,double)
-	MAX_TYPE(unsigned long,double,double)
-	MAX_TYPE(unsigned short,double,double)
-	// and example where explicitly we can use three different types
+
+	MAX_TYPE_3(int,double,double)
+	MAX_TYPE_3(int,long,long)
+	MAX_TYPE_3(short,double,double)
+	MAX_TYPE_3(short,long,long)
+	MAX_TYPE_3(unsigned char,double,double)
+	MAX_TYPE_3(unsigned int,double,double)
+	MAX_TYPE_3(unsigned long,double,double)
+	MAX_TYPE_3(unsigned short,double,double)
+	// and example where we can explicitly use three different types
 	// MAX_TYPE(std::complex < int >, double, std::complex < double >)
+
+	// macro below assumes that bigger type is the first one
+	// macro MAX_TYPE_2( argument_1_type, argument_2_type ) 
+	// simulate that result_type =  argument_1_type
+	#define MAX_TYPE_2(T1,T2) template <>\
+	struct Max_type_private < T1, T2 >\
+	{ typedef T1 type; };
+
+	MAX_TYPE_2(double,int)
+	MAX_TYPE_2(long,int)
+	MAX_TYPE_2(long,short)
+	MAX_TYPE_2(double,short)
+	MAX_TYPE_2(double,unsigned char)
+	MAX_TYPE_2(double,unsigned int)
+	MAX_TYPE_2(double,unsigned long)
+	MAX_TYPE_2(double,unsigned short)
 
 	/**
 	 * \class Max_type

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 02 May 2006 11:39:22 CEST
- * Last modified: Wed 28 Jun 2006 14:37:57 CEST
+ * Last modified: Wed 12 Jul 2006 20:16:34 CEST
  */
 
 #ifndef WTM_TRAINING_ALGORITM_HPP_INCLUDED
@@ -106,7 +106,7 @@ namespace neural_net
 		/** Training functional. */
 		Training_functional_type training_functional;
 
-		/** 
+		/**
 		 * Constructor.
 		 * \param training_functional_ is a training functor.
 		 * \param numeric_iterator_ is a numeric iterator.
@@ -115,7 +115,7 @@ namespace neural_net
 		(
 			const Training_functional_type & training_functional_,
 			Numeric_iterator_type numeric_iterator_ = linear_numeric_iterator()
-		) throw()
+		)
 		: training_functional ( training_functional_ ),
 		numeric_iterator ( numeric_iterator_ )
 		{
@@ -135,7 +135,7 @@ namespace neural_net
 			typename Index_type_2,
 			typename Numeric_iterator_type_2
 		>
-		Wtm_training_algorithm
+		inline Wtm_training_algorithm
 		(
 			const Wtm_training_algorithm
 			<
@@ -147,7 +147,7 @@ namespace neural_net
 				Numeric_iterator_type_2
 			>
 			& wtm_training_alg_
-		) throw()
+		)
 		: training_functional ( wtm_training_alg_.training_functional ),
 		numeric_iterator ( wtm_training_alg_.numeric_iterator ),
 		iteration ( wtm_training_alg_.iteration )
@@ -167,7 +167,7 @@ namespace neural_net
 			Data_iterator_type data_begin,
 			Data_iterator_type data_end,
 			Network_type * network_
-		) throw()
+		)
 		{
 			network = network_;
 
@@ -210,7 +210,7 @@ namespace neural_net
 		 * As is set in WTM algoritm method is looking for the best neuron,
 		 * and train it to have better results with actual data in the future.
 		 */
-		void train ( const Value_type & value ) throw()
+		void train ( const Value_type & value )
 		{
 			Index_type index_1;
 			Index_type index_2;
