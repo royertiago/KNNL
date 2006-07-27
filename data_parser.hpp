@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sat 29 Apr 2006 19:10:50 CEST
- * Last modified: Mon 19 Jun 2006 14:50:44 CEST
+ * Last modified: Wed 12 Jul 2006 19:26:16 CEST
  */
 
 #ifndef DATA_PARSER_HPP_INCLUDED
@@ -82,7 +82,7 @@ namespace data_parser
 	{
 	public:
 		/** Constructor. */
-		Data_parser() throw()
+		Data_parser()
 		{}
 
 		/**
@@ -92,7 +92,7 @@ namespace data_parser
 		 * \return modified container.
 		 * \throw std::runtime_error when after parsing size of data_container is still zero.
 		 */
-		Data_container & operator() ( std::istream & is, Data_container & data_container )
+		Data_container & operator() ( std::istream & is, Data_container & data_container ) const
 		throw ( std::runtime_error )
 		{
 			std::string tmp_string;
@@ -134,7 +134,7 @@ namespace data_parser
 		(
 			typename Data_container::value_type & container,
 			std::string & str
-		) throw()
+		) const
 		{
 			std::stringstream tmp_sstr ( str );
 

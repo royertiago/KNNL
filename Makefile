@@ -16,12 +16,8 @@ GCC=g++
  
 ## Libraries to link against
 ## example:
-#LIBS+= -lm
-LIBS+= -lboost_program_options-gcc
-#LIBS+=-lboost_serialization-gcc
-#LIBS+=-lboost_date_time-gcc
-LIBS+= -lboost_filesystem-gcc
-# LIBS+=$(shell pkg-config --libs gtkmm-2.4)
+LIBS+=-lboost_program_options-gcc
+LIBS+=-lboost_filesystem-gcc
 
 ## Local include paths
 INCLUDE=-I.
@@ -30,62 +26,113 @@ INCLUDE=-I.
 LFLAGS+= -z combreloc 
 #LFLAGS+= -static
 
-## Compilation flags
-CFLAGS+= -Wall -pedantic
-CFLAGS+= -pipe 
-CFLAGS+= -O2
-#CFLAGS+= -march=i586
-#CFLAGS+= -mtune=i686
-#CFLAGS+= -ffloat-store 
-CFLAGS+= -msse
-CFLAGS+= $(shell ./gcccpuopt.sh)
-## Use flag below for C code for C++ code better not (increase size and reduce speed).
-## This flag is very good for optimising low level system functions.
-#CFLAGS+= -fomit-frame-pointer
- 
-## example:
-# CFLAGS+=$(shell pkg-config --cflags gtkmm-2.4)
+define debug_core_info
+	## Debugging flags
+	GFLAGS+= -pg
+	GFLAGS+= -ggdb3
+	GFLAGS+= -fprofile-arcs
+	GFLAGS+= -ftest-coverage
+	## To add "press any key section" to work with:
+	## pmap `pgrep ${PROGS}
+	GFLAGS += -DPMAP
+endef
 
-## Debugging and profiling flags
-#GFLAGS+= -p
-#GFLAGS+= -pg
-#GFLAGS+= -ggdb3
-#GFLAGS+= -DFTDEBUG
-#GFLAGS+= -DTDEBUG
-#GFLAGS+= -fprofile-arcs
-#GFLAGS+= -ftest-coverage
+define tdebug_info
+	GFLAGS+= -DFTDEBUG
+	#GFLAGS+= -DTDEBUG
+endef
 
-## To erase "assert"
-#GFLAGS += -DNDEBUG
+define release_info
+	CFLAGS+= -fomit-frame-pointer # incompatibiles with -pg
+	## To erase "assert"
+	# GFLAGS += -DNDEBUG
+endef
 
-## To add "press any key section" to work with:
-## pmap `pgrep ${PROGS}`
-# GFLAGS += -DPMAP
+define core_info
+	## Compilation flags
+	CFLAGS+= -Wall -pedantic
+	CFLAGS+= -pipe 
+	CFLAGS+= -O3
+	#CFLAGS+= -mtune=i686
+	#CFLAGS+= -ffloat-store
+	CFLAGS+= -finline-functions
+	CFLAGS+= -funroll-all-loops
+	CFLAGS+= -fno-strict-aliasing 
+	CFLAGS+= -fPIC
+	CFLAGS+= -msse
+	CFLAGS+= $(shell ./gcccpuopt.sh)
+	## example:
+	# CFLAGS+=$(shell pkg-config --cflags gtkmm-2.4)
+endef
+
+release:
+	@ echo ""
+	@ echo '----------------------------------=#=----------------------------------'
+	@ echo ""
+	@ echo '                           RELEASE VERSION'
+	@ echo ""
+	@ echo '----------------------------------=#=----------------------------------'
+	@ echo ""
+	@ $(eval $(call release_info))
+	@ $(eval $(call core_info))
+	@ $(MAKE) program "CFLAGS=${CFLAGS}"
+
+tdrelease:
+	@ echo ""
+	@ echo '----------------------------------=#=----------------------------------'
+	@ echo ""
+	@ echo '                      RELEASE VERSION WITH LOGGER'
+	@ echo ""
+	@ echo '----------------------------------=#=----------------------------------'
+	@ echo ""
+	@ $(eval $(call tdebug_info))
+	@ $(eval $(call release_info))
+	@ $(eval $(call core_info))
+	@ $(MAKE) program "CFLAGS=${CFLAGS}" "GFLAGS=${GFLAGS}"
+
+debug:
+	@ echo ""
+	@ echo '----------------------------------=#=----------------------------------'
+	@ echo ""
+	@ echo '                      DEBUG VERSION WITH LOGGER'
+	@ echo ""
+	@ echo '----------------------------------=#=----------------------------------'
+	@ echo ""
+	@ $(eval $(call tdebug_info))
+	@ $(eval $(call debug_core_info))
+	@ $(eval $(call core_info))
+	@ $(MAKE) program "CFLAGS=${CFLAGS}" "GFLAGS=${GFLAGS}"
 
 ######################################
 # You shouldn't need to modify these #
 ######################################
 
-CC=${GCC} ${INCLUDE} ${CFLAGS} ${GFLAGS} 
+CC=${GCC} ${INCLUDE} ${CFLAGS} ${GFLAGS}
 LINK=${GCC} ${GFLAGS} ${LFLAGS}
-GENDEP=${GCC} ${GFLAGS} -MM ${INCLUDE} ${CFALGS}
+GENDEP=${GCC} ${GFLAGS} ${CFLAGS} -MM ${INCLUDE} 
 
 OBJS:=$(patsubst %.${EXT},%.o, $(wildcard *.${EXT}))
 DEPS:=$(patsubst %.${EXT},.%.d, $(wildcard *.${EXT}))
 
-.PHONY: all
-all: ${PROGS}
-	@ echo Build complete
+.PHONY: program
+program: ${PROGS}
+	@ echo ""
+	@ echo '----------------------------------=#=----------------------------------'
+	@ echo ""
+	@ echo 'Build complete'
 	@ echo LFLAGS = ${LFLAGS}
 	@ echo CFLAGS = ${CFLAGS}
 	@ echo GFLAGS = ${GFLAGS}
 	@ echo LIBS = ${LIBS}
+	@ echo ""
+	@ echo '----------------------------------=#=----------------------------------'
+	@ echo ""
 
 .%.d: %.${EXT}
 	@ echo DEP $<
 	@ ${GENDEP} $< | sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' > $@
 
-${PROGS}: ${DEPS} ${OBJS}
+${PROGS}: ${DEP} ${OBJS}
 	@ echo LINK $@ 
 	@ ${LINK} ${OBJS} ${LIBS} -o $@.debug
 	@ strip -R .comment -R .note -R .note.ABI-tag -s $@.debug -o $@
@@ -96,7 +143,7 @@ ${OBJS}: %.o: %.${EXT}
 
 REALDEPS:=$(wildcard .*.d)
 ifneq ($(strip $(REALDEPS)),)
-include ${REALDEPS}
+	include $(REALDEPS)
 endif
 
 .PHONY: clean
@@ -110,4 +157,3 @@ clean:
 
 	@ echo CLEAN ${DEPS}
 	@ rm -f ${DEPS}
-

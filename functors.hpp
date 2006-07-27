@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Wed 10 May 2006 11:16:03 CEST
- * Last modified: Wed 28 Jun 2006 14:39:50 CEST
+ * Last modified: Thu 08 Jun 2006 01:55:39 CEST
  */
 
 #ifndef FUNCTORS_HPP_INCLUDED
@@ -134,7 +134,7 @@ namespace neural_net
 		 * \param sigma_ is sigma coefficient in Gauss hat function.
 		 * \param exp_ is exponential factor in Gauss hat function.
 		 */
-		Gauss_function ( const Scalar_type & sigma_, const Exponent_type & exp_ ) throw()
+		Gauss_function ( const Scalar_type & sigma_, const Exponent_type & exp_ ) 
 		: sigma ( sigma_ ), exponent ( exp_ )
 		{}
 
@@ -147,7 +147,7 @@ namespace neural_net
 		 * \f]
 		 * where: v is value.
 		 */
-		const result_type operator() ( const Value_type & value ) const throw()
+		const result_type operator() ( const Value_type & value ) const
 		{
 			operators::power < result_type, Exponent_type > power_v;
 
@@ -182,7 +182,7 @@ namespace neural_net
 				Exponent_type_2
 			>
 			& gauss_function
-		) throw()
+		) 
 		: sigma ( gauss_function.sigma ), exponent ( gauss_function.exponent )
 		{}
 	};
@@ -239,7 +239,7 @@ namespace neural_net
 		 * \param sigma_ is scailing coefficient.
 		 * \param exp_ is exponential factor.
 		 */
-		Cauchy_function ( const Scalar_type & sigma_, const Exponent_type & exp_ ) throw()
+		Cauchy_function ( const Scalar_type & sigma_, const Exponent_type & exp_ ) 
 		: sigma ( sigma_ ), exponent ( exp_ )
 		{}
 		
@@ -252,7 +252,7 @@ namespace neural_net
 		 * \f]
 		 * where: x is value.
 		 */
-		const result_type operator() ( const Value_type & value ) const throw()
+		const result_type operator() ( const Value_type & value ) const 
 		{
 			operators::power < result_type, Exponent_type > power_v;
 
@@ -286,7 +286,7 @@ namespace neural_net
 				Exponent_type_2
 			>
 			& cauchy_function
-		) throw()
+		) 
 		: sigma ( cauchy_function.sigma ), exponent ( cauchy_function.exponent )
 		{}
 	};
@@ -320,7 +320,7 @@ namespace neural_net
 		 * Constuctor.
 		 * \param sigma_ is constant value.
 		 */
-		Constant_function ( const Scalar_type & sigma_ ) throw()
+		Constant_function ( const Scalar_type & sigma_ )
 		: sigma ( sigma_ )
 		{}
 
@@ -337,7 +337,7 @@ namespace neural_net
 				Value_type_2,
 				Scalar_type_2
 			> & constant_function
-		) throw()
+		)
 		: sigma ( constant_function.sigma )
 		{}
 
@@ -350,7 +350,7 @@ namespace neural_net
 		 * \f]
 		 * where: x is value.
 		 */
-		const result_type operator() ( const Value_type & value ) const throw()
+		const result_type operator() ( const Value_type & value ) const 
 		{
 			// result
 			return ( sigma );

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:42:31 CEST
- * Last modified: Fri 07 Jul 2006 19:07:12 CEST
+ * Last modified: Wed 12 Jul 2006 19:28:12 CEST
  */
 
 #ifndef EUCLIDEAN_DISTANCE_FUNCTION_HPP_INCLUDED
@@ -87,7 +87,7 @@ namespace distance
 		/**
 		 * Constructor.
 		 */
-		Euclidean_distance_function() throw()
+		Euclidean_distance_function()
 		{}
 
 		/**
@@ -103,7 +103,7 @@ namespace distance
 		(
 			const Value_type & x,
 			const Value_type & y
-		) const throw()
+		) const
 		{
 			return
 			(
@@ -134,7 +134,7 @@ namespace distance
 			typename Value_type::const_iterator end_1,
 			typename Value_type::const_iterator begin_2,
 			const inner_type & init
-		) const throw()
+		) const
 		{
 			return std::inner_product
 			(

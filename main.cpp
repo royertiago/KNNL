@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Thu 10 Apr 2006 11:05:06 CEST
- * Last modified: Fri 07 Jul 2006 16:21:14 CEST
+ * Last modified: Thu 27 Jul 2006 15:42:40 CEST
  */
 
 #include "debugger.hpp"
@@ -47,6 +47,11 @@
 #include "std_headers.hpp"
 #include "neural_net_headers.hpp"
 #include "configuration.hpp"
+
+// PMAP is used just to hold program for debugging memory usage
+#ifdef PMAP
+	#include <cstdio>
+#endif //PMAP
 
 /**
  * \mainpage Kohonen Neural Network Library Demo
@@ -129,9 +134,8 @@ int main ( int argc, char * argv[] )
 
 	// flag used when compilation is prepared for the tests using pmap linux command
 #ifdef PMAP
-	char key;
 	std::cout << "Press any key.";
-	::getc (key);
+	getchar ();
 #endif //PMAP
 
 	try
@@ -241,8 +245,6 @@ int main ( int argc, char * argv[] )
 				  ++pos_max, ++pos_min
 			)
 			{
-				D ( *pos_max );
-				D ( *pos_min );
 				coefs.push_back ( operators::inverse ( ( *pos_max - *pos_min ) * ( *pos_max - *pos_min ) ) ); // weight for i-th axis
 			}
 
@@ -694,7 +696,7 @@ int main ( int argc, char * argv[] )
 
 #ifdef PMAP
 	std::cout << "Press any key.";
-	::getc (key);
+	getchar ();
 #endif //PMAP
 
 	return 0;

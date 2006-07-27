@@ -114,7 +114,7 @@ namespace neural_net
 		(
 			const Training_functional_type & training_functional_,
 			Numeric_iterator_type numeric_iterator_ = linear_numeric_iterator()
-		) throw()
+		) 
 		: training_functional ( training_functional_ ),
 		numeric_iterator ( numeric_iterator_ )
 		{
@@ -144,7 +144,7 @@ namespace neural_net
 				Numeric_iterator_type_2
 			>
 			& wta_training_alg_
-		) throw()
+		) 
 		: training_functional ( wta_training_alg_.training_functional ),
 		numeric_iterator ( wta_training_alg_.numeric_iterator ),
 		iteration ( wta_training_alg_.iteration )
@@ -164,7 +164,7 @@ namespace neural_net
 			Data_iterator_type data_begin,
 			Data_iterator_type data_end,
 			Network_type * network_
-		) throw()
+		) 
 		{
 			network = network_;
 
@@ -207,7 +207,7 @@ namespace neural_net
 		 * As is set in WTA algoritm method is looking for the best neuron,
 		 * and train it to have better results with actual data in the future.
 		 */
-		void train ( const Value_type & value ) throw()
+		void train ( const Value_type & value ) 
 		{
 			size_t index_1 = 0;
 			size_t index_2 = 0;

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 18 Jun 2006 13:22:04 CEST
- * Last modified: Mon 19 Jun 2006 16:39:20 CEST
+ * Last modified: Sun 18 Jun 2006 13:56:46 CEST
  */
 
 #ifndef NUMERIC_ITERATOR_HPP_INCLUDED
@@ -73,7 +73,7 @@ namespace neural_net
 		 * Constructor.
 		 * \param state_ is a state in the beginning of the work of iterator
 		 */
-		Numeric_iterator ( const Value_type & state_ ) throw()
+		Numeric_iterator ( Value_type state_ )
 		: state ( state_ )
 		{}
 	};
@@ -97,7 +97,7 @@ namespace neural_net
 		Linear_numeric_iterator (
 			Value_type state_ = static_cast < Value_type > ( 0 ),
 			Value_type step_ = static_cast < Value_type > ( 1 )
-		) throw()
+		)
 		: Numeric_iterator < Value_type > ( state_ ), step ( step_ )
 		{}
 
@@ -105,7 +105,7 @@ namespace neural_net
 		 * Reset state.
 		 * \param state_ is a new state.
 		 */
-		void reset ( const Value_type & state_ = static_cast < Value_type > ( 0 ) ) throw()
+		void reset ( const Value_type & state_ = static_cast < Value_type > ( 0 ) )
 		{
 			Numeric_iterator < Value_type >::state = state_;
 			return;
@@ -114,7 +114,7 @@ namespace neural_net
 		/**
 		 * Method returns state.
 		 */
-		inline const Value_type operator() ( void ) const throw()
+		inline const Value_type operator() ( void ) const
 		{
 			return ( Numeric_iterator < Value_type >::state );
 		}
@@ -123,7 +123,7 @@ namespace neural_net
 		 * Preincrementation.
 		 */
 		inline const Linear_numeric_iterator < Value_type > &
-		operator++() throw()
+		operator++()
 		{
 			Numeric_iterator < Value_type >::state += step;
 			return *this;
@@ -133,7 +133,7 @@ namespace neural_net
 		 * Postincrementation.
 		 */
 		inline const Linear_numeric_iterator < Value_type >
-		operator++ ( int ) throw()
+		operator++ ( int )
 		{
 			Value_type tmp ( present_state );
 			Numeric_iterator < Value_type >::state += step;

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 06 Feb 2006 17:51:24 CET
- * Last modified: Mon 19 Jun 2006 14:50:12 CEST
+ * Last modified: Wed 12 Jul 2006 19:23:24 CEST
  */
 
 #include "configuration.hpp"
@@ -56,12 +56,12 @@ namespace config
 	(
 		int argc, char * argv[],
 		Configuration & conf_
-	) throw()
+	)
 	{
 		namespace bpo = boost::program_options;
 
 		// prepare 3 separated groups of options
-		bpo::options_description generic_opts ( "Generic ioptions",screen_width ); // e.g.-h help-V version
+		bpo::options_description generic_opts ( "Generic ioptions",screen_width ); // e.g.-h help -V version
 		bpo::options_description config_opts ( "Configuration",screen_width ); // for configuring program
 		bpo::options_description hidden_opts ( "Hidden options",screen_width ); // e.g. input file
 

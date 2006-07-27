@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Wed 03 May 2006 13:18:41 CEST
- * Last modified: Mon 19 Jun 2006 16:46:28 CEST
+ * Last modified: Wed 12 Jul 2006 22:08:18 CEST
  */
 
 #ifndef WTM_TOPOLOGY_HPP_INCLUDED
@@ -112,7 +112,7 @@ namespace neural_net
 			const Index_type & index_1_2,
 			const Index_type & index_2_1,
 			const Index_type & index_2_2
-		) throw()
+		) const
 		{
 			return
 			(
@@ -153,7 +153,7 @@ namespace neural_net
 			const Index_type & index_1_2,
 			const Index_type & index_2_1,
 			const Index_type & index_2_2
-		)
+		) const
 		{
 			return
 			(
@@ -194,13 +194,13 @@ namespace neural_net
 		 * This value have to be not less than number of rows in neuron
 		 * container counted from 0.
 		 */
-		explicit Hexagonal_topology ( const Index_type & hex_offset_ ) throw()
+		inline explicit Hexagonal_topology ( const Index_type & hex_offset_ )
 		: hex_offset ( hex_offset_ )
 		{}
 
 		/** Copy constructor. */
 		template < typename Index_type_2 >
-		Hexagonal_topology ( const Hexagonal_topology < Index_type_2 > & hex_topology ) throw()
+		inline Hexagonal_topology ( const Hexagonal_topology < Index_type_2 > & hex_topology )
 		: Basic_topology < Index_type_2, Index_type_2 >(),
 		hex_offset ( hex_topology.hex_offset )
 		{}
@@ -230,7 +230,7 @@ namespace neural_net
 			const Index_type & index_1_2,
 			const Index_type & index_2_1,
 			const Index_type & index_2_2
-		) throw()
+		) const
 		{
 			Index_type hex_index_1_1;
 			Index_type hex_index_1_2;

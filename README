@@ -14,3 +14,17 @@ To compile demo run:
 
 make 
 
+or 
+
+make release
+
+for debugging use
+
+make debug
+
+or to prepare release version with logger - trivial debugger 
+described in debbugger.hpp file:
+
+make tdrelease
+
+

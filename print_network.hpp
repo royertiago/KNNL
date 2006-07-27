@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 21 Apr 2006 19:30:09 CEST
- * Last modified: Fri 07 Jul 2006 16:17:11 CEST
+ * Last modified: Mon 22 May 2006 19:16:04 CEST
  */
 
 #ifndef PRINT_NETWORK_HPP_INCLUDED
@@ -69,7 +69,7 @@ namespace neural_net
 	 * \return modified stream.
 	 */
 	template < typename T >
-	std::ostream & print_network_weights ( std::ostream & os, const T & network ) throw()
+	std::ostream & print_network_weights ( std::ostream & os, const T & network )
 	{
 		size_t M = network.objects.size();
 		size_t N = network.objects[0].size();
@@ -101,7 +101,7 @@ namespace neural_net
 	 * \return modified stream.
 	 */
 	template < typename T, typename U >
-	std::ostream & print_network ( std::ostream & os, const T & network, const U & value ) throw()
+	std::ostream & print_network ( std::ostream & os, const T & network, const U & value )
 	{
 		size_t M = network.objects.size();
 		size_t N = network.objects[0].size();
@@ -140,7 +140,7 @@ namespace neural_net
 	 * \return modified stream.
 	 */
 	template < typename T >
-	inline std::ostream & value_to_ostream ( std::ostream & os, const T & value ) throw()
+	inline std::ostream & value_to_ostream ( std::ostream & os, const T & value )
 	{
 		os << value;
 		return os;
@@ -153,7 +153,7 @@ namespace neural_net
 	 * \return modified stream.
 	 */
 	template < typename T, template < typename T > class CONT >
-	inline std::ostream & value_to_ostream ( std::ostream & os, const CONT<T> & value ) throw()
+	inline std::ostream & value_to_ostream ( std::ostream & os, const CONT<T> & value )
 	{
 		std::copy ( value.begin(), value.end(), std::ostream_iterator < T > ( os, " " ) );
 		return os;
