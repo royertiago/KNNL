@@ -57,8 +57,10 @@ define core_info
 	#CFLAGS+= -ffloat-store
 	CFLAGS+= -finline-functions
 	CFLAGS+= -funroll-all-loops
+	#CFLAGS+= -ftree-vectorize 
+	#CFLAGS+= -ftree-vectorizer-verbose=5
 	CFLAGS+= -fno-strict-aliasing 
-	CFLAGS+= -fPIC
+	eFLAGS+= -fPIC
 	CFLAGS+= -msse
 	CFLAGS+= $(shell ./gcccpuopt.sh)
 	## example:

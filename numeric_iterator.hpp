@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 18 Jun 2006 13:22:04 CEST
- * Last modified: Sun 18 Jun 2006 13:56:46 CEST
+ * Last modified: Sun 08 Oct 2006 12:44:14 CEST
  */
 
 #ifndef NUMERIC_ITERATOR_HPP_INCLUDED
@@ -135,7 +135,7 @@ namespace neural_net
 		inline const Linear_numeric_iterator < Value_type >
 		operator++ ( int )
 		{
-			Value_type tmp ( present_state );
+			Value_type tmp ( Numeric_iterator < Value_type >::state );
 			Numeric_iterator < Value_type >::state += step;
 			return tmp;
 		}
