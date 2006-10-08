@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 02 May 2006 11:39:22 CEST
- * Last modified: Wed 12 Jul 2006 20:16:34 CEST
+ * Last modified: Sun 08 Oct 2006 16:54:42 CEST
  */
 
 #ifndef WTM_TRAINING_ALGORITM_HPP_INCLUDED
@@ -212,8 +212,8 @@ namespace neural_net
 		 */
 		void train ( const Value_type & value )
 		{
-			Index_type index_1;
-			Index_type index_2;
+			Index_type index_1 = Index_type();
+			Index_type index_2 = Index_type();
 			
 			typename Network_type::value_type::result_type tmp_result;
 
