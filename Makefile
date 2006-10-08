@@ -12,7 +12,7 @@ PROGS=knnl_demo
 EXT=cpp
 
 # Compiler
-GCC=g++-4.1.1
+GCC=g++
  
 ## Libraries to link against
 ## example:
