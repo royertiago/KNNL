@@ -10,7 +10,7 @@ to use library without boost.
 
 For details look on http://knnl.sourceforge.net.
 
-To compile demo run:
+To compile demo version run:
 
 make 
 
