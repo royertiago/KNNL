@@ -50,7 +50,10 @@ endef
 
 define core_info
 	## Compilation flags
-	CFLAGS+= -Wall -pedantic
+	CFLAGS+= -Wall -pedantic -ansi -W
+	CFLAGS+= -Wconversion -Wpointer-arith 
+	CFLAGS+= -Wcast-align
+	CFLAGS+= -Wwrite-strings 
 	CFLAGS+= -pipe 
 	CFLAGS+= -O3
 	#CFLAGS+= -mtune=i686
