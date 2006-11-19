@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:37:57 CEST
- * Last modified: Wed 12 Jul 2006 22:09:45 CEST
+ * Last modified: Sun 19 Nov 2006 10:39:54 CET
  */
 
 #ifndef RECTANGULAR_CONTAINER_HPP_INCLUDED
@@ -95,7 +95,7 @@ namespace neural_net
 		 * \param j is the column number.
 		 * \return const reference to the (i,j)-th object.
 		 */
-		const Object_type & operator() ( size_t & i, size_t & j ) const
+		const Object_type & operator() ( const size_t & i, const size_t & j ) const
 		{
 			return objects[i][j];
 		}
