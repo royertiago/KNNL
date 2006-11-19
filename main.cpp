@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Thu 10 Apr 2006 11:05:06 CEST
- * Last modified: Thu 27 Jul 2006 15:42:40 CEST
+ * Last modified: Sun 19 Nov 2006 12:02:21 CET
  */
 
 #include "debugger.hpp"
@@ -321,11 +321,11 @@ int main ( int argc, char * argv[] )
 
 			// print weights before training process
 			//std::cout << "kohonen_network" << std::endl;
-//			neural_net::print_network_weights ( std::cout, kohonen_network );
+//			neural_net::print_network_weights ( std::cout, kohonen_network, "\t" );
 			//std::cout << std::endl;
 			
 			//std::cout << "kohonen_network_1" << std::endl;
-			neural_net::print_network_weights ( std::cout, kohonen_network_1 );
+			neural_net::print_network_weights ( std::cout, kohonen_network_1, "\t" );
 			//std::cout << std::endl;
 
 			//std::cout << "kohonen_network_m" << std::endl;
