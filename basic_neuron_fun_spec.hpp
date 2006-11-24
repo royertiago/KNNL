@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 15:01:26 CEST
- * Last modified: Wed 12 Jul 2006 19:22:42 CEST
+ * Last modified: Fri 24 Nov 2006 11:03:25 CET
  */
 
 #ifndef BASIC_NEURON_FUN_SPEC_HPP_INCLUDED
@@ -146,7 +146,7 @@ namespace neural_net
 		 * where: f is activation function, g is binary operation,
 		 * w is weight and x is input value.
 		 */
-		const typename Activation_function_type::result_type
+		typename Activation_function_type::result_type
 		operator() ( const value_type & x ) const
 		{
 			// calculate output of the neuron as activation fuction

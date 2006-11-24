@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 07 May 2006 13:51:04 CEST
- * Last modified: Wed 12 Jul 2006 19:32:25 CEST
+ * Last modified: Fri 24 Nov 2006 11:06:50 CET
  */
 
 #ifndef GENERALIZED_TRAINING_WEIGHT_HPP_INCLUDED
@@ -168,7 +168,7 @@ namespace neural_net
 		 * \f]
 		 * where x is value and w is neuron weight.
 		 */
-		const typename Space_function_type::value_type operator()
+		typename Space_function_type::value_type operator()
 		(
 			Value_type & weight,
 			const Value_type & value,
@@ -410,7 +410,7 @@ namespace neural_net
 		 * \f]
 		 * where x is value, w is neuron weight, \f$p_1\f$ is scaling parameter, \f$p_0\f$ is shifting parameter.
 		 */
-		const typename Space_function_type::value_type operator()
+		typename Space_function_type::value_type operator()
 		(
 			Value_type & weight,
 			const Value_type & value,

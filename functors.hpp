@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Wed 10 May 2006 11:16:03 CEST
- * Last modified: Thu 08 Jun 2006 01:55:39 CEST
+ * Last modified: Fri 24 Nov 2006 11:05:57 CET
  */
 
 #ifndef FUNCTORS_HPP_INCLUDED
@@ -147,7 +147,7 @@ namespace neural_net
 		 * \f]
 		 * where: v is value.
 		 */
-		const result_type operator() ( const Value_type & value ) const
+		result_type operator() ( const Value_type & value ) const
 		{
 			operators::power < result_type, Exponent_type > power_v;
 
@@ -252,7 +252,7 @@ namespace neural_net
 		 * \f]
 		 * where: x is value.
 		 */
-		const result_type operator() ( const Value_type & value ) const 
+		result_type operator() ( const Value_type & value ) const 
 		{
 			operators::power < result_type, Exponent_type > power_v;
 
@@ -350,7 +350,7 @@ namespace neural_net
 		 * \f]
 		 * where: x is value.
 		 */
-		const result_type operator() ( const Value_type & value ) const 
+		result_type operator() ( const Value_type & value ) const 
 		{
 			// result
 			return ( sigma );
