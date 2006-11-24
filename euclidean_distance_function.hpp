@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:42:31 CEST
- * Last modified: Wed 12 Jul 2006 19:28:12 CEST
+ * Last modified: Fri 24 Nov 2006 11:04:52 CET
  */
 
 #ifndef EUCLIDEAN_DISTANCE_FUNCTION_HPP_INCLUDED
@@ -99,7 +99,7 @@ namespace distance
 		 * d (x,y) = \sum\limits_{i=0}^{N} cdot (x_i-y_i)^2
 		 * \f]
 		 */
-		const typename Value_type::value_type operator()
+		typename Value_type::value_type operator()
 		(
 			const Value_type & x,
 			const Value_type & y
@@ -128,7 +128,7 @@ namespace distance
 		* \param init is an initial value.
 		* \result sqare of Euclidean distance.
 		*/
-		const inner_type euclidean_distance_square
+		inner_type euclidean_distance_square
 		(
 			typename Value_type::const_iterator begin_1,
 			typename Value_type::const_iterator end_1,
