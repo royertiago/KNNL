@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 21 Apr 2006 19:30:09 CEST
- * Last modified: Sun 19 Nov 2006 12:09:58 CET
+ * Last modified: Sun 26 Nov 2006 09:00:35 CET
  */
 
 #ifndef PRINT_NETWORK_HPP_INCLUDED
@@ -70,10 +70,10 @@ namespace neural_net
 	 */
 	template < typename T >
 	std::ostream & print_network_weights 
-		( std::ostream & os, const T & network, const char * sep = "\t" )
+		( std::ostream & os, T const & network, char const * sep = "\t" )
 	{
-		size_t M = network.objects.size();
-		size_t N = network.objects[0].size();
+		const size_t M = network.objects.size();
+		const size_t N = network.objects[0].size();
 		
 		for ( size_t i = 0; i < M; ++i )
 		{
@@ -102,7 +102,7 @@ namespace neural_net
 	 * \return modified stream.
 	 */
 	template < typename T, typename U >
-	std::ostream & print_network ( std::ostream & os, const T & network, const U & value )
+	std::ostream & print_network ( std::ostream & os, T const & network, U const & value )
 	{
 		size_t M = network.objects.size();
 		size_t N = network.objects[0].size();
@@ -141,7 +141,7 @@ namespace neural_net
 	 * \return modified stream.
 	 */
 	template < typename T >
-	inline std::ostream & value_to_ostream ( std::ostream & os, const T & value )
+	inline std::ostream & value_to_ostream ( std::ostream & os, T const & value )
 	{
 		os << value;
 		return os;
@@ -154,7 +154,7 @@ namespace neural_net
 	 * \return modified stream.
 	 */
 	template < typename T, template < typename T > class CONT >
-	inline std::ostream & value_to_ostream ( std::ostream & os, const CONT<T> & value )
+	inline std::ostream & value_to_ostream ( std::ostream & os, CONT<T> const & value )
 	{
 		std::copy ( value.begin(), value.end(), std::ostream_iterator < T > ( os, " " ) );
 		return os;
@@ -163,5 +163,4 @@ namespace neural_net
 }// namespace neural_net
 
 #endif // PRINT_NETWORK_HPP_INCLUDED
-
 

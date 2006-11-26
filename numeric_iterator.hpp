@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 18 Jun 2006 13:22:04 CEST
- * Last modified: Fri 24 Nov 2006 11:07:46 CET
+ * Last modified: Sun 26 Nov 2006 08:54:24 CET
  */
 
 #ifndef NUMERIC_ITERATOR_HPP_INCLUDED
@@ -105,7 +105,7 @@ namespace neural_net
 		 * Reset state.
 		 * \param state_ is a new state.
 		 */
-		void reset ( const Value_type & state_ = static_cast < Value_type > ( 0 ) )
+		void reset ( Value_type const & state_ = static_cast < Value_type > ( 0 ) )
 		{
 			Numeric_iterator < Value_type >::state = state_;
 			return;

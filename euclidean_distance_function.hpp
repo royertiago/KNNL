@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:42:31 CEST
- * Last modified: Fri 24 Nov 2006 11:04:52 CET
+ * Last modified: Sun 26 Nov 2006 08:34:54 CET
  */
 
 #ifndef EUCLIDEAN_DISTANCE_FUNCTION_HPP_INCLUDED
@@ -101,8 +101,8 @@ namespace distance
 		 */
 		typename Value_type::value_type operator()
 		(
-			const Value_type & x,
-			const Value_type & y
+			Value_type const & x,
+			Value_type const & y
 		) const
 		{
 			return
@@ -112,7 +112,7 @@ namespace distance
 					x.begin(),
 					x.end(),
 					y.begin(),
-					static_cast < const typename Value_type::value_type & > ( 0 )
+					static_cast < typename Value_type::value_type const & > ( 0 )
 				)
 			);
 		}
@@ -133,7 +133,7 @@ namespace distance
 			typename Value_type::const_iterator begin_1,
 			typename Value_type::const_iterator end_1,
 			typename Value_type::const_iterator begin_2,
-			const inner_type & init
+			inner_type const & init
 		) const
 		{
 			return std::inner_product

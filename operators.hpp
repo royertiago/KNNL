@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 17:47:44 CEST
- * Last modified: Fri 24 Nov 2006 11:09:48 CET
+ * Last modified: Sun 26 Nov 2006 08:58:58 CET
  */
 
 #ifndef OPERATORS_HPP_INCLUDED
@@ -79,7 +79,7 @@ namespace operators
 	 * \return absolute value.
 	 */
 	template < typename T >
-	inline T abs ( const T & value )
+	inline T abs ( T const & value )
 	{
 		return ( value > 0 ? value : -value );
 	}
@@ -110,8 +110,8 @@ namespace operators
 		 */
 		compose_f_gxy_gxy_t
 		(
-			const OP1& o1,
-			const OP2& o2
+			OP1 const & o1,
+			OP2 const & o2
 		)
 		: op1 ( o1 ), op2 ( o2 )
 		{}
@@ -128,8 +128,8 @@ namespace operators
 		typename OP1::result_type
 		operator()
 		(
-			const typename OP2::first_argument_type& x,
-			const typename OP2::second_argument_type& y
+			typename OP2::first_argument_type const & x,
+			typename OP2::second_argument_type const & y
 		) const
 		{
 			return op1 ( op2 ( x, y ),op2 ( x, y ) );
@@ -153,8 +153,8 @@ namespace operators
 	inline compose_f_gxy_gxy_t < OP1, OP2 >
 	compose_f_gxy_gxy
 	(
-		const OP1& o1,
-		const OP2& o2
+		OP1 const & o1,
+		OP2 const & o2
 	)
 	{
 		return compose_f_gxy_gxy_t < OP1, OP2 > ( o1, o2 );
@@ -179,8 +179,8 @@ namespace operators
 	CONT < T, Alloc_type <T> >
 	operator+
 	(
-		const CONT < T, Alloc_type <T> > & lhs,
-		const CONT < T, Alloc_type <T> > & rhs
+		CONT < T, Alloc_type <T> > const & lhs,
+		CONT < T, Alloc_type <T> > const & rhs
 	)
 	{
 		CONT < T, Alloc_type <T> > result = lhs;
@@ -216,8 +216,8 @@ namespace operators
 	CONT < T, Alloc_type <T> >
 	operator-
 	(
-		const CONT < T, Alloc_type <T> > & lhs,
-		const CONT < T, Alloc_type <T> > & rhs
+		CONT < T, Alloc_type <T> > const & lhs,
+		CONT < T, Alloc_type <T> > const & rhs
 	)
 	{
 		CONT < T , Alloc_type <T> > result = lhs;
@@ -254,8 +254,8 @@ namespace operators
 	CONT < T, Alloc_type <T> >
 	operator*
 	(
-		const K & a,
-		const CONT < T, Alloc_type <T> > & rhs
+		K const & a,
+		CONT < T, Alloc_type <T> > const & rhs
 	)
 	{
 		CONT < T , Alloc_type <T> > result = rhs;
@@ -283,7 +283,7 @@ namespace operators
 	 */
 	template < typename Value_type >
 	inline typename Max_type < double, Value_type >::type
-	inverse ( const Value_type & x )
+	inverse ( Value_type const & x )
 	{
 		typedef typename Max_type < double, Value_type >::type internal_type;
 
@@ -322,7 +322,7 @@ namespace operators
 	public:
 		typedef typename Max_type < T, E >::type result_type;
 
-		result_type operator() ( const T & value_, const E & exp_ ) const
+		result_type operator() ( T const & value_, E const & exp_ ) const
 		{
 			if ( exp_ == 0 )
 			{
@@ -350,7 +350,7 @@ namespace operators
 		 * \f]
 		 * where: x is value_, y is exp_.
 		 */
-		result_type power_int ( const T & value_, const E & exp_ ) const
+		result_type power_int ( T const & value_, E const & exp_ ) const
 		{
 			T z = value_;
 			result_type y;
@@ -400,7 +400,7 @@ namespace operators
 		 * \f]
 		 * where: x is value_, y is exp_.
 		 */
-		result_type operator() ( const T & value_, const E & exp_ ) const
+		result_type operator() ( T const & value_, E const & exp_ ) const
 		{
 			return std::pow ( static_cast < result_type > ( value_ ), exp_ );
 		}

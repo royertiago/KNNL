@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 24 Apr 2006 12:11:38 CEST
- * Last modified: Tue 23 May 2006 23:51:06 CEST
+ * Last modified: Sun 26 Nov 2006 09:02:37 CET
  */
 
 #ifndef RANGES_HPP_INCLUDED
@@ -74,13 +74,13 @@ namespace neural_net
 		 * Constructor.
 		 * \param value_ is a value that will be set at he begining.
 		 */
-		explicit Ranges ( const typename Container_type::value_type & value_ )
+		explicit Ranges ( typename Container_type::value_type const & value_ )
 		:ranges ( value_, value_ )
 		{}
 
 		/** Copy constructor. */
 		template < typename Container_type_2 >
-		Ranges ( const Ranges < Container_type_2 > & ranges_ )
+		Ranges ( Ranges < Container_type_2 > const & ranges_ )
 		: ranges ( ranges_.ranges )
 		{}
 
@@ -88,7 +88,7 @@ namespace neural_net
 		 * Function that is going through the all container.
 		 * \param value is a reference to the container.
 		 */
-		void operator() ( const Container_type & value ) 
+		void operator() ( Container_type const & value ) 
 		{
 			typename Container_type::const_iterator pos;
 
@@ -122,7 +122,7 @@ namespace neural_net
 		 * This value could not exests in container, because is created from
 		 * all maximums of data e.g. { (1,2), (2,1) } -> (2,2)
 		 */
-		const typename Container_type::value_type & get_max() const 
+		typename Container_type::value_type const & get_max() const 
 		{
 			return ranges.second;
 		}
@@ -132,7 +132,7 @@ namespace neural_net
 		 * This value could not exests in container, because is created from
 		 * all minimums of data e.g. { (1,2), (2,1) } -> (1,1)
 		 */
-		const typename Container_type::value_type & get_min() const 
+		typename Container_type::value_type const & get_min() const 
 		{
 			return ranges.first;
 		}

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 07 May 2006 13:51:04 CEST
- * Last modified: Fri 24 Nov 2006 11:06:50 CET
+ * Last modified: Sun 26 Nov 2006 08:48:13 CET
  */
 
 #ifndef GENERALIZED_TRAINING_WEIGHT_HPP_INCLUDED
@@ -170,13 +170,13 @@ namespace neural_net
 		 */
 		typename Space_function_type::value_type operator()
 		(
-			Value_type & weight,
-			const Value_type & value,
-			const Iteration_type & iteration,
-			const Index_type & c_1,
-			const Index_type & c_2,
-			const Index_type & v_1,
-			const Index_type & v_2
+			Value_type const & weight,
+			Value_type const & value,
+			Iteration_type const & iteration,
+			Index_type const & c_1,
+			Index_type const & c_2,
+			Index_type const & v_1,
+			Index_type const & v_2
 		)
 		{
 			// calculate result
@@ -196,10 +196,10 @@ namespace neural_net
 		 */
 		Classic_training_weight
 		(
-			const Network_function_type & n_f,
-			const Space_function_type & s_f,
-			const Network_topology & n_t,
-			const Space_topology & s_t
+			Network_function_type const & n_f,
+			Space_function_type const & s_f,
+			Network_topology const & n_t,
+			Space_topology const & s_t
 		)
 		: Basic_generalized_training_weight
 		<
@@ -334,12 +334,12 @@ namespace neural_net
 		 */
 		Experimental_training_weight
 		(
-			const Network_function_type & n_f,
-			const Space_function_type & s_f,
-			const Network_topology & n_t,
-			const Space_topology & s_t,
-			const Parameter_type & parameter_0_,
-			const Parameter_type & parameter_1_
+			Network_function_type const & n_f,
+			Space_function_type const & s_f,
+			Network_topology const & n_t,
+			Space_topology const & s_t,
+			Parameter_type const & parameter_0_,
+			Parameter_type const & parameter_1_
 		)
 		: parameter_1 ( parameter_1_),
 		parameter_0 ( parameter_0_),
@@ -413,12 +413,12 @@ namespace neural_net
 		typename Space_function_type::value_type operator()
 		(
 			Value_type & weight,
-			const Value_type & value,
-			const Iteration_type & iteration,
-			const Index_type & c_1,
-			const Index_type & c_2,
-			const Index_type & v_1,
-			const Index_type & v_2
+			Value_type const & value,
+			Iteration_type const & iteration,
+			Index_type const & c_1,
+			Index_type const & c_2,
+			Index_type const & v_1,
+			Index_type const & v_2
 		) const
 		{
 			// calculate result
