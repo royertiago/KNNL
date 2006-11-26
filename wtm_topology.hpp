@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Wed 03 May 2006 13:18:41 CEST
- * Last modified: Wed 12 Jul 2006 22:08:18 CEST
+ * Last modified: Sun 26 Nov 2006 09:37:32 CET
  */
 
 #ifndef WTM_TOPOLOGY_HPP_INCLUDED
@@ -106,12 +106,12 @@ namespace neural_net
 		 * \f]
 		 * where: n is first neuron, m is second neuron.
 		 */
-		inline const Index_type operator()
+		inline Index_type operator()
 		(
-			const Index_type & index_1_1,
-			const Index_type & index_1_2,
-			const Index_type & index_2_1,
-			const Index_type & index_2_2
+			Index_type const & index_1_1,
+			Index_type const & index_1_2,
+			Index_type const & index_2_1,
+			Index_type const & index_2_2
 		) const
 		{
 			return
@@ -147,12 +147,12 @@ namespace neural_net
 		 * \f]
 		 * where: n is first neuron, m is second neuron.
 		 */
-		inline const Index_type operator()
+		inline Index_type operator()
 		(
-			const Index_type & index_1_1,
-			const Index_type & index_1_2,
-			const Index_type & index_2_1,
-			const Index_type & index_2_2
+			Index_type const & index_1_1,
+			Index_type const & index_1_2,
+			Index_type const & index_2_1,
+			Index_type const & index_2_2
 		) const
 		{
 			return
@@ -165,7 +165,6 @@ namespace neural_net
 			);
 		}
 	};
-
 
 	/**
 	 * \class Hexagonal_topology
@@ -194,13 +193,13 @@ namespace neural_net
 		 * This value have to be not less than number of rows in neuron
 		 * container counted from 0.
 		 */
-		inline explicit Hexagonal_topology ( const Index_type & hex_offset_ )
+		inline explicit Hexagonal_topology ( Index_type const & hex_offset_ )
 		: hex_offset ( hex_offset_ )
 		{}
 
 		/** Copy constructor. */
 		template < typename Index_type_2 >
-		inline Hexagonal_topology ( const Hexagonal_topology < Index_type_2 > & hex_topology )
+		inline Hexagonal_topology ( Hexagonal_topology < Index_type_2 > const & hex_topology )
 		: Basic_topology < Index_type_2, Index_type_2 >(),
 		hex_offset ( hex_topology.hex_offset )
 		{}
@@ -224,12 +223,12 @@ namespace neural_net
 		 * \f}
 		 * where: n is firs neuron, m is second.
 		 */
-		const Index_type operator()
+		Index_type operator()
 		(
-			const Index_type & index_1_1,
-			const Index_type & index_1_2,
-			const Index_type & index_2_1,
-			const Index_type & index_2_2
+			Index_type const & index_1_1,
+			Index_type const & index_1_2,
+			Index_type const & index_2_1,
+			Index_type const & index_2_2
 		) const
 		{
 			Index_type hex_index_1_1;
@@ -259,7 +258,7 @@ namespace neural_net
 			// ( -1, 0 ); ( 0, -1 ); ( 1, 0 ); ( 0, 1 ).
 			if ( tmp_hex_index_1 == 0 && tmp_hex_index_2 == 0 )
 			{
-				return static_cast < const Index_type > ( 0 );
+				return static_cast < Index_type > ( 0 );
 			}
 
 			// check if values have the same direction if yes it means that we have to use
@@ -275,7 +274,7 @@ namespace neural_net
 				return operators::abs ( tmp_hex_index_1 ) + operators::abs ( tmp_hex_index_2 );
 			}
 
-			return static_cast < const Index_type > ( 0 );
+			return static_cast < Index_type > ( 0 );
 		}
 
 	protected:

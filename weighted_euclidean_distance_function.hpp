@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 17 Apr 2006 23:54:20 CEST
- * Last modified: Thu 27 Jul 2006 15:42:25 CEST
+ * Last modified: Sun 26 Nov 2006 09:33:07 CET
  */
 
 #ifndef WEIGHTED_EUCLIDEAN_DISTANCE_FUNCTION_HPP_INCLUDED
@@ -88,7 +88,7 @@ namespace distance
 		typedef typename Value_type::value_type inner_type;
 		
 		/** Parameters. */
-		const Parameters_type * parameters;
+		Parameters_type const * parameters;
 
 		/** Parameters size. */
 		size_t parameters_size;
@@ -99,7 +99,7 @@ namespace distance
 		/**
 		 * Constructor.
 		 */
-		explicit Weighted_euclidean_distance_function ( const Parameters_type * weights )
+		explicit Weighted_euclidean_distance_function ( Parameters_type const * weights )
 		: parameters ( weights )
 		{
 			assert ( parameters != static_cast < Parameters_type * > ( 0 ) );
@@ -116,10 +116,10 @@ namespace distance
 		 * \f]
 		 * where: w are parameters given in constructor.
 		 */
-		const inner_type operator()
+		inner_type operator()
 		(
-			const Value_type & x,
-			const Value_type & y
+			Value_type const & x,
+			Value_type const & y
 		) const
 		{
 			return
@@ -130,7 +130,7 @@ namespace distance
 					x.end(),
 					y.begin(),
 					parameters->begin(),
-					static_cast < const inner_type & > (0)
+					static_cast < inner_type const & > (0)
 				)
 			);
 		}
@@ -143,12 +143,12 @@ namespace distance
 		>
 		Weighted_euclidean_distance_function
 		(
-			const Weighted_euclidean_distance_function
+			Weighted_euclidean_distance_function
 			<
 				Parameters_type_2,
 				Value_type_2
 			>
-			& weighted_euclidean_distance
+			const & weighted_euclidean_distance
 		)
 		: parameters ( weighted_euclidean_distance.parameters )
 		{}
@@ -166,12 +166,12 @@ namespace distance
 		> &
 		operator=
 		(
-			const Weighted_euclidean_distance_function
+			Weighted_euclidean_distance_function
 			<
 				Parameters_type_2,
 				Value_type_2
 			>
-			& weighted_euclidean_distance
+			const & weighted_euclidean_distance
 		)
 		{
 			// Handle self-assignment:
@@ -203,13 +203,13 @@ namespace distance
 		 * w is given through Input_iterator_3,
 		 * \f$d_0\f$ is initial value (init).
 		 */
-		const inner_type weighted_euclidean_distance_square
+		inner_type weighted_euclidean_distance_square
 		(
 			typename Value_type::const_iterator begin_1,
 			typename Value_type::const_iterator end_1,
 			typename Value_type::const_iterator begin_2,
 			typename Parameters_type::const_iterator begin_3,
-			const inner_type & init
+			inner_type const & init
 		) const
 		{
 			inner_type tmp_val;

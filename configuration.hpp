@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 29 Jan 2006 11:35:05 CET
- * Last modified: Fri 09 Jun 2006 15:13:18 CEST
+ * Last modified: Sun 26 Nov 2006 08:33:33 CET
  */
 
 #ifndef CONFIGURATION_HPP_INCLUDED
@@ -71,17 +71,17 @@ namespace config
 	/**
 	 * Base for calculation major number as unsigned int.
 	 */
-	const unsigned int BASE_MAJOR = 16777216;
+	unsigned int const BASE_MAJOR = 16777216;
 
 	/**
 	 * Base for calculation minor number as unsigned int.
 	 */
-	const unsigned int BASE_MINOR = 16384;
+	unsigned int const BASE_MINOR = 16384;
 
 	/**
 	 * Width of screen for displaying options.
 	 */
-	const unsigned int screen_width = 80;
+	unsigned int const screen_width = 80;
 		
 	/** Exit status. */
 	enum

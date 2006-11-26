@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 21 Apr 2006 17:33:34 CEST
- * Last modified: Mon 19 Jun 2006 15:30:07 CEST
+ * Last modified: Sun 26 Nov 2006 09:34:24 CET
  */
 
 #ifndef WTA_TRAINING_ALGORITM_HPP_INCLUDED
@@ -112,13 +112,13 @@ namespace neural_net
 		 */
 		Wta_training_algorithm
 		(
-			const Training_functional_type & training_functional_,
+			Training_functional_type const & training_functional_,
 			Numeric_iterator_type numeric_iterator_ = linear_numeric_iterator()
 		) 
 		: training_functional ( training_functional_ ),
 		numeric_iterator ( numeric_iterator_ )
 		{
-			network = static_cast < Network_type* > ( 0 );
+			network = static_cast < Network_type * > ( 0 );
 		}
 
 		/**
@@ -135,7 +135,7 @@ namespace neural_net
 		>
 		Wta_training_algorithm
 		(
-			const Wta_training_algorithm
+			Wta_training_algorithm
 			<
 				Network_type_2,
 				Value_type_2,
@@ -143,7 +143,7 @@ namespace neural_net
 				Training_functional_type_2,
 				Numeric_iterator_type_2
 			>
-			& wta_training_alg_
+			const & wta_training_alg_
 		) 
 		: training_functional ( wta_training_alg_.training_functional ),
 		numeric_iterator ( wta_training_alg_.numeric_iterator ),
@@ -159,7 +159,7 @@ namespace neural_net
 		 * \param data_end is end iterator.
 		 * \return error code.
 		 */
-		const int operator() 
+		int operator() 
 		(
 			Data_iterator_type data_begin,
 			Data_iterator_type data_end,
@@ -207,7 +207,7 @@ namespace neural_net
 		 * As is set in WTA algoritm method is looking for the best neuron,
 		 * and train it to have better results with actual data in the future.
 		 */
-		void train ( const Value_type & value ) 
+		void train ( Value_type const & value ) 
 		{
 			size_t index_1 = 0;
 			size_t index_2 = 0;

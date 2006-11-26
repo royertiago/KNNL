@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Thu 13 Apr 2006 08:30:20 CEST
- * Last modified: Mon 22 May 2006 17:19:53 CEST
+ * Last modified: Sun 26 Nov 2006 08:32:48 CET
  */
 
 #ifndef BASIC_WEAK_DISTANCE_FUNCTION_HPP_INCLUDED
@@ -98,12 +98,12 @@ namespace distance
 		>
 		Basic_weak_distance_function
 		(
-			const Basic_weak_distance_function
+			Basic_weak_distance_function
 			<
 				Value_type_2,
 				Result_type_2
 			>
-			& weak_distance_function_
+			const & weak_distance_function_
 		)
 		{}
 	};

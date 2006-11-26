@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Wed 26 Apr 2006 14:55:28 CEST
- * Last modified: Wed 12 Jul 2006 19:48:03 CEST
+ * Last modified: Sun 26 Nov 2006 09:06:53 CET
  */
 
 #ifndef TRAINING_FUNCTIONAL_HPP_INCLUDED
@@ -157,8 +157,8 @@ namespace neural_net
 		 */
 		Wta_proportional_training_functional
 		(
-			const Parameters_type & parameter_0_,
-			const Parameters_type & parameter_1_
+			Parameters_type const & parameter_0_,
+			Parameters_type const & parameter_1_
 		)
 		: parameter_0 ( parameter_0_ ), parameter_1 ( parameter_1_ )
 		{}
@@ -172,13 +172,13 @@ namespace neural_net
 		>
 		Wta_proportional_training_functional
 		(
-			const Wta_proportional_training_functional
+			Wta_proportional_training_functional
 			<
 				Value_type_2,
 				Parameters_type_2,
 				Iteration_type_2
 			>
-			& training_functional_
+			const & training_functional_
 		)
 		: Basic_wta_training_functional < Value_type, Parameters_type >(),
 		parameter_0 ( training_functional_.parameter_0 ),
@@ -199,8 +199,8 @@ namespace neural_net
 		Value_type & operator()
 		(
 			Value_type & weight,
-			const Value_type & value,
-			const iteration_type & s
+			Value_type const & value,
+			iteration_type const & s
 		) const
 		{
 			using namespace operators;
@@ -257,8 +257,8 @@ namespace neural_net
 		 */
 		Wtm_classical_training_functional
 		(
-			const Generalized_training_weight_type & generalized_weight,
-			const Parameters_type & parameter_
+			Generalized_training_weight_type const & generalized_weight,
+			Parameters_type const & parameter_
 		)
 		: Basic_wtm_training_functional
 		<
@@ -322,12 +322,12 @@ namespace neural_net
 		Value_type & operator()
 		(
 			Value_type & weight,
-			const Value_type & value,
-			const Iteration_type & s,
-			const Index_type & center_i,
-			const Index_type & center_j,
-			const Index_type & i_,
-			const Index_type & j_
+			Value_type const & value,
+			Iteration_type const & s,
+			Index_type const & center_i,
+			Index_type const & center_j,
+			Index_type const & i_,
+			Index_type const & j_
 		)
 		{
 			using namespace operators;

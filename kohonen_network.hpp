@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 18 Apr 2006 19:25:15 CEST
- * Last modified: Sat 17 Jun 2006 17:45:18 CEST
+ * Last modified: Sun 26 Nov 2006 08:50:02 CET
  */
 
 #ifndef KOHONEN_NETWORK_HPP_INCLUDED
@@ -86,13 +86,13 @@ namespace neural_net
 	>
 	void generate_kohonen_network
 	(
-		const size_t & no_rows,
-		const size_t & no_columns,
-		const typename Kohonen_network_type::value_type::activation_function_type & activation_function,
-		const typename Kohonen_network_type::value_type::binary_operation_type & binary_operation,
+		size_t const & no_rows,
+		size_t const & no_columns,
+		typename Kohonen_network_type::value_type::activation_function_type const & activation_function,
+		typename Kohonen_network_type::value_type::binary_operation_type const & binary_operation,
 		Data_container_type & data,
 		Kohonen_network_type & kohonen_network,
-		const Randomize_policy & randomize_policy
+		Randomize_policy const & randomize_policy
 	)
 	{
 		randomize_policy();
@@ -103,7 +103,7 @@ namespace neural_net
 
 		std::vector < Neuron_type > tmp_neuron_vector;
 
-		size_t K = data.begin()->size();
+		const size_t K = data.begin()->size();
 
 		Ranges < Data_container_type > data_ranges ( *data.begin() );
 		data_ranges ( data );

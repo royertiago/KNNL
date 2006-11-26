@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:37:57 CEST
- * Last modified: Sun 19 Nov 2006 12:08:24 CET
+ * Last modified: Sun 26 Nov 2006 09:03:56 CET
  */
 
 #ifndef RECTANGULAR_CONTAINER_HPP_INCLUDED
@@ -95,7 +95,7 @@ namespace neural_net
 		 * \param j is the column number.
 		 * \return const reference to the (i,j)-th object.
 		 */
-		Object_type & operator() ( size_t i, size_t j )
+		Object_type const & operator() ( size_t i, size_t j )
 		{
 			return objects[i][j];
 		}
@@ -110,22 +110,22 @@ namespace neural_net
 		template < typename Object_type_2 >
 		Rectangular_container
 		(
-			const Rectangular_container < Object_type_2 > & rectangular_container
+			Rectangular_container < Object_type_2 > const & rectangular_container
 		)
 		: objects ( rectangular_container.objects )
 		{}
 
-		inline const size_t get_no_columns() const
+		inline size_t get_no_columns() const
 		{
 			return objects.begin()->size();
 		}
 
-		inline const size_t get_no_rows() const
+		inline size_t get_no_rows() const
 		{
 			return objects.size();
 		}
 
-		inline const Matrix_index get_size() const
+		inline Matrix_index get_size() const
 		{
 			Matrix_index idx;
 			idx.first = objects.size();

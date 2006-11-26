@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Thu 10 Apr 2006 11:05:06 CEST
- * Last modified: Sun 19 Nov 2006 12:02:21 CET
+ * Last modified: Sun 26 Nov 2006 09:32:27 CET
  */
 
 #include "debugger.hpp"
@@ -562,8 +562,8 @@ int main ( int argc, char * argv[] )
 //			neural_net::print_network_weights ( std::cout, kohonen_network_3 );
 			//std::cout << std::endl;
 
-			// small helping constant
-			const int border = 3;
+			// small helping constant to set iteration boundary of the repel function
+			int const border = 3;
 
 			// construct another algorithm
 			typedef neural_net::Wtm_training_algorithm

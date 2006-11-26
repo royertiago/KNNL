@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 15:01:26 CEST
- * Last modified: Fri 24 Nov 2006 11:03:43 CET
+ * Last modified: Sun 26 Nov 2006 09:28:46 CET
  */
 
 #ifndef BASIC_NEURON_HPP_INCLUDED
@@ -116,9 +116,9 @@ namespace neural_net
 		 */
 		Basic_neuron
 		(
-			const weights_type & weights_,
-			const Activation_function_type & activation_function_,
-			const Binary_operation_type & binary_operation_
+			weights_type const & weights_,
+			Activation_function_type const & activation_function_,
+			Binary_operation_type const & binary_operation_
 		)
 		: activation_function ( activation_function_ ),
 		binary_operation ( binary_operation_ ),
@@ -136,7 +136,7 @@ namespace neural_net
 		 * w is weight and x is input value.
 		 */
 		typename Activation_function_type::result_type
-		operator() ( const value_type & x ) const
+		operator() ( value_type const & x ) const
 		{
 			// calculate output of the neuron as activation fuction
 			// working on results from binary operation on weights and value
@@ -152,14 +152,18 @@ namespace neural_net
 		>
 		Basic_neuron
 		(
-			const Basic_neuron
+			Basic_neuron
 			<
 				Activation_function_type_2,
 				Binary_operation_type_2
 			>
-			& neuron_
+			const & neuron_
 		)
-		{}
+		{
+			activation_function = neuron_.activation_function;
+			binary_operation = neuron_.binary_operation;
+			weights = neuron_.weights;
+		}
 
 	protected:
 		Basic_neuron();

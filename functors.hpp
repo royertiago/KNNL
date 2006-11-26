@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Wed 10 May 2006 11:16:03 CEST
- * Last modified: Fri 24 Nov 2006 11:05:57 CET
+ * Last modified: Sun 26 Nov 2006 08:45:53 CET
  */
 
 #ifndef FUNCTORS_HPP_INCLUDED
@@ -134,7 +134,7 @@ namespace neural_net
 		 * \param sigma_ is sigma coefficient in Gauss hat function.
 		 * \param exp_ is exponential factor in Gauss hat function.
 		 */
-		Gauss_function ( const Scalar_type & sigma_, const Exponent_type & exp_ ) 
+		Gauss_function ( Scalar_type const & sigma_, Exponent_type const & exp_ ) 
 		: sigma ( sigma_ ), exponent ( exp_ )
 		{}
 
@@ -147,7 +147,7 @@ namespace neural_net
 		 * \f]
 		 * where: v is value.
 		 */
-		result_type operator() ( const Value_type & value ) const
+		result_type operator() ( Value_type const & value ) const
 		{
 			operators::power < result_type, Exponent_type > power_v;
 
@@ -175,13 +175,13 @@ namespace neural_net
 		>
 		Gauss_function
 		(
-			const Gauss_function
+			Gauss_function
 			<
 				Value_type_2,
 				Scalar_type_2,
 				Exponent_type_2
 			>
-			& gauss_function
+			const & gauss_function
 		) 
 		: sigma ( gauss_function.sigma ), exponent ( gauss_function.exponent )
 		{}
@@ -239,7 +239,7 @@ namespace neural_net
 		 * \param sigma_ is scailing coefficient.
 		 * \param exp_ is exponential factor.
 		 */
-		Cauchy_function ( const Scalar_type & sigma_, const Exponent_type & exp_ ) 
+		Cauchy_function ( Scalar_type const & sigma_, Exponent_type const & exp_ ) 
 		: sigma ( sigma_ ), exponent ( exp_ )
 		{}
 		
@@ -252,7 +252,7 @@ namespace neural_net
 		 * \f]
 		 * where: x is value.
 		 */
-		result_type operator() ( const Value_type & value ) const 
+		result_type operator() ( Value_type const & value ) const 
 		{
 			operators::power < result_type, Exponent_type > power_v;
 
@@ -270,7 +270,7 @@ namespace neural_net
 			);
 		}
 
-		/** Copy constructor. */
+		/**constructor. */
 		template
 		<
 			typename Value_type_2,
@@ -279,13 +279,13 @@ namespace neural_net
 		>
 		Cauchy_function
 		(
-			const Cauchy_function
+			Cauchy_function
 			<
 				Value_type_2,
 				Scalar_type_2,
 				Exponent_type_2
 			>
-			& cauchy_function
+			const & cauchy_function
 		) 
 		: sigma ( cauchy_function.sigma ), exponent ( cauchy_function.exponent )
 		{}
@@ -313,7 +313,7 @@ namespace neural_net
 		typedef Scalar_type scalar_type;
 		typedef Scalar_type result_type;
 
-		/** Sigma constant value. */
+		/** Sigma constant value, but not const. */
 		Scalar_type sigma;
 
 		/**
@@ -332,11 +332,12 @@ namespace neural_net
 		>
 		Constant_function
 		(
-			const Constant_function
+			Constant_function
 			<
 				Value_type_2,
 				Scalar_type_2
-			> & constant_function
+			> 
+			const & constant_function
 		)
 		: sigma ( constant_function.sigma )
 		{}
@@ -350,7 +351,7 @@ namespace neural_net
 		 * \f]
 		 * where: x is value.
 		 */
-		result_type operator() ( const Value_type & value ) const 
+		result_type operator() ( Value_type const & value ) const 
 		{
 			// result
 			return ( sigma );
