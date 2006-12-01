@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 18 Apr 2006 19:25:15 CEST
- * Last modified: Sun 26 Nov 2006 08:50:02 CET
+ * Last modified: Fri 01 Dec 2006 18:11:27 CET
  */
 
 #ifndef KOHONEN_NETWORK_HPP_INCLUDED
@@ -99,11 +99,11 @@ namespace neural_net
 
 		typedef typename Kohonen_network_type::value_type Neuron_type;
 
-		typename Neuron_type::weights_type weights;
+		const size_t K = data.begin()->size();
+
+		typename Neuron_type::weights_type weights ( K );
 
 		std::vector < Neuron_type > tmp_neuron_vector;
-
-		const size_t K = data.begin()->size();
 
 		Ranges < Data_container_type > data_ranges ( *data.begin() );
 		data_ranges ( data );
@@ -114,7 +114,7 @@ namespace neural_net
 			{
 				for ( size_t k = 0; k < K; ++k )
 				{
-					weights.push_back (
+					weights[k] = (
 						static_cast < typename Data_container_type::value_type::value_type >
 						( ( data_ranges.get_max().at ( k )
 							- data_ranges.get_min().at ( k ) )
@@ -128,8 +128,8 @@ namespace neural_net
 					activation_function,
 					binary_operation
 				);
-				weights.clear();
-				tmp_neuron_vector.push_back ( local_neuron );
+				//weights.clear();
+				tmp_neuron_vector[j] = ( local_neuron );
 			}
 			kohonen_network.objects.push_back ( tmp_neuron_vector );
 			tmp_neuron_vector.clear();
