@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Thu 10 Apr 2006 11:05:06 CEST
- * Last modified: Sun 26 Nov 2006 09:32:27 CET
+ * Last modified: Fri 01 Dec 2006 19:20:13 CET
  */
 
 #include "debugger.hpp"
@@ -193,6 +193,8 @@ int main ( int argc, char * argv[] )
 			int no_epochs = CONF.parameters.no_epochs;
 
 			// example of using macro for debugging
+			D ( R );
+			D ( C );
 			D ( no_epochs );
 
 			typedef double data_type;
@@ -213,6 +215,8 @@ int main ( int argc, char * argv[] )
 
 			data_parser::Data_parser < V_v_d > data_parser;
 			data_parser ( tmp_stream, data );
+
+			D ( data.size() );
 
 			// configure Cauchy hat function
 			typedef neural_net::Cauchy_function < V_d::value_type, V_d::value_type, int > C_a_f;
