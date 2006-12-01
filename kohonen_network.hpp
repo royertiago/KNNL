@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 18 Apr 2006 19:25:15 CEST
- * Last modified: Fri 01 Dec 2006 19:17:41 CET
+ * Last modified: Fri 01 Dec 2006 22:57:30 CET
  */
 
 #ifndef KOHONEN_NETWORK_HPP_INCLUDED
@@ -86,8 +86,8 @@ namespace neural_net
 	>
 	void generate_kohonen_network
 	(
-		size_t const & no_rows,
-		size_t const & no_columns,
+		typename Kohonen_network_type::row_type::size_type const & no_rows,
+		typename Kohonen_network_type::column_type::size_type const & no_columns,
 		typename Kohonen_network_type::value_type::activation_function_type const & activation_function,
 		typename Kohonen_network_type::value_type::binary_operation_type const & binary_operation,
 		Data_container_type & data,
@@ -98,21 +98,25 @@ namespace neural_net
 		randomize_policy();
 
 		typedef typename Kohonen_network_type::value_type Neuron_type;
+		typedef typename Kohonen_network_type::row_type::size_type row_size_t;
+		typedef typename Kohonen_network_type::column_type::size_type col_size_t;
+		typedef typename Neuron_type::weights_type weights_t;
+		typedef typename weights_t::size_type w_size_t;
 
 		std::vector < Neuron_type > tmp_neuron_vector;
 		tmp_neuron_vector.reserve ( no_columns );
 
-		const size_t K = data.begin()->size();
-		typename Neuron_type::weights_type weights ( K );
+		const w_size_t K = data.begin()->size();
+		weights_t weights ( K );
 
 		Ranges < Data_container_type > data_ranges ( *data.begin() );
 		data_ranges ( data );
 
-		for ( size_t i = 0; i < no_rows; ++i )
+		for ( row_size_t i = 0; i < no_rows; ++i )
 		{
-			for ( size_t j = 0; j < no_columns; ++j )
+			for ( col_size_t j = 0; j < no_columns; ++j )
 			{
-				for ( size_t k = 0; k < K; ++k )
+				for ( w_size_t k = 0; k < K; ++k )
 				{
 					weights[k] = (
 						static_cast < typename Data_container_type::value_type::value_type >

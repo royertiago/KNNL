@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 21 Apr 2006 17:33:34 CEST
- * Last modified: Sun 26 Nov 2006 09:34:24 CET
+ * Last modified: Fri 01 Dec 2006 22:59:43 CET
  */
 
 #ifndef WTA_TRAINING_ALGORITM_HPP_INCLUDED
@@ -209,8 +209,8 @@ namespace neural_net
 		 */
 		void train ( Value_type const & value ) 
 		{
-			size_t index_1 = 0;
-			size_t index_2 = 0;
+			typename Network_type::row_size_t index_1 = 0;
+			typename Network_type::col_size_t index_2 = 0;
 
 			typename Network_type::value_type::result_type tmp_result;
 
@@ -225,8 +225,8 @@ namespace neural_net
 			typename Network_type::column_iterator c_iter;
 
 			// set ranges for iteration procedure
-			size_t r_counter = 0;
-			size_t c_counter = 0;
+			typename Network_type::row_size_t r_counter = 0;
+			typename Network_type::col_size_t c_counter = 0;
 
 			for ( r_iter = network->objects.begin();
 				  r_iter != network->objects.end();

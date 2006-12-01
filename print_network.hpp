@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 21 Apr 2006 19:30:09 CEST
- * Last modified: Sun 26 Nov 2006 09:00:35 CET
+ * Last modified: Fri 01 Dec 2006 22:56:08 CET
  */
 
 #ifndef PRINT_NETWORK_HPP_INCLUDED
@@ -72,12 +72,12 @@ namespace neural_net
 	std::ostream & print_network_weights 
 		( std::ostream & os, T const & network, char const * sep = "\t" )
 	{
-		const size_t M = network.objects.size();
-		const size_t N = network.objects[0].size();
+		const typename T::row_size_t M = network.objects.size();
+		const typename T::col_size_t N = network.objects[0].size();
 		
-		for ( size_t i = 0; i < M; ++i )
+		for ( typename T::row_size_t i = 0; i < M; ++i )
 		{
-			for ( size_t j = 0; j < N; ++j )
+			for ( typename T::col_size_t j = 0; j < N; ++j )
 			{
 				std::copy
 				(
@@ -104,12 +104,12 @@ namespace neural_net
 	template < typename T, typename U >
 	std::ostream & print_network ( std::ostream & os, T const & network, U const & value )
 	{
-		size_t M = network.objects.size();
-		size_t N = network.objects[0].size();
+		const typename T::row_size_t M = network.objects.size();
+		const typename T::col_size_t N = network.objects[0].size();
 		
-		for ( size_t i = 0; i < M; ++i )
+		for ( typename T::row_size_t i = 0; i < M; ++i )
 		{
-			for ( size_t j = 0; j < N; ++j )
+			for ( typename T::col_size_t j = 0; j < N; ++j )
 			{
 				os << "weights[" << i <<"][" << j << "] = ";
 				std::copy

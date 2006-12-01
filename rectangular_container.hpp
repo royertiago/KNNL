@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:37:57 CEST
- * Last modified: Sun 26 Nov 2006 09:03:56 CET
+ * Last modified: Fri 01 Dec 2006 22:53:28 CET
  */
 
 #ifndef RECTANGULAR_CONTAINER_HPP_INCLUDED
@@ -59,11 +59,6 @@ namespace neural_net
 	* \addtogroup neural_net
 	*/
 	/*\@{*/
-
-	/**
-	 * Stores size of container.
-	 */
-	typedef std::pair < size_t, size_t > Matrix_index;
 
 	/**
 	 * Rectangular_grid_container template class.
@@ -86,6 +81,14 @@ namespace neural_net
 		typedef typename row_type::iterator row_iterator;
 		typedef typename column_type::iterator column_iterator;
 
+		typedef typename row_type::size_type row_size_t;
+		typedef typename column_type::size_type col_size_t;
+
+		/**
+		* Stores size of container.
+		*/
+		typedef std::pair < row_size_t, col_size_t > Matrix_index;
+
 		/** Objects. */
 		row_type objects;
 
@@ -95,7 +98,7 @@ namespace neural_net
 		 * \param j is the column number.
 		 * \return const reference to the (i,j)-th object.
 		 */
-		Object_type const & operator() ( size_t i, size_t j )
+		Object_type const & operator() ( row_size_t i, col_size_t j )
 		{
 			return objects[i][j];
 		}
@@ -115,12 +118,12 @@ namespace neural_net
 		: objects ( rectangular_container.objects )
 		{}
 
-		inline size_t get_no_columns() const
+		inline col_size_t get_no_columns() const
 		{
 			return objects.begin()->size();
 		}
 
-		inline size_t get_no_rows() const
+		inline row_size_t get_no_rows() const
 		{
 			return objects.size();
 		}
