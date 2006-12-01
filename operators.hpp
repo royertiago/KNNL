@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 17:47:44 CEST
- * Last modified: Sun 26 Nov 2006 08:58:58 CET
+ * Last modified: Fri 01 Dec 2006 23:31:32 CET
  */
 
 #ifndef OPERATORS_HPP_INCLUDED
@@ -183,7 +183,7 @@ namespace operators
 		CONT < T, Alloc_type <T> > const & rhs
 	)
 	{
-		CONT < T, Alloc_type <T> > result = lhs;
+		CONT < T, Alloc_type <T> > result ( lhs );
 
 		std::transform
 		(
@@ -220,7 +220,7 @@ namespace operators
 		CONT < T, Alloc_type <T> > const & rhs
 	)
 	{
-		CONT < T , Alloc_type <T> > result = lhs;
+		CONT < T , Alloc_type <T> > result ( lhs );
 
 		std::transform
 		(
@@ -258,7 +258,7 @@ namespace operators
 		CONT < T, Alloc_type <T> > const & rhs
 	)
 	{
-		CONT < T , Alloc_type <T> > result = rhs;
+		CONT < T , Alloc_type <T> > result ( rhs );
 
 		std::transform
 		(
