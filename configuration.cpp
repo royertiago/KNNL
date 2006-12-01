@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 06 Feb 2006 17:51:24 CET
- * Last modified: Wed 12 Jul 2006 19:23:24 CEST
+ * Last modified: Fri 01 Dec 2006 19:19:18 CET
  */
 
 #include "configuration.hpp"
@@ -79,12 +79,12 @@ namespace config
 			)
 			(
 				"no-rows,r",
-				bpo::value<size_t> ( &conf_.parameters.no_rows )->default_value ( 5 ),
+				bpo::value<size_t> ( &conf_.parameters.no_rows )->default_value ( 2 ),
 				"number of rows in kohonen network"
 			)
 			(
 				"no-columns,c",
-				bpo::value<size_t> ( &conf_.parameters.no_columns )->default_value ( 5 ),
+				bpo::value<size_t> ( &conf_.parameters.no_columns )->default_value ( 3 ),
 				"number of columns in kohonen network"
 			)
 			(
