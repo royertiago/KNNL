@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 23 May 2006 23:53:14 CEST
- * Last modified: Wed 12 Jul 2006 18:43:42 CEST
+ * Last modified: Fri 01 Dec 2006 16:32:27 CET
  */
 
 #ifndef MAX_TYPE_HPP_INCLUDED
@@ -123,6 +123,10 @@ namespace operators
 	public:
 		typedef typename Max_type_private < T_1_t, T_2_t >::type type;
 	};
+
+	//#undef MAX_TYPE_2
+	//#undef MAX_TYPE_3
+
 } // namespace operators
 /*\@}*/
 #endif // MAX_TYPE_HPP_INCLUDED
