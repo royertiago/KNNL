@@ -39,13 +39,14 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Thu 10 Apr 2006 11:05:06 CEST
- * Last modified: Fri 01 Dec 2006 19:20:13 CET
+ * Last modified: Sat 16 Dec 2006 16:06:15 CET
  */
 
 #include "debugger.hpp"
 
 #include "std_headers.hpp"
 #include "neural_net_headers.hpp"
+#include "data_parser.hpp"
 #include "configuration.hpp"
 
 // PMAP is used just to hold program for debugging memory usage
