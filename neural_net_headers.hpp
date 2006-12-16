@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 12 May 2006 14:39:01 CEST
- * Last modified: Tue 23 May 2006 23:03:42 CEST
+ * Last modified: Sat 16 Dec 2006 16:06:28 CET
  */
 
 #ifndef NEURAL_NET_HEADERS_HPP_INCLUDED
@@ -52,7 +52,6 @@
  */
 
 #include "basic_neuron.hpp"
-#include "data_parser.hpp"
 #include "euclidean_distance_function.hpp"
 #include "functors.hpp"
 #include "generalized_training_weight.hpp"
