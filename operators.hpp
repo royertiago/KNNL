@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 17:47:44 CEST
- * Last modified: Fri 01 Dec 2006 23:31:32 CET
+ * Last modified: Sun 28 Jan 2007 20:09:46 CET
  */
 
 #ifndef OPERATORS_HPP_INCLUDED
@@ -405,6 +405,35 @@ namespace operators
 			return std::pow ( static_cast < result_type > ( value_ ), exp_ );
 		}
 	};
+
+    template < typename T, int N > 
+    struct static_power_t;
+
+    template < typename T > 
+    struct static_power_t<T,0>
+    {
+        T operator()( T const x )
+        {
+            return static_cast<T>(1);
+        }
+    };
+
+    template < typename T, int N >
+    struct static_power_t
+    {
+        T operator()( T const x )
+        {
+            //static_power_t<T,N-1> sp;
+            return x * static_power_t<T,N-1>()(x);
+        }
+    };
+
+    template < typename T, int N >
+    T static_power ( T const x )
+    {
+        return static_power_t<T,N>()(x);
+    }
+
 } // namespace operators
 /*\@}*/
 #endif // OPERATORS_HPP_INCLUDED
