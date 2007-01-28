@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 07 May 2006 13:51:04 CEST
- * Last modified: Sun 28 Jan 2007 20:30:32 CET
+ * Last modified: Sun 28 Jan 2007 20:51:23 CET
  */
 
 #ifndef GENERALIZED_TRAINING_WEIGHT_HPP_INCLUDED
@@ -276,10 +276,10 @@ namespace neural_net
 	 * value and weight in proper topology.
 	 * \param Index_type is a type of index in the neural network container.
 	 * \param Parameters_type is a type of the parameters for experimenntal training.
-     * \param n_power is a power q_1
-     * \param s_power is a power q_2
+     * \param n_power is a power q_N
+     * \param s_power is a power q_S
 	 * \f[
-	 * y= ( p_1 \cdot n_f (n_t (c_1,c_2,v_1,v_2)) - p_0 )^q_1 \cdot s_f (s_t (x,w))^q_2
+	 * y= ( p_1 \cdot n_f (n_t (c_1,c_2,v_1,v_2)) - p_0 )^q_N \cdot s_f (s_t (x,w))^q_S
 	 * \f]
 	 */
 	template
