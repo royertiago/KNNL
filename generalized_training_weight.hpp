@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 07 May 2006 13:51:04 CEST
- * Last modified: Sun 26 Nov 2006 08:48:13 CET
+ * Last modified: Sun 28 Jan 2007 20:30:32 CET
  */
 
 #ifndef GENERALIZED_TRAINING_WEIGHT_HPP_INCLUDED
@@ -276,8 +276,10 @@ namespace neural_net
 	 * value and weight in proper topology.
 	 * \param Index_type is a type of index in the neural network container.
 	 * \param Parameters_type is a type of the parameters for experimenntal training.
+     * \param n_power is a power q_1
+     * \param s_power is a power q_2
 	 * \f[
-	 * y= ( p_1 \cdot n_f (n_t (c_1,c_2,v_1,v_2)) - p_0 ) \cdot s_f (s_t (x,w))
+	 * y= ( p_1 \cdot n_f (n_t (c_1,c_2,v_1,v_2)) - p_0 )^q_1 \cdot s_f (s_t (x,w))^q_2
 	 * \f]
 	 */
 	template
@@ -289,7 +291,9 @@ namespace neural_net
 		typename Network_topology,
 		typename Space_topology,
 		typename Index_type,
-		typename Parameter_type
+		typename Parameter_type,
+        unsigned int n_power = 1,
+        unsigned int s_power = 1
 	>
 	class Experimental_training_weight
 	: public Basic_generalized_training_weight
@@ -304,6 +308,10 @@ namespace neural_net
 	>
 	{
 	public:
+
+        //unsigned int const s_power;
+        //unsigned int const n_power;
+
 		/** Scaling parameter. */
 		Parameter_type parameter_1;
 
@@ -339,9 +347,13 @@ namespace neural_net
 			Network_topology const & n_t,
 			Space_topology const & s_t,
 			Parameter_type const & parameter_0_,
-			Parameter_type const & parameter_1_
+			Parameter_type const & parameter_1_//,
+//            unsigned int const s_power_ = 1,
+//            unsigned int const n_power_ = 1
 		)
-		: parameter_1 ( parameter_1_),
+		: //s_power ( s_power_ ),
+        //n_power ( n_power_ ),
+        parameter_1 ( parameter_1_),
 		parameter_0 ( parameter_0_),
 		network_function ( n_f ),
 		space_function ( s_f ),
@@ -421,11 +433,14 @@ namespace neural_net
 			Index_type const & v_2
 		) const
 		{
+			//operators::power < typename Space_function_type::value_type, unsigned int > power_v;
 			// calculate result
 			return
 			(
-				( parameter_1 * (network_function) ( (network_topology) ( c_1, c_2, v_1, v_2 ) ) - parameter_0 )
-				* (space_function) ( (space_topology) ( value, weight ) )
+			//	power_v( parameter_1 * (network_function) ( (network_topology) ( c_1, c_2, v_1, v_2 ) ) - parameter_0, n_power )
+			//	* power_v( (space_function) ( (space_topology) ( value, weight ) ), s_power )
+				operators::static_power<typename Space_function_type::value_type,n_power>( parameter_1 * (network_function) ( (network_topology) ( c_1, c_2, v_1, v_2 ) ) - parameter_0 )
+				* operators::static_power<typename Space_function_type::value_type,s_power>( (space_function) ( (space_topology) ( value, weight ) ) )
 			);
 		}
 	};
