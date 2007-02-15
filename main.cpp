@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Thu 10 Apr 2006 11:05:06 CEST
- * Last modified: Sat 16 Dec 2006 16:06:15 CET
+ * Last modified: Mon 05 Feb 2007 22:42:06 CET
  */
 
 #include "debugger.hpp"
@@ -191,7 +191,7 @@ int main ( int argc, char * argv[] )
 
 			// set number of the the training epochs
 			// one epoch it is training through all data stored in container
-			int no_epochs = CONF.parameters.no_epochs;
+			unsigned int const no_epochs = CONF.parameters.no_epochs;
 
 			// example of using macro for debugging
 			D ( R );
@@ -345,7 +345,7 @@ int main ( int argc, char * argv[] )
 			Learning_algorithm training_alg ( wta_train_func );
 			
 			// train network
-			for ( int i = 0; i < no_epochs; ++i )
+			for ( unsigned int i = 0; i < no_epochs; ++i )
 			{
 				training_alg ( data.begin(), data.end(), &kohonen_network );
 				// beter results are reached if data are sorted in each cycle
@@ -364,7 +364,7 @@ int main ( int argc, char * argv[] )
 			Learning_algorithm training_alg_1 ( wta_train_func_1 );
 
 			// train network
-			for ( int i = 0; i < no_epochs; ++i )
+			for ( unsigned int i = 0; i < no_epochs; ++i )
 			{
 				training_alg_1 ( data.begin(), data.end(), &kohonen_network_1 );
 				// beter results are reached if data are sorted in each cycle
@@ -383,7 +383,7 @@ int main ( int argc, char * argv[] )
 			Learning_algorithm_w training_alg_w ( wta_train_func_1, l_n_i );
 
 			// train network
-			for ( int i = 0; i < no_epochs; ++i )
+			for ( unsigned int i = 0; i < no_epochs; ++i )
 			{
 				training_alg_w ( data.begin(), data.end(), &kohonen_network_w );
 				// beter results are reached if data are sorted in each cycle
@@ -546,7 +546,7 @@ int main ( int argc, char * argv[] )
 			Wtm_c_training_alg wtm_c_train_alg ( wtm_c_l_f );
 
 			// tricky training
-			for ( int i = 0; i < no_epochs; ++i )
+			for ( unsigned int i = 0; i < no_epochs; ++i )
 			{
 				// train network using data
 				wtm_c_train_alg ( data.begin(), data.end(), &kohonen_network_2 );
@@ -568,7 +568,7 @@ int main ( int argc, char * argv[] )
 			//std::cout << std::endl;
 
 			// small helping constant to set iteration boundary of the repel function
-			int const border = 3;
+			unsigned int const border = 3;
 
 			// construct another algorithm
 			typedef neural_net::Wtm_training_algorithm
@@ -583,7 +583,7 @@ int main ( int argc, char * argv[] )
 			// definition
 			Wtm_c_training_alg_e wtm_c_train_alg_e ( wtm_e_l_f );
 
-			for ( int i = 0; i < no_epochs; ++i )
+			for ( unsigned int i = 0; i < no_epochs; ++i )
 			{
 				// repel neurons just at the begining
 				if ( i < border )
@@ -629,7 +629,7 @@ int main ( int argc, char * argv[] )
 			wtm_c_train_alg_e_c.training_functional.generalized_training_weight.parameter_0
 				= 0;
 
-			for ( int i = 0; i < no_epochs; ++i )
+			for ( unsigned int i = 0; i < no_epochs; ++i )
 			{
 				// train
 				wtm_c_train_alg_e_c ( data.begin(), data.end(), &kohonen_network_5 );
@@ -669,7 +669,7 @@ int main ( int argc, char * argv[] )
 				= 0;
 
 			// similar training
-			for ( int i = 0; i < no_epochs; ++i )
+			for ( unsigned int i = 0; i < no_epochs; ++i )
 			{
 				wtm_c_train_alg_e_co ( data.begin(), data.end(), &kohonen_network_4 );
 
