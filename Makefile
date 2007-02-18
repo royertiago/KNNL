@@ -38,7 +38,7 @@ define debug_core_info
 endef
 
 define tdebug_info
-	GFLAGS+= -DFTDEBUG
+	#GFLAGS+= -DFTDEBUG
 	#GFLAGS+= -DTDEBUG
 endef
 
