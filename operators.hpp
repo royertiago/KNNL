@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 17:47:44 CEST
- * Last modified: Sun 28 Jan 2007 20:09:46 CET
+ * Last modified: Sun 03 Jun 2007 19:01:11 CEST
  */
 
 #ifndef OPERATORS_HPP_INCLUDED
@@ -412,7 +412,7 @@ namespace operators
     template < typename T > 
     struct static_power_t<T,0>
     {
-        T operator()( T const x )
+        T operator()(T const)
         {
             return static_cast<T>(1);
         }
