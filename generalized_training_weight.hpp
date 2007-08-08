@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 07 May 2006 13:51:04 CEST
- * Last modified: Sun 28 Jan 2007 20:51:23 CET
+ * Last modified: Wed 08 Aug 2007 18:21:59 CEST
  */
 
 #ifndef GENERALIZED_TRAINING_WEIGHT_HPP_INCLUDED
@@ -433,14 +433,14 @@ namespace neural_net
 			Index_type const & v_2
 		) const
 		{
-			//operators::power < typename Space_function_type::value_type, unsigned int > power_v;
+			//::operators::power < typename Space_function_type::value_type, unsigned int > power_v;
 			// calculate result
 			return
 			(
 			//	power_v( parameter_1 * (network_function) ( (network_topology) ( c_1, c_2, v_1, v_2 ) ) - parameter_0, n_power )
 			//	* power_v( (space_function) ( (space_topology) ( value, weight ) ), s_power )
-				operators::static_power<typename Space_function_type::value_type,n_power>( parameter_1 * (network_function) ( (network_topology) ( c_1, c_2, v_1, v_2 ) ) - parameter_0 )
-				* operators::static_power<typename Space_function_type::value_type,s_power>( (space_function) ( (space_topology) ( value, weight ) ) )
+				::operators::static_power<typename Space_function_type::value_type,n_power>( parameter_1 * (network_function) ( (network_topology) ( c_1, c_2, v_1, v_2 ) ) - parameter_0 )
+				* ::operators::static_power<typename Space_function_type::value_type,s_power>( (space_function) ( (space_topology) ( value, weight ) ) )
 			);
 		}
 	};

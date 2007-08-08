@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 17:47:44 CEST
- * Last modified: Sun 03 Jun 2007 19:01:11 CEST
+ * Last modified: Wed 08 Aug 2007 18:29:02 CEST
  */
 
 #ifndef OPERATORS_HPP_INCLUDED
@@ -95,7 +95,7 @@ namespace operators
 	 */
 	template < typename OP1, typename OP2 >
 	class compose_f_gxy_gxy_t
-	: public std::binary_function
+	: public ::std::binary_function
 	<
 		typename OP2::first_argument_type,
 		typename OP2::second_argument_type,
@@ -185,13 +185,13 @@ namespace operators
 	{
 		CONT < T, Alloc_type <T> > result ( lhs );
 
-		std::transform
+		::std::transform
 		(
 			result.begin(),
 			result.end(),
 			rhs.begin(),
 			result.begin(),
-			std::plus < typename CONT < T, Alloc_type<T> >::value_type >()
+			::std::plus < typename CONT < T, Alloc_type<T> >::value_type >()
 		);
 
 		return result;
@@ -222,13 +222,13 @@ namespace operators
 	{
 		CONT < T , Alloc_type <T> > result ( lhs );
 
-		std::transform
+		::std::transform
 		(
 			result.begin(),
 			result.end(),
 			rhs.begin(),
 			result.begin(),
-			std::minus < typename CONT < T , Alloc_type <T> >::value_type >()
+			::std::minus < typename CONT < T , Alloc_type <T> >::value_type >()
 		);
 
 		return result;
@@ -260,14 +260,14 @@ namespace operators
 	{
 		CONT < T , Alloc_type <T> > result ( rhs );
 
-		std::transform
+		::std::transform
 		(
 			result.begin(),
 			result.end(),
 			result.begin(),
-			std::bind2nd
+			::std::bind2nd
 			(
-				std::multiplies < typename CONT < T , Alloc_type <T> >::value_type >(),
+				::std::multiplies < typename CONT < T , Alloc_type <T> >::value_type >(),
 				a
 			)
 		);
@@ -304,7 +304,7 @@ namespace operators
 	<
 		typename T,
 		typename E,
-		bool ISINTEGRAL = boost::is_integral<E>::value
+		bool ISINTEGRAL = ::boost::is_integral<E>::value
 	>
 	class power;
 
@@ -402,7 +402,7 @@ namespace operators
 		 */
 		result_type operator() ( T const & value_, E const & exp_ ) const
 		{
-			return std::pow ( static_cast < result_type > ( value_ ), exp_ );
+			return ::std::pow ( static_cast < result_type > ( value_ ), exp_ );
 		}
 	};
 

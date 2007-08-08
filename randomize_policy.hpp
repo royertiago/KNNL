@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 22 May 2006 20:03:59 CEST
- * Last modified: Wed 12 Jul 2006 18:24:06 CEST
+ * Last modified: Wed 08 Aug 2007 17:27:14 CEST
  */
 
 #ifndef RANDOMIZE_POLICY_HPP_INCLUDED
@@ -96,7 +96,7 @@ namespace neural_net
 		/** Initialize random number generator using srand(). */
 		void operator() ( void ) const
 		{
-			std::srand ( time ( NULL ) );
+			::std::srand ( ::std::time ( NULL ) );
 			return;
 		}
 	};

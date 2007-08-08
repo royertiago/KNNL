@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 18 Apr 2006 19:25:15 CEST
- * Last modified: Fri 01 Dec 2006 22:57:30 CET
+ * Last modified: Wed 08 Aug 2007 17:23:33 CEST
  */
 
 #ifndef KOHONEN_NETWORK_HPP_INCLUDED
@@ -103,7 +103,7 @@ namespace neural_net
 		typedef typename Neuron_type::weights_type weights_t;
 		typedef typename weights_t::size_type w_size_t;
 
-		std::vector < Neuron_type > tmp_neuron_vector;
+		::std::vector < Neuron_type > tmp_neuron_vector;
 		tmp_neuron_vector.reserve ( no_columns );
 
 		const w_size_t K = data.begin()->size();

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sat 29 Apr 2006 19:10:50 CEST
- * Last modified: Wed 12 Jul 2006 19:26:16 CEST
+ * Last modified: Wed 08 Aug 2007 17:15:45 CEST
  */
 
 #ifndef DATA_PARSER_HPP_INCLUDED
@@ -90,18 +90,18 @@ namespace data_parser
 		 * \param is is a reference to the stream.
 		 * \param data_container is a reference to the container.
 		 * \return modified container.
-		 * \throw std::runtime_error when after parsing size of data_container is still zero.
+		 * \throw ::std::runtime_error when after parsing size of data_container is still zero.
 		 */
-		Data_container & operator() ( std::istream & is, Data_container & data_container ) const
-		throw ( std::runtime_error )
+		Data_container & operator() ( ::std::istream & is, Data_container & data_container ) const
+		throw ( ::std::runtime_error )
 		{
-			std::string tmp_string;
+			::std::string tmp_string;
 			size_t counter = 0;
 
 			typename Data_container::value_type tmp_sub_container;
 
 			// get line of data from stream
-			while ( std::getline ( is, tmp_string ) )
+			while ( ::std::getline ( is, tmp_string ) )
 			{
 				// count data
 				++counter;
@@ -116,7 +116,7 @@ namespace data_parser
 			// if data container is empty after all procedure throw exception
 			if ( data_container.size() == 0 )
 			{
-				throw std::runtime_error ( "Data file corupted." );
+				throw ::std::runtime_error ( "Data file corupted." );
 			}
 
 			// return data container of containers
@@ -133,19 +133,19 @@ namespace data_parser
 		typename Data_container::value_type parse_string
 		(
 			typename Data_container::value_type & container,
-			std::string & str
+			::std::string & str
 		) const
 		{
-			std::stringstream tmp_sstr ( str );
+			::std::stringstream tmp_sstr ( str );
 
 			typedef typename Data_container::value_type::value_type internal_type;
 
 			// parse data as sequence of fixed type data and store them into the container.
-			std::copy
+			::std::copy
 			(
-				std::istream_iterator < internal_type > ( tmp_sstr ),
-				std::istream_iterator < internal_type >(),
-				std::back_inserter ( container )
+				::std::istream_iterator < internal_type > ( tmp_sstr ),
+				::std::istream_iterator < internal_type >(),
+				::std::back_inserter ( container )
 			);
 
 			return container;

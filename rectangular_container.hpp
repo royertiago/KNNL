@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:37:57 CEST
- * Last modified: Fri 01 Dec 2006 22:53:28 CET
+ * Last modified: Wed 08 Aug 2007 18:29:17 CEST
  */
 
 #ifndef RECTANGULAR_CONTAINER_HPP_INCLUDED
@@ -64,7 +64,7 @@ namespace neural_net
 	 * Rectangular_grid_container template class.
 	 * \param Object_type is type of stored objects.
 	 * \todo TODO: Rectangular_container class should be rewritten
-	 * using new version of boost::matrix.
+	 * using new version of ::boost::matrix.
 	 */
 	template
 	<
@@ -75,8 +75,8 @@ namespace neural_net
 	public:
 
 		typedef Object_type value_type;
-		typedef typename std::vector < Object_type > column_type;
-		typedef typename std::vector < column_type > row_type;
+		typedef typename ::std::vector < Object_type > column_type;
+		typedef typename ::std::vector < column_type > row_type;
 
 		typedef typename row_type::iterator row_iterator;
 		typedef typename column_type::iterator column_iterator;
@@ -87,7 +87,7 @@ namespace neural_net
 		/**
 		* Stores size of container.
 		*/
-		typedef std::pair < row_size_t, col_size_t > Matrix_index;
+		typedef ::std::pair < row_size_t, col_size_t > Matrix_index;
 
 		/** Objects. */
 		row_type objects;

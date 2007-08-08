@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 02 May 2006 11:39:22 CEST
- * Last modified: Sun 26 Nov 2006 09:38:52 CET
+ * Last modified: Wed 08 Aug 2007 18:29:44 CEST
  */
 
 #ifndef WTM_TRAINING_ALGORITM_HPP_INCLUDED
@@ -73,7 +73,7 @@ namespace neural_net
 	 * kohonen network using WTM method.
 	 * \param Network_type is a network type.
 	 * \param Value_type is a type os single data
-	 * in mathematical meanning, so it could be std::vector<double>, too.
+	 * in mathematical meanning, so it could be ::std::vector<double>, too.
 	 * \param Data_iterator_type is is iterator for container
 	 * with training data.
 	 * \param Training_functional_type is a type of functional.
@@ -174,10 +174,10 @@ namespace neural_net
 			assert ( network != static_cast < Network_type * > ( 0 ) );
 
 			// for each data train network
-			std::for_each
+			::std::for_each
 			(
 				data_begin, data_end,
-				boost::bind
+				::boost::bind
 				(
 					& Wtm_training_algorithm
 					<
@@ -219,7 +219,7 @@ namespace neural_net
 
 			// reset max_result
 			typename Network_type::value_type::result_type max_result
-				= std::numeric_limits <
+				= ::std::numeric_limits <
 					typename Network_type::value_type::result_type
 				>::min();
 

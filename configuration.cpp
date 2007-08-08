@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 06 Feb 2006 17:51:24 CET
- * Last modified: Fri 01 Dec 2006 19:19:18 CET
+ * Last modified: Wed 08 Aug 2007 18:28:01 CEST
  */
 
 #include "configuration.hpp"
@@ -58,7 +58,7 @@ namespace config
 		Configuration & conf_
 	)
 	{
-		namespace bpo = boost::program_options;
+		namespace bpo = ::boost::program_options;
 
 		// prepare 3 separated groups of options
 		bpo::options_description generic_opts ( "Generic ioptions",screen_width ); // e.g.-h help -V version
@@ -97,7 +97,7 @@ namespace config
 		hidden_opts.add_options()
 			(
 				"input-file,i",
-				bpo::value<std::string> ( &conf_.parameters.input_file_name ),
+				bpo::value< ::std::string > ( &conf_.parameters.input_file_name ),
 				"input file name"
 			);
 
@@ -130,11 +130,11 @@ namespace config
 		// if-h is choosen then print help
 		if ( vm.count ( "help" ) )
 		{
-			std::cout << std::endl << conf_.get_program_name() << " ";
-			std::cout << conf_.get_version_string() << std::endl << std::endl;
-			std::cout << "Program usage: pf [OPTIONS] [FILE]" << std::endl << std::endl;
-			std::cout << "If FILE is not given then standard input ( stdin ) is taken as input stream." << std::endl;
-			std::cout << cmdline_options << std::endl;
+			::std::cout << std::endl << conf_.get_program_name() << " ";
+			::std::cout << conf_.get_version_string() << ::std::endl << ::std::endl;
+			::std::cout << "Program usage: pf [OPTIONS] [FILE]" << ::std::endl << ::std::endl;
+			::std::cout << "If FILE is not given then standard input ( stdin ) is taken as input stream." << ::std::endl;
+			::std::cout << cmdline_options << ::std::endl;
 			
 			return EXIT_SUCCES;
 		}
@@ -142,8 +142,8 @@ namespace config
 		// if-V then print version number
 		if ( vm.count ( "version" ) )
 		{
-			std::cout << conf_.get_program_name() << " ";
-			std::cout << conf_.get_version_string() << std::endl;
+			::std::cout << conf_.get_program_name() << " ";
+			::std::cout << conf_.get_version_string() << ::std::endl;
 
 			return EXIT_SUCCES;
 		}
@@ -153,11 +153,11 @@ namespace config
 		{
 			if ( vm.count ( "input-file" ) )
 			{
-				std::cout << "Input file is: " << conf_.parameters.input_file_name << "\n";
+				::std::cout << "Input file is: " << conf_.parameters.input_file_name << "\n";
 			}
 			else
 			{
-				std::cout << "Input file was not set- standard input is theated as input." << std::endl;
+				::std::cout << "Input file was not set- standard input is theated as input." << ::std::endl;
 			}
 			
 			// if stronger verbosity is set
@@ -165,17 +165,17 @@ namespace config
 			{
 				if ( vm.count ( "no-rows" ) )
 				{
-					std::cout << "Number of rows in kohonen network is: " << conf_.parameters.no_rows << "\n";
+					::std::cout << "Number of rows in kohonen network is: " << conf_.parameters.no_rows << "\n";
 				}
 				
 				if ( vm.count ( "no-columns" ) )
 				{
-					std::cout << "Number of columns in kohonen network is: " << conf_.parameters.no_columns << "\n";
+					::std::cout << "Number of columns in kohonen network is: " << conf_.parameters.no_columns << "\n";
 				}
 				
 				if ( vm.count ( "no-epochs" ) )
 				{
-					std::cout << "Number of epochs of the training algorithm is: " << conf_.parameters.no_epochs << "\n";
+					::std::cout << "Number of epochs of the training algorithm is: " << conf_.parameters.no_epochs << "\n";
 				}
 			}
 		}

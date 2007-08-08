@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Wed 03 May 2006 13:18:41 CEST
- * Last modified: Sun 26 Nov 2006 09:37:32 CET
+ * Last modified: Wed 08 Aug 2007 18:22:48 CEST
  */
 
 #ifndef WTM_TOPOLOGY_HPP_INCLUDED
@@ -116,8 +116,8 @@ namespace neural_net
 		{
 			return
 			(
-				operators::abs ( index_1_1 - index_2_1 )
-				+ operators::abs ( index_1_2 - index_2_2 )
+				::operators::abs ( index_1_1 - index_2_1 )
+				+ ::operators::abs ( index_1_2 - index_2_2 )
 			);
 		}
 	};
@@ -157,10 +157,10 @@ namespace neural_net
 		{
 			return
 			(
-				std::max
+				::std::max
 				(
-					operators::abs ( index_1_1 - index_2_1 ),
-					operators::abs ( index_1_2 - index_2_2 )
+					::operators::abs ( index_1_1 - index_2_1 ),
+					::operators::abs ( index_1_2 - index_2_2 )
 				)
 			);
 		}
@@ -247,10 +247,10 @@ namespace neural_net
 			hex_index_2_2 = ( hex_offset / 2 + index_2_2 ) - index_2_1 / 2;
 
 			// calculate difference between points in hexagonal space
-			tmp_hex_index_1 = std::max ( hex_index_1_1, hex_index_2_1 )
-								- std::min ( hex_index_1_1, hex_index_2_1 );
-			tmp_hex_index_2 = std::max ( hex_index_1_2, hex_index_2_2 )
-								- std::min ( hex_index_1_2, hex_index_2_2 );
+			tmp_hex_index_1 = ::std::max ( hex_index_1_1, hex_index_2_1 )
+								- ::std::min ( hex_index_1_1, hex_index_2_1 );
+			tmp_hex_index_2 = ::std::max ( hex_index_1_2, hex_index_2_2 )
+								- ::std::min ( hex_index_1_2, hex_index_2_2 );
 
 			// here we have special algebra to calculate distance,
 			// bacause of special basis in this space:
@@ -267,11 +267,11 @@ namespace neural_net
 				 || ( ( hex_index_1_1 < hex_index_2_1 ) && ( hex_index_1_2 < hex_index_2_2 ) )
 			)
 			{
-				return std::max ( tmp_hex_index_1, tmp_hex_index_2 );
+				return ::std::max ( tmp_hex_index_1, tmp_hex_index_2 );
 			}
 			else
 			{
-				return operators::abs ( tmp_hex_index_1 ) + operators::abs ( tmp_hex_index_2 );
+				return ::operators::abs ( tmp_hex_index_1 ) + ::operators::abs ( tmp_hex_index_2 );
 			}
 
 			return static_cast < Index_type > ( 0 );

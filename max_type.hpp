@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 23 May 2006 23:53:14 CEST
- * Last modified: Fri 01 Dec 2006 16:32:27 CET
+ * Last modified: Wed 08 Aug 2007 17:25:27 CEST
  */
 
 #ifndef MAX_TYPE_HPP_INCLUDED
@@ -83,7 +83,7 @@ namespace operators
 	MAX_TYPE_3(unsigned long,double,double)
 	MAX_TYPE_3(unsigned short,double,double)
 	// and example where we can explicitly use three different types
-	// MAX_TYPE(std::complex < int >, double, std::complex < double >)
+	// MAX_TYPE(::std::complex < int >, double, ::std::complex < double >)
 
 	// macro below assumes that bigger type is the first one
 	// macro MAX_TYPE_2( argument_1_type, argument_2_type ) 
@@ -107,7 +107,7 @@ namespace operators
 	 * \param T_1 first type.
 	 * \param T_2 second type.
 	 * \return type e.g. typeid (typename Max_type <double, int>::type) == typeid (double),
-	 * typeid (typename Max_type <std::complex<int>,double>::type) == typeid (std::complex<double>).
+	 * typeid (typename Max_type <::std::complex<int>,double>::type) == typeid (::std::complex<double>).
 	 */
 	template
 	<
@@ -117,8 +117,8 @@ namespace operators
 	class Max_type
 	{
 	private:
-		typedef typename boost::remove_all_extents < T_1 >::type T_1_t;
-		typedef typename boost::remove_all_extents < T_2 >::type T_2_t;
+		typedef typename ::boost::remove_all_extents < T_1 >::type T_1_t;
+		typedef typename ::boost::remove_all_extents < T_2 >::type T_2_t;
 
 	public:
 		typedef typename Max_type_private < T_1_t, T_2_t >::type type;
