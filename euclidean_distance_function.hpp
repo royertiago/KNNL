@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:42:31 CEST
- * Last modified: Sun 26 Nov 2006 08:34:54 CET
+ * Last modified: Wed 08 Aug 2007 18:21:06 CEST
  */
 
 #ifndef EUCLIDEAN_DISTANCE_FUNCTION_HPP_INCLUDED
@@ -136,15 +136,15 @@ namespace distance
 			inner_type const & init
 		) const
 		{
-			return std::inner_product
+			return ::std::inner_product
 			(
 				begin_1, end_1, begin_2,
 				static_cast < inner_type > ( init ),
-				std::plus < inner_type >(),
-				operators::compose_f_gxy_gxy
+				::std::plus < inner_type >(),
+				::operators::compose_f_gxy_gxy
 				(
-					std::multiplies < inner_type >(),
-					std::minus < inner_type >()
+					::std::multiplies < inner_type >(),
+					::std::minus < inner_type >()
 				)
 			);
 		}

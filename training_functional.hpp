@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Wed 26 Apr 2006 14:55:28 CEST
- * Last modified: Sun 26 Nov 2006 09:06:53 CET
+ * Last modified: Wed 08 Aug 2007 18:25:18 CEST
  */
 
 #ifndef TRAINING_FUNCTIONAL_HPP_INCLUDED
@@ -203,7 +203,7 @@ namespace neural_net
 			iteration_type const & s
 		) const
 		{
-			using namespace operators;
+			using namespace ::operators;
 			return
 			(
 				weight
@@ -330,7 +330,7 @@ namespace neural_net
 			Index_type const & j_
 		)
 		{
-			using namespace operators;
+			using namespace ::operators;
 
 			return
 			(

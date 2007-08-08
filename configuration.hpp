@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 29 Jan 2006 11:35:05 CET
- * Last modified: Sun 26 Nov 2006 08:33:33 CET
+ * Last modified: Wed 08 Aug 2007 18:28:14 CEST
  */
 
 #ifndef CONFIGURATION_HPP_INCLUDED
@@ -103,7 +103,7 @@ namespace config
 		unsigned int major;		/**< Number on the first position in the string */
 		unsigned int minor;		/**< Number on the second position in the string */
 		unsigned int release;	/**< Number on the third position in the string */
-		std::string quantifier;	/**< Rest of version number string */
+		::std::string quantifier;	/**< Rest of version number string */
 	};
 
 	/**
@@ -121,7 +121,7 @@ namespace config
 		/**
 		 * Input file name.
 		 */
-		std::string input_file_name;
+		::std::string input_file_name;
 
 		/**
 		 * Number of rows in kohonen network.
@@ -161,7 +161,7 @@ namespace config
 		 * Set program name.
 		 * \param program_name_ containg string e.g. "Pattern Finder".
 		 */
-		void set_program_name ( std::string program_name_ )
+		void set_program_name ( ::std::string program_name_ )
 		{
 			program_name = program_name_;
 		}
@@ -178,7 +178,7 @@ namespace config
 
 			{
 				// prepare string
-				std::stringstream sstr_;
+				::std::stringstream sstr_;
 				sstr_ << version_struct.major
 					<< "." << version_struct.minor
 					<< "." << version_struct.release
@@ -198,14 +198,14 @@ namespace config
 		 * \param version_string_ contains string e.g. "1.2.3".
 		 * version_struct and version_number are calculated.
 		 */
-		void set_version_number ( std::string version_string_ )
+		void set_version_number ( ::std::string version_string_ )
 		{
 			version_string = version_string_;
 
-			std::string v_s = version_string_;
+			::std::string v_s = version_string_;
 
 			// prepare string to parse it in the string stream
-			std::transform
+			::std::transform
 			(
 				v_s.begin(), v_s.end(),
 				v_s.begin(),
@@ -213,7 +213,7 @@ namespace config
 			);
 
 			// initialize stringstream
-			std::stringstream s_v_s ( v_s );
+			::std::stringstream s_v_s ( v_s );
 			// and table for temporal data
 			int tmp_tab[3];
 
@@ -239,9 +239,9 @@ namespace config
 
 		/**
 		 * Get program name.
-		 * \return std::string.
+		 * \return ::std::string.
 		 */
-		inline std::string get_program_name()
+		inline ::std::string get_program_name()
 		{
 			return program_name;
 		}
@@ -257,16 +257,16 @@ namespace config
 
 		/**
 		 * Get version number as a string.
-		 * \return std::string e.g. 0.1.2.
+		 * \return ::std::string e.g. 0.1.2.
 		 */
-		inline std::string get_version_string()
+		inline ::std::string get_version_string()
 		{
 			return version_string;
 		}
 
 		/**
 		 * Get version number.
-		 * \return unsigned int it is needed by the boost::serialisation package.
+		 * \return unsigned int it is needed by the ::boost::serialisation package.
 		 */
 		inline unsigned int get_version_number()
 		{
@@ -280,13 +280,13 @@ namespace config
 		
 	private:
 		/** Program name. */
-		std::string program_name;
+		::std::string program_name;
 
 		/** Version number. */
 		Version_struct version_struct;
 
 		/** Version number. */
-		std::string version_string;
+		::std::string version_string;
 
 		/** Version number. */
 		unsigned int version_number;

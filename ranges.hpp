@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 24 Apr 2006 12:11:38 CEST
- * Last modified: Sun 26 Nov 2006 09:02:37 CET
+ * Last modified: Wed 08 Aug 2007 17:27:38 CEST
  */
 
 #ifndef RANGES_HPP_INCLUDED
@@ -111,8 +111,8 @@ namespace neural_net
 					++pos_min_range, ++pos_max_range, ++pos_range
 				)
 				{
-					*pos_min_range = std::min ( *pos_min_range, *pos_range );
-					*pos_max_range = std::max ( *pos_max_range, *pos_range );
+					*pos_min_range = ::std::min ( *pos_min_range, *pos_range );
+					*pos_max_range = ::std::max ( *pos_max_range, *pos_range );
 				}
 			}
 		}
@@ -141,7 +141,7 @@ namespace neural_net
 		Ranges();
 
 	private:
-		std::pair
+		::std::pair
 		<
 			typename Container_type::value_type,
 			typename Container_type::value_type

@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Wed 10 May 2006 11:16:03 CEST
- * Last modified: Sun 26 Nov 2006 08:45:53 CET
+ * Last modified: Wed 08 Aug 2007 18:21:33 CEST
  */
 
 #ifndef FUNCTORS_HPP_INCLUDED
@@ -94,13 +94,13 @@ namespace neural_net
 	: public Basic_function < Value_type >,
 	public Basic_activation_function
 	<
-		typename operators::Max_type < Scalar_type, Exponent_type >::type,
+		typename ::operators::Max_type < Scalar_type, Exponent_type >::type,
 		Value_type,
-		typename operators::Max_type
+		typename ::operators::Max_type
 		<
-			typename operators::Max_type
+			typename ::operators::Max_type
 			<
-				typename operators::Max_type < Scalar_type, Exponent_type >::type,
+				typename ::operators::Max_type < Scalar_type, Exponent_type >::type,
 				Value_type
 			>::type,
 			double
@@ -113,11 +113,11 @@ namespace neural_net
 		typedef Exponent_type exponent_type;
 		typedef Value_type value_type;
 
-		typedef typename operators::Max_type
+		typedef typename ::operators::Max_type
 		<
-			typename operators::Max_type
+			typename ::operators::Max_type
 			<
-				typename operators::Max_type < Scalar_type, Exponent_type >::type,
+				typename ::operators::Max_type < Scalar_type, Exponent_type >::type,
 				Value_type
 			>::type,
 			double
@@ -149,17 +149,17 @@ namespace neural_net
 		 */
 		result_type operator() ( Value_type const & value ) const
 		{
-			operators::power < result_type, Exponent_type > power_v;
+			::operators::power < result_type, Exponent_type > power_v;
 
 			// calculate result
 			return
 			(
-				std::exp
+				::std::exp
 				(
-					- operators::inverse ( static_cast < Scalar_type > ( 2 ) )
+					- ::operators::inverse ( static_cast < Scalar_type > ( 2 ) )
 					* (power_v)
 					(
-						operators::inverse ( sigma ) * value,
+						::operators::inverse ( sigma ) * value,
 						exponent
 					)
 				)
@@ -207,11 +207,11 @@ namespace neural_net
 	: public Basic_function < Value_type >,
 	public Basic_activation_function
 	<
-		typename operators::Max_type < Scalar_type, Exponent_type >::type,
+		typename ::operators::Max_type < Scalar_type, Exponent_type >::type,
 		Value_type,
-		typename operators::Max_type
+		typename ::operators::Max_type
 		<
-			typename operators::Max_type < Scalar_type, Exponent_type >::type,
+			typename ::operators::Max_type < Scalar_type, Exponent_type >::type,
 			Value_type
 		>::type
 	>
@@ -222,9 +222,9 @@ namespace neural_net
 		typedef Exponent_type exponent_type;
 		typedef Value_type value_type;
 
-		typedef typename operators::Max_type
+		typedef typename ::operators::Max_type
 		<
-			typename operators::Max_type < Scalar_type, Exponent_type >::type,
+			typename ::operators::Max_type < Scalar_type, Exponent_type >::type,
 			Value_type
 		>::type result_type;
 
@@ -254,16 +254,16 @@ namespace neural_net
 		 */
 		result_type operator() ( Value_type const & value ) const 
 		{
-			operators::power < result_type, Exponent_type > power_v;
+			::operators::power < result_type, Exponent_type > power_v;
 
 			// calculate result
 			return
 			(
-				operators::inverse
+				::operators::inverse
 				(
 					(power_v)
 					(
-						operators::inverse ( sigma ) * value,
+						::operators::inverse ( sigma ) * value,
 						exponent
 					) + 1
 				)

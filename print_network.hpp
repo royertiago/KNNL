@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 21 Apr 2006 19:30:09 CEST
- * Last modified: Fri 01 Dec 2006 22:56:08 CET
+ * Last modified: Wed 08 Aug 2007 17:26:34 CEST
  */
 
 #ifndef PRINT_NETWORK_HPP_INCLUDED
@@ -69,8 +69,8 @@ namespace neural_net
 	 * \return modified stream.
 	 */
 	template < typename T >
-	std::ostream & print_network_weights 
-		( std::ostream & os, T const & network, char const * sep = "\t" )
+	::std::ostream & print_network_weights 
+		( ::std::ostream & os, T const & network, char const * sep = "\t" )
 	{
 		const typename T::row_size_t M = network.objects.size();
 		const typename T::col_size_t N = network.objects[0].size();
@@ -79,16 +79,16 @@ namespace neural_net
 		{
 			for ( typename T::col_size_t j = 0; j < N; ++j )
 			{
-				std::copy
+				::std::copy
 				(
 					network.objects[i][j].weights.begin(),
 					network.objects[i][j].weights.end(),
-					std::ostream_iterator
+					::std::ostream_iterator
 					<
 						typename T::value_type::weights_type::value_type
 					> ( os, sep )
 				);
-				os << std::endl;
+				os << ::std::endl;
 			}
 		}
 		return os;
@@ -102,7 +102,7 @@ namespace neural_net
 	 * \return modified stream.
 	 */
 	template < typename T, typename U >
-	std::ostream & print_network ( std::ostream & os, T const & network, U const & value )
+	::std::ostream & print_network ( ::std::ostream & os, T const & network, U const & value )
 	{
 		const typename T::row_size_t M = network.objects.size();
 		const typename T::col_size_t N = network.objects[0].size();
@@ -112,11 +112,11 @@ namespace neural_net
 			for ( typename T::col_size_t j = 0; j < N; ++j )
 			{
 				os << "weights[" << i <<"][" << j << "] = ";
-				std::copy
+				::std::copy
 				(
 					network.objects[i][j].weights.begin(),
 					network.objects[i][j].weights.end(),
-					std::ostream_iterator
+					::std::ostream_iterator
 					<
 						typename T::value_type::weights_type::value_type
 					> ( os, "\t" )
@@ -127,9 +127,9 @@ namespace neural_net
 				//os << network.objects[i][j] ( value );
 				//os << " == "; 
 				os << network.objects [ i ][ j ]( value );
-				os << std::endl;
+				os << ::std::endl;
 			}
-			os << std::endl;
+			os << ::std::endl;
 		}
 		return os;
 	}
@@ -141,7 +141,7 @@ namespace neural_net
 	 * \return modified stream.
 	 */
 	template < typename T >
-	inline std::ostream & value_to_ostream ( std::ostream & os, T const & value )
+	inline ::std::ostream & value_to_ostream ( ::std::ostream & os, T const & value )
 	{
 		os << value;
 		return os;
@@ -154,9 +154,9 @@ namespace neural_net
 	 * \return modified stream.
 	 */
 	template < typename T, template < typename T > class CONT >
-	inline std::ostream & value_to_ostream ( std::ostream & os, CONT<T> const & value )
+	inline ::std::ostream & value_to_ostream ( ::std::ostream & os, CONT<T> const & value )
 	{
-		std::copy ( value.begin(), value.end(), std::ostream_iterator < T > ( os, " " ) );
+		::std::copy ( value.begin(), value.end(), ::std::ostream_iterator < T > ( os, " " ) );
 		return os;
 	}
 	/*\@}*/

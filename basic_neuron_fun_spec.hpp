@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 15:01:26 CEST
- * Last modified: Sun 26 Nov 2006 08:18:34 CET
+ * Last modified: Wed 08 Aug 2007 18:27:41 CEST
  */
 
 #ifndef BASIC_NEURON_FUN_SPEC_HPP_INCLUDED
@@ -92,13 +92,13 @@ namespace neural_net
 		typedef typename Binary_operation_type::value_type value_type;
 
 		/** Activation function. */
-		boost::function
+		::boost::function
 		<
 			Activation_function_type ( typename Binary_operation_type::result_type )
 		> activation_function;
 
 		/** Weak and generalized distance function. */
-		boost::function
+		::boost::function
 		<
 			Binary_operation_type ( value_type, value_type )
 		> binary_operation;
@@ -119,13 +119,13 @@ namespace neural_net
 		(
 			weights_type const & weights_,
 		
-			boost::function
+			::boost::function
 			<
 				Activation_function_type ( typename Binary_operation_type::result_type )
 			> 
 			const & activation_function_,
 			
-			boost::function
+			::boost::function
 			<
 				Binary_operation_type ( value_type, value_type )
 			>

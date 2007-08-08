@@ -39,7 +39,7 @@
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 21 Apr 2006 17:33:34 CEST
- * Last modified: Fri 01 Dec 2006 22:59:43 CET
+ * Last modified: Wed 08 Aug 2007 18:29:31 CEST
  */
 
 #ifndef WTA_TRAINING_ALGORITM_HPP_INCLUDED
@@ -74,7 +74,7 @@ namespace neural_net
 	 * kohonen network using WTA method.
 	 * \param Network_type is a network type.
 	 * \param Value_type is a type os single data
-	 * in mathematical meanning, so it could be std::vector<double>, too.
+	 * in mathematical meanning, so it could be ::std::vector<double>, too.
 	 * \param Data_iterator_type is is iterator for container
 	 * with training data.
 	 * \param Training_functional_type is a type of functional.
@@ -172,10 +172,10 @@ namespace neural_net
 			assert ( network != static_cast < Network_type * > ( 0 ) );
 
 			// for each data train neural network
-			std::for_each
+			::std::for_each
 			(
 				data_begin, data_end,
-				boost::bind
+				::boost::bind
 				(
 					& Wta_training_algorithm
 					<
@@ -216,7 +216,7 @@ namespace neural_net
 
 			// reset max_result
 			typename Network_type::value_type::result_type max_result
-				= std::numeric_limits
+				= ::std::numeric_limits
 				<
 					typename Network_type::value_type::result_type
 				>::min();
@@ -252,10 +252,10 @@ namespace neural_net
 			}
 
 			r_iter = network->objects.begin();
-			std::advance ( r_iter, index_1 );
+			::std::advance ( r_iter, index_1 );
 
 			c_iter = r_iter->begin();
-			std::advance ( c_iter, index_2 );
+			::std::advance ( c_iter, index_2 );
 
 			// train the winning neuron
 			(training_functional)
