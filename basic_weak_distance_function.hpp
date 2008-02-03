@@ -35,7 +35,7 @@
  */
 
 /*
- * e-mail: habdank AT megapolis DOT pl
+ * e-mail: habdank AT gmail DOT com
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Thu 13 Apr 2006 08:30:20 CEST
@@ -62,52 +62,52 @@
  */
 namespace distance
 {
-	/**
-	* \addtogroup distance
-	*/
-	/*\@{*/
+    /**
+    * \addtogroup distance
+    */
+    /*\@{*/
 
-	/**
-	 * Basic_weak_distance_function template class.
-	 * \param Value_type is a type of values.
-	 * \param Parameters_type ia a type of parameters.
-	 */
-	template
-	<
-		typename Value_type,
-		typename Result_type
-	>
-	class Basic_weak_distance_function
-	{
-	public:
+    /**
+     * Basic_weak_distance_function template class.
+     * \param Value_type is a type of values.
+     * \param Parameters_type ia a type of parameters.
+     */
+    template
+    <
+        typename Value_type,
+        typename Result_type
+    >
+    class Basic_weak_distance_function
+    {
+    public:
 
-		typedef Value_type value_type;
-		typedef Result_type result_type;
+        typedef Value_type value_type;
+        typedef Result_type result_type;
 
-		/**
-		 * Constructor.
-		 */
-		Basic_weak_distance_function()
-		{}
+        /**
+         * Constructor.
+         */
+        Basic_weak_distance_function()
+        {}
 
-		/** Copy constructor. */
-		template
-		<
-			typename Value_type_2,
-			typename Result_type_2
-		>
-		Basic_weak_distance_function
-		(
-			Basic_weak_distance_function
-			<
-				Value_type_2,
-				Result_type_2
-			>
-			const & weak_distance_function_
-		)
-		{}
-	};
-	/*\@}*/
+        /** Copy constructor. */
+        template
+        <
+            typename Value_type_2,
+            typename Result_type_2
+        >
+        Basic_weak_distance_function
+        (
+            Basic_weak_distance_function
+            <
+                Value_type_2,
+                Result_type_2
+            >
+            const & weak_distance_function_
+        )
+        {}
+    };
+    /*\@}*/
 
 } // namespace distance
 

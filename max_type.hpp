@@ -35,7 +35,7 @@
  */
 
 /*
- * e-mail: habdank AT megapolis DOT pl
+ * e-mail: habdank AT gmail DOT com
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 23 May 2006 23:53:14 CEST
@@ -57,75 +57,75 @@
 /*\@{*/
 namespace operators
 {
-	template < typename S, typename T >
-	struct Max_type_private
-	{};
+    template < typename S, typename T >
+    struct Max_type_private
+    {};
 
-	template < typename T >
-	struct Max_type_private < T, T >
-	{
-		typedef T type;
-	};
-	
-	// just some examples to set up results for Max_type
-	// if anyone would like to add his/her types they just have to use
-	// macro MAX_TYPE_3( argument_1_type, argument_2_type, result_type )
-	#define MAX_TYPE_3(T1,T2,T3) template <>\
-	struct Max_type_private < T1, T2 >\
-	{ typedef T3 type; };
+    template < typename T >
+    struct Max_type_private < T, T >
+    {
+        typedef T type;
+    };
 
-	MAX_TYPE_3(int,double,double)
-	MAX_TYPE_3(int,long,long)
-	MAX_TYPE_3(short,double,double)
-	MAX_TYPE_3(short,long,long)
-	MAX_TYPE_3(unsigned char,double,double)
-	MAX_TYPE_3(unsigned int,double,double)
-	MAX_TYPE_3(unsigned long,double,double)
-	MAX_TYPE_3(unsigned short,double,double)
-	// and example where we can explicitly use three different types
-	// MAX_TYPE(::std::complex < int >, double, ::std::complex < double >)
+    // just some examples to set up results for Max_type
+    // if anyone would like to add his/her types they just have to use
+    // macro MAX_TYPE_3( argument_1_type, argument_2_type, result_type )
+    #define MAX_TYPE_3(T1,T2,T3) template <>\
+    struct Max_type_private < T1, T2 >\
+    { typedef T3 type; };
 
-	// macro below assumes that bigger type is the first one
-	// macro MAX_TYPE_2( argument_1_type, argument_2_type ) 
-	// simulate that result_type =  argument_1_type
-	#define MAX_TYPE_2(T1,T2) template <>\
-	struct Max_type_private < T1, T2 >\
-	{ typedef T1 type; };
+    MAX_TYPE_3(int,double,double)
+    MAX_TYPE_3(int,long,long)
+    MAX_TYPE_3(short,double,double)
+    MAX_TYPE_3(short,long,long)
+    MAX_TYPE_3(unsigned char,double,double)
+    MAX_TYPE_3(unsigned int,double,double)
+    MAX_TYPE_3(unsigned long,double,double)
+    MAX_TYPE_3(unsigned short,double,double)
+    // and example where we can explicitly use three different types
+    // MAX_TYPE(::std::complex < int >, double, ::std::complex < double >)
 
-	MAX_TYPE_2(double,int)
-	MAX_TYPE_2(long,int)
-	MAX_TYPE_2(long,short)
-	MAX_TYPE_2(double,short)
-	MAX_TYPE_2(double,unsigned char)
-	MAX_TYPE_2(double,unsigned int)
-	MAX_TYPE_2(double,unsigned long)
-	MAX_TYPE_2(double,unsigned short)
+    // macro below assumes that bigger type is the first one
+    // macro MAX_TYPE_2( argument_1_type, argument_2_type )
+    // simulate that result_type =  argument_1_type
+    #define MAX_TYPE_2(T1,T2) template <>\
+    struct Max_type_private < T1, T2 >\
+    { typedef T1 type; };
 
-	/**
-	 * \class Max_type
-	 * \brief Template that estimates maximal of the mathematical types.
-	 * \param T_1 first type.
-	 * \param T_2 second type.
-	 * \return type e.g. typeid (typename Max_type <double, int>::type) == typeid (double),
-	 * typeid (typename Max_type <::std::complex<int>,double>::type) == typeid (::std::complex<double>).
-	 */
-	template
-	<
-		typename T_1,
-		typename T_2
-	>
-	class Max_type
-	{
-	private:
-		typedef typename ::boost::remove_all_extents < T_1 >::type T_1_t;
-		typedef typename ::boost::remove_all_extents < T_2 >::type T_2_t;
+    MAX_TYPE_2(double,int)
+    MAX_TYPE_2(long,int)
+    MAX_TYPE_2(long,short)
+    MAX_TYPE_2(double,short)
+    MAX_TYPE_2(double,unsigned char)
+    MAX_TYPE_2(double,unsigned int)
+    MAX_TYPE_2(double,unsigned long)
+    MAX_TYPE_2(double,unsigned short)
 
-	public:
-		typedef typename Max_type_private < T_1_t, T_2_t >::type type;
-	};
+    /**
+     * \class Max_type
+     * \brief Template that estimates maximal of the mathematical types.
+     * \param T_1 first type.
+     * \param T_2 second type.
+     * \return type e.g. typeid (typename Max_type <double, int>::type) == typeid (double),
+     * typeid (typename Max_type <::std::complex<int>,double>::type) == typeid (::std::complex<double>).
+     */
+    template
+    <
+        typename T_1,
+        typename T_2
+    >
+    class Max_type
+    {
+    private:
+        typedef typename ::boost::remove_all_extents < T_1 >::type T_1_t;
+        typedef typename ::boost::remove_all_extents < T_2 >::type T_2_t;
 
-	//#undef MAX_TYPE_2
-	//#undef MAX_TYPE_3
+    public:
+        typedef typename Max_type_private < T_1_t, T_2_t >::type type;
+    };
+
+    //#undef MAX_TYPE_2
+    //#undef MAX_TYPE_3
 
 } // namespace operators
 /*\@}*/

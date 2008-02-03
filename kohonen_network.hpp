@@ -35,7 +35,7 @@
  */
 
 /*
- * e-mail: habdank AT megapolis DOT pl
+ * e-mail: habdank AT gmail DOT com
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 18 Apr 2006 19:25:15 CEST
@@ -60,85 +60,85 @@
 
 namespace neural_net
 {
-	/**
-	* \addtogroup neural_net
-	*/
-	/*\@{*/
+    /**
+    * \addtogroup neural_net
+    */
+    /*\@{*/
 
-	/**
-	 * Function generates randomly distributed weights for neural network.
-	 * Distribution is uniform and weights are generated based on
-	 * multidimensional ranges of training data.
-	 * \param no_rows is a number of rows that will be created in neural network.
-	 * \param no_columns is a number of columns that will be created in neural network.
-	 * \param activation_function is activation function that will be set.
-	 * \param binary_operation is a function tat will be set under activation function.
-	 * \param data is a reference to data container.
-	 * \param kohonen_network is a reference to the network.
-	 * \param randomize_policy is a policy class for setting up random number generator.
-	 * \todo TODO: When Rectangular_container will be changed then this class should be repaired too.
-	 */
-	template
-	<
-		typename Data_container_type,
-		typename Kohonen_network_type,
-		typename Randomize_policy
-	>
-	void generate_kohonen_network
-	(
-		typename Kohonen_network_type::row_type::size_type const & no_rows,
-		typename Kohonen_network_type::column_type::size_type const & no_columns,
-		typename Kohonen_network_type::value_type::activation_function_type const & activation_function,
-		typename Kohonen_network_type::value_type::binary_operation_type const & binary_operation,
-		Data_container_type & data,
-		Kohonen_network_type & kohonen_network,
-		Randomize_policy const & randomize_policy
-	)
-	{
-		randomize_policy();
+    /**
+     * Function generates randomly distributed weights for neural network.
+     * Distribution is uniform and weights are generated based on
+     * multidimensional ranges of training data.
+     * \param no_rows is a number of rows that will be created in neural network.
+     * \param no_columns is a number of columns that will be created in neural network.
+     * \param activation_function is activation function that will be set.
+     * \param binary_operation is a function tat will be set under activation function.
+     * \param data is a reference to data container.
+     * \param kohonen_network is a reference to the network.
+     * \param randomize_policy is a policy class for setting up random number generator.
+     * \todo TODO: When Rectangular_container will be changed then this class should be repaired too.
+     */
+    template
+    <
+        typename Data_container_type,
+        typename Kohonen_network_type,
+        typename Randomize_policy
+    >
+    void generate_kohonen_network
+    (
+        typename Kohonen_network_type::row_type::size_type const & no_rows,
+        typename Kohonen_network_type::column_type::size_type const & no_columns,
+        typename Kohonen_network_type::value_type::activation_function_type const & activation_function,
+        typename Kohonen_network_type::value_type::binary_operation_type const & binary_operation,
+        Data_container_type & data,
+        Kohonen_network_type & kohonen_network,
+        Randomize_policy const & randomize_policy
+    )
+    {
+        randomize_policy();
 
-		typedef typename Kohonen_network_type::value_type Neuron_type;
-		typedef typename Kohonen_network_type::row_type::size_type row_size_t;
-		typedef typename Kohonen_network_type::column_type::size_type col_size_t;
-		typedef typename Neuron_type::weights_type weights_t;
-		typedef typename weights_t::size_type w_size_t;
+        typedef typename Kohonen_network_type::value_type Neuron_type;
+        typedef typename Kohonen_network_type::row_type::size_type row_size_t;
+        typedef typename Kohonen_network_type::column_type::size_type col_size_t;
+        typedef typename Neuron_type::weights_type weights_t;
+        typedef typename weights_t::size_type w_size_t;
 
-		::std::vector < Neuron_type > tmp_neuron_vector;
-		tmp_neuron_vector.reserve ( no_columns );
+        ::std::vector < Neuron_type > tmp_neuron_vector;
+        tmp_neuron_vector.reserve ( no_columns );
 
-		const w_size_t K = data.begin()->size();
-		weights_t weights ( K );
+        const w_size_t K = data.begin()->size();
+        weights_t weights ( K );
 
-		Ranges < Data_container_type > data_ranges ( *data.begin() );
-		data_ranges ( data );
+        Ranges < Data_container_type > data_ranges ( *data.begin() );
+        data_ranges ( data );
 
-		for ( row_size_t i = 0; i < no_rows; ++i )
-		{
-			for ( col_size_t j = 0; j < no_columns; ++j )
-			{
-				for ( w_size_t k = 0; k < K; ++k )
-				{
-					weights[k] = (
-						static_cast < typename Data_container_type::value_type::value_type >
-						( ( data_ranges.get_max().at ( k )
-							- data_ranges.get_min().at ( k ) )
-						 * ( rand() / ( 1.0 + RAND_MAX ) )
-						 + data_ranges.get_min().at ( k ) ) );
-				}
+        for ( row_size_t i = 0; i < no_rows; ++i )
+        {
+            for ( col_size_t j = 0; j < no_columns; ++j )
+            {
+                for ( w_size_t k = 0; k < K; ++k )
+                {
+                    weights[k] = (
+                        static_cast < typename Data_container_type::value_type::value_type >
+                        ( ( data_ranges.get_max().at ( k )
+                            - data_ranges.get_min().at ( k ) )
+                         * ( rand() / ( 1.0 + RAND_MAX ) )
+                         + data_ranges.get_min().at ( k ) ) );
+                }
 
-				Neuron_type local_neuron
-				(
-					weights,
-					activation_function,
-					binary_operation
-				);
-				tmp_neuron_vector.push_back ( local_neuron );
-			}
-			kohonen_network.objects.push_back ( tmp_neuron_vector );
-			tmp_neuron_vector.clear();
-		}
-	}
-	/*\@}*/
+                Neuron_type local_neuron
+                (
+                    weights,
+                    activation_function,
+                    binary_operation
+                );
+                tmp_neuron_vector.push_back ( local_neuron );
+            }
+            kohonen_network.objects.push_back ( tmp_neuron_vector );
+            tmp_neuron_vector.clear();
+        }
+    }
+    /*\@}*/
 
 } // namespace neural_net
 

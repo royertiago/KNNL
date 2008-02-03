@@ -35,7 +35,7 @@
  */
 
 /*
- * e-mail: habdank AT megapolis DOT pl
+ * e-mail: habdank AT gmail DOT com
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 24 Apr 2006 12:11:38 CEST
@@ -56,99 +56,99 @@
 
 namespace neural_net
 {
-	/**
-	* \addtogroup neural_net
-	*/
-	/*\@{*/
+    /**
+    * \addtogroup neural_net
+    */
+    /*\@{*/
 
-	/**
-	 * \class Ranges
-	 * \brief Class creates and claculates ranges of data.
-	 * \param Container_type is a type of container.
-	 */
-	template < typename Container_type >
-	class Ranges
-	{
-	public:
-		/**
-		 * Constructor.
-		 * \param value_ is a value that will be set at he begining.
-		 */
-		explicit Ranges ( typename Container_type::value_type const & value_ )
-		:ranges ( value_, value_ )
-		{}
+    /**
+     * \class Ranges
+     * \brief Class creates and claculates ranges of data.
+     * \param Container_type is a type of container.
+     */
+    template < typename Container_type >
+    class Ranges
+    {
+    public:
+        /**
+         * Constructor.
+         * \param value_ is a value that will be set at he begining.
+         */
+        explicit Ranges ( typename Container_type::value_type const & value_ )
+        :ranges ( value_, value_ )
+        {}
 
-		/** Copy constructor. */
-		template < typename Container_type_2 >
-		Ranges ( Ranges < Container_type_2 > const & ranges_ )
-		: ranges ( ranges_.ranges )
-		{}
+        /** Copy constructor. */
+        template < typename Container_type_2 >
+        Ranges ( Ranges < Container_type_2 > const & ranges_ )
+        : ranges ( ranges_.ranges )
+        {}
 
-		/**
-		 * Function that is going through the all container.
-		 * \param value is a reference to the container.
-		 */
-		void operator() ( Container_type const & value ) 
-		{
-			typename Container_type::const_iterator pos;
+        /**
+         * Function that is going through the all container.
+         * \param value is a reference to the container.
+         */
+        void operator() ( Container_type const & value )
+        {
+            typename Container_type::const_iterator pos;
 
-			typename Container_type::value_type::const_iterator pos_range;
-			typename Container_type::value_type::iterator pos_min_range;
-			typename Container_type::value_type::iterator pos_max_range;
+            typename Container_type::value_type::const_iterator pos_range;
+            typename Container_type::value_type::iterator pos_min_range;
+            typename Container_type::value_type::iterator pos_max_range;
 
-			// go through the all data in container and ...
-			for ( pos = value.begin(); pos != value.end(); ++pos )
-			{
-				// look for the highest and lowest values to set ranges.
-				// iterate through position of the container and ranges type to compare
-				// proper values and set ranges.
-				for
-				(
-					pos_min_range = ranges.first.begin(),
-					pos_max_range = ranges.second.begin(),
-					pos_range = pos->begin();
-					pos_min_range != ranges.first.end();
-					++pos_min_range, ++pos_max_range, ++pos_range
-				)
-				{
-					*pos_min_range = ::std::min ( *pos_min_range, *pos_range );
-					*pos_max_range = ::std::max ( *pos_max_range, *pos_range );
-				}
-			}
-		}
+            // go through the all data in container and ...
+            for ( pos = value.begin(); pos != value.end(); ++pos )
+            {
+                // look for the highest and lowest values to set ranges.
+                // iterate through position of the container and ranges type to compare
+                // proper values and set ranges.
+                for
+                (
+                    pos_min_range = ranges.first.begin(),
+                    pos_max_range = ranges.second.begin(),
+                    pos_range = pos->begin();
+                    pos_min_range != ranges.first.end();
+                    ++pos_min_range, ++pos_max_range, ++pos_range
+                )
+                {
+                    *pos_min_range = ::std::min ( *pos_min_range, *pos_range );
+                    *pos_max_range = ::std::max ( *pos_max_range, *pos_range );
+                }
+            }
+        }
 
-		/**
-		 * Function returns supremum value of the data in the container.
-		 * This value could not exests in container, because is created from
-		 * all maximums of data e.g. { (1,2), (2,1) } -> (2,2)
-		 */
-		typename Container_type::value_type const & get_max() const 
-		{
-			return ranges.second;
-		}
+        /**
+         * Function returns supremum value of the data in the container.
+         * This value could not exests in container, because is created from
+         * all maximums of data e.g. { (1,2), (2,1) } -> (2,2)
+         */
+        typename Container_type::value_type const & get_max() const
+        {
+            return ranges.second;
+        }
 
-		/**
-		 * Function returns infimum of the data in the container.
-		 * This value could not exests in container, because is created from
-		 * all minimums of data e.g. { (1,2), (2,1) } -> (1,1)
-		 */
-		typename Container_type::value_type const & get_min() const 
-		{
-			return ranges.first;
-		}
+        /**
+         * Function returns infimum of the data in the container.
+         * This value could not exests in container, because is created from
+         * all minimums of data e.g. { (1,2), (2,1) } -> (1,1)
+         */
+        typename Container_type::value_type const & get_min() const
+        {
+            return ranges.first;
+        }
 
-	protected:
-		Ranges();
+    protected:
+        Ranges();
 
-	private:
-		::std::pair
-		<
-			typename Container_type::value_type,
-			typename Container_type::value_type
-		> ranges;
+    private:
+        ::std::pair
+        <
+            typename Container_type::value_type,
+            typename Container_type::value_type
+        > ranges;
 
-	};
-	/*\@}*/
+    };
+    /*\@}*/
 
 } // namespace neural_net
 

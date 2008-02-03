@@ -35,7 +35,7 @@
  */
 
 /*
- * e-mail: habdank AT megapolis DOT pl
+ * e-mail: habdank AT gmail DOT com
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 12 May 2006 14:39:01 CEST

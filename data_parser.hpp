@@ -35,7 +35,7 @@
  */
 
 /*
- * e-mail: habdank AT megapolis DOT pl
+ * e-mail: habdank AT gmail DOT com
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sat 29 Apr 2006 19:10:50 CEST
@@ -73,85 +73,85 @@
  */
 namespace data_parser
 {
-	/**
-	 * Class for parsing data stream.
-	 * \param Data_container is a container type.
-	 */
-	template < typename Data_container >
-	class Data_parser
-	{
-	public:
-		/** Constructor. */
-		Data_parser()
-		{}
+    /**
+     * Class for parsing data stream.
+     * \param Data_container is a container type.
+     */
+    template < typename Data_container >
+    class Data_parser
+    {
+    public:
+        /** Constructor. */
+        Data_parser()
+        {}
 
-		/**
-		 * Function that parse stream and store data in container.
-		 * \param is is a reference to the stream.
-		 * \param data_container is a reference to the container.
-		 * \return modified container.
-		 * \throw ::std::runtime_error when after parsing size of data_container is still zero.
-		 */
-		Data_container & operator() ( ::std::istream & is, Data_container & data_container ) const
-		throw ( ::std::runtime_error )
-		{
-			::std::string tmp_string;
-			size_t counter = 0;
+        /**
+         * Function that parse stream and store data in container.
+         * \param is is a reference to the stream.
+         * \param data_container is a reference to the container.
+         * \return modified container.
+         * \throw ::std::runtime_error when after parsing size of data_container is still zero.
+         */
+        Data_container & operator() ( ::std::istream & is, Data_container & data_container ) const
+        throw ( ::std::runtime_error )
+        {
+            ::std::string tmp_string;
+            size_t counter = 0;
 
-			typename Data_container::value_type tmp_sub_container;
+            typename Data_container::value_type tmp_sub_container;
 
-			// get line of data from stream
-			while ( ::std::getline ( is, tmp_string ) )
-			{
-				// count data
-				++counter;
+            // get line of data from stream
+            while ( ::std::getline ( is, tmp_string ) )
+            {
+                // count data
+                ++counter;
 
-				// parse data and push data back into the container
-				data_container.push_back ( parse_string ( tmp_sub_container, tmp_string ) );
+                // parse data and push data back into the container
+                data_container.push_back ( parse_string ( tmp_sub_container, tmp_string ) );
 
-				// reset temporal container
-				tmp_sub_container.clear();
-			}
+                // reset temporal container
+                tmp_sub_container.clear();
+            }
 
-			// if data container is empty after all procedure throw exception
-			if ( data_container.size() == 0 )
-			{
-				throw ::std::runtime_error ( "Data file corupted." );
-			}
+            // if data container is empty after all procedure throw exception
+            if ( data_container.size() == 0 )
+            {
+                throw ::std::runtime_error ( "Data file corupted." );
+            }
 
-			// return data container of containers
-			return data_container;
-		}
+            // return data container of containers
+            return data_container;
+        }
 
-	private:
-		/**
-		 * This function is for parsing string.
-		 * \param container is a reference to the data conatiner.
-		 * \param str is a reference to the string.
-		 * \return container of the values stored in one string.
-		 */
-		typename Data_container::value_type parse_string
-		(
-			typename Data_container::value_type & container,
-			::std::string & str
-		) const
-		{
-			::std::stringstream tmp_sstr ( str );
+    private:
+        /**
+         * This function is for parsing string.
+         * \param container is a reference to the data conatiner.
+         * \param str is a reference to the string.
+         * \return container of the values stored in one string.
+         */
+        typename Data_container::value_type parse_string
+        (
+            typename Data_container::value_type & container,
+            ::std::string & str
+        ) const
+        {
+            ::std::stringstream tmp_sstr ( str );
 
-			typedef typename Data_container::value_type::value_type internal_type;
+            typedef typename Data_container::value_type::value_type internal_type;
 
-			// parse data as sequence of fixed type data and store them into the container.
-			::std::copy
-			(
-				::std::istream_iterator < internal_type > ( tmp_sstr ),
-				::std::istream_iterator < internal_type >(),
-				::std::back_inserter ( container )
-			);
+            // parse data as sequence of fixed type data and store them into the container.
+            ::std::copy
+            (
+                ::std::istream_iterator < internal_type > ( tmp_sstr ),
+                ::std::istream_iterator < internal_type >(),
+                ::std::back_inserter ( container )
+            );
 
-			return container;
-		}
+            return container;
+        }
 
-	};
+    };
 } // namespace data_parser
 /*\@}*/
 

@@ -35,7 +35,7 @@
  */
 
 /*
- * e-mail: habdank AT megapolis DOT pl
+ * e-mail: habdank AT gmail DOT com
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Sun 18 Jun 2006 13:22:04 CEST
@@ -53,105 +53,105 @@
 
 namespace neural_net
 {
-	/**
-	* \addtogroup neural_net
-	*/
-	/*\@{*/
+    /**
+    * \addtogroup neural_net
+    */
+    /*\@{*/
 
-	/**
-	 * \class Numeric_iterator
-	 * \brief Class that defines bahavior of the numeric iterator.
-	 * \param Value_type is a type of value.
-	 */
-	template < typename Value_type >
-	struct Numeric_iterator
-	{
-		typedef Value_type value_type;
-		value_type state;
+    /**
+     * \class Numeric_iterator
+     * \brief Class that defines bahavior of the numeric iterator.
+     * \param Value_type is a type of value.
+     */
+    template < typename Value_type >
+    struct Numeric_iterator
+    {
+        typedef Value_type value_type;
+        value_type state;
 
-		/**
-		 * Constructor.
-		 * \param state_ is a state in the beginning of the work of iterator
-		 */
-		Numeric_iterator ( Value_type state_ )
-		: state ( state_ )
-		{}
-	};
+        /**
+         * Constructor.
+         * \param state_ is a state in the beginning of the work of iterator
+         */
+        Numeric_iterator ( Value_type state_ )
+        : state ( state_ )
+        {}
+    };
 
-	/**
-	 * \class Linear_numeric_iterator
-	 * \brief Class that defines bahavior of the linear numeric iterator.
-	 * It begins with given value and iterate using given step.
-	 * \param Value_type is a type of value.
-	 */
-	template < typename Value_type >
-	class Linear_numeric_iterator
-	: public Numeric_iterator < Value_type >
-	{
-	public:
-		/**
-		 * Constructor.
-		 * \param state_ is a begin value.
-		 * \param step_ is a step value.
-		 */
-		Linear_numeric_iterator (
-			Value_type state_ = static_cast < Value_type > ( 0 ),
-			Value_type step_ = static_cast < Value_type > ( 1 )
-		)
-		: Numeric_iterator < Value_type > ( state_ ), step ( step_ )
-		{}
+    /**
+     * \class Linear_numeric_iterator
+     * \brief Class that defines bahavior of the linear numeric iterator.
+     * It begins with given value and iterate using given step.
+     * \param Value_type is a type of value.
+     */
+    template < typename Value_type >
+    class Linear_numeric_iterator
+    : public Numeric_iterator < Value_type >
+    {
+    public:
+        /**
+         * Constructor.
+         * \param state_ is a begin value.
+         * \param step_ is a step value.
+         */
+        Linear_numeric_iterator (
+            Value_type state_ = static_cast < Value_type > ( 0 ),
+            Value_type step_ = static_cast < Value_type > ( 1 )
+        )
+        : Numeric_iterator < Value_type > ( state_ ), step ( step_ )
+        {}
 
-		/**
-		 * Reset state.
-		 * \param state_ is a new state.
-		 */
-		void reset ( Value_type const & state_ = static_cast < Value_type > ( 0 ) )
-		{
-			Numeric_iterator < Value_type >::state = state_;
-			return;
-		}
+        /**
+         * Reset state.
+         * \param state_ is a new state.
+         */
+        void reset ( Value_type const & state_ = static_cast < Value_type > ( 0 ) )
+        {
+            Numeric_iterator < Value_type >::state = state_;
+            return;
+        }
 
-		/**
-		 * Method returns state.
-		 */
-		inline Value_type operator() ( void ) const
-		{
-			return ( Numeric_iterator < Value_type >::state );
-		}
+        /**
+         * Method returns state.
+         */
+        inline Value_type operator() ( void ) const
+        {
+            return ( Numeric_iterator < Value_type >::state );
+        }
 
-		/**
-		 * Preincrementation.
-		 */
-		inline Linear_numeric_iterator < Value_type > &
-		operator++()
-		{
-			Numeric_iterator < Value_type >::state += step;
-			return *this;
-		}
+        /**
+         * Preincrementation.
+         */
+        inline Linear_numeric_iterator < Value_type > &
+        operator++()
+        {
+            Numeric_iterator < Value_type >::state += step;
+            return *this;
+        }
 
-		/**
-		 * Postincrementation.
-		 */
-		inline Linear_numeric_iterator < Value_type >
-		operator++ ( int )
-		{
-			Value_type tmp ( Numeric_iterator < Value_type >::state );
-			Numeric_iterator < Value_type >::state += step;
-			return tmp;
-		}
+        /**
+         * Postincrementation.
+         */
+        inline Linear_numeric_iterator < Value_type >
+        operator++ ( int )
+        {
+            Value_type tmp ( Numeric_iterator < Value_type >::state );
+            Numeric_iterator < Value_type >::state += step;
+            return tmp;
+        }
 
-		///\todo TODO: try to prepare conversion on Value_type
-		/*inline const Value_type operator Value_type ( void ) const
-		{
-			return Numeric_iterator::state;
-		}*/
+        ///\todo TODO: try to prepare conversion on Value_type
+        /*inline const Value_type operator Value_type ( void ) const
+        {
+            return Numeric_iterator::state;
+        }*/
 
-	protected:
-		Value_type step;
-	};
+    protected:
+        Value_type step;
+    };
 
-	typedef Linear_numeric_iterator < int > linear_numeric_iterator;
-	/*\@}*/
+    typedef Linear_numeric_iterator < int > linear_numeric_iterator;
+    /*\@}*/
 
 } // namespace neural_net
 
