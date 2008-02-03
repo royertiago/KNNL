@@ -29,13 +29,13 @@
  * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
- * OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+* WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+* OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
 
 /*
- * e-mail: habdank AT megapolis DOT pl
+ * e-mail: habdank AT gmail DOT com
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 21 Apr 2006 19:30:09 CEST
@@ -57,109 +57,109 @@
 
 namespace neural_net
 {
-	/**
-	* \addtogroup neural_net
-	*/
-	/*\@{*/
+    /**
+     * \addtogroup neural_net
+     */
+    /*\@{*/
 
-	/**
-	 * Function prints weight of the neural network.
-	 * \param os is output stream.
-	 * \param network is a reference to network.
-	 * \return modified stream.
-	 */
-	template < typename T >
-	::std::ostream & print_network_weights 
-		( ::std::ostream & os, T const & network, char const * sep = "\t" )
-	{
-		const typename T::row_size_t M = network.objects.size();
-		const typename T::col_size_t N = network.objects[0].size();
-		
-		for ( typename T::row_size_t i = 0; i < M; ++i )
-		{
-			for ( typename T::col_size_t j = 0; j < N; ++j )
-			{
-				::std::copy
-				(
-					network.objects[i][j].weights.begin(),
-					network.objects[i][j].weights.end(),
-					::std::ostream_iterator
-					<
-						typename T::value_type::weights_type::value_type
-					> ( os, sep )
-				);
-				os << ::std::endl;
-			}
-		}
-		return os;
-	}
+    /**
+     * Function prints weight of the neural network.
+     * \param os is output stream.
+     * \param network is a reference to network.
+     * \return modified stream.
+     */
+    template < typename T >
+    ::std::ostream & print_network_weights
+    ( ::std::ostream & os, T const & network, char const * sep = "\t" )
+    {
+        const typename T::row_size_t M = network.objects.size();
+        const typename T::col_size_t N = network.objects[0].size();
 
-	/**
-	 * Function prints structure and results of the neural network.
-	 * \param os is output stream.
-	 * \param network is a reference to network.
-	 * \param value is a value that network will calculate results.
-	 * \return modified stream.
-	 */
-	template < typename T, typename U >
-	::std::ostream & print_network ( ::std::ostream & os, T const & network, U const & value )
-	{
-		const typename T::row_size_t M = network.objects.size();
-		const typename T::col_size_t N = network.objects[0].size();
-		
-		for ( typename T::row_size_t i = 0; i < M; ++i )
-		{
-			for ( typename T::col_size_t j = 0; j < N; ++j )
-			{
-				os << "weights[" << i <<"][" << j << "] = ";
-				::std::copy
-				(
-					network.objects[i][j].weights.begin(),
-					network.objects[i][j].weights.end(),
-					::std::ostream_iterator
-					<
-						typename T::value_type::weights_type::value_type
-					> ( os, "\t" )
-				);
-				os << " ( ";
-				value_to_ostream ( os, value );
-				os << " ) == ";
-				//os << network.objects[i][j] ( value );
-				//os << " == "; 
-				os << network.objects [ i ][ j ]( value );
-				os << ::std::endl;
-			}
-			os << ::std::endl;
-		}
-		return os;
-	}
+        for ( typename T::row_size_t i = 0; i < M; ++i )
+        {
+            for ( typename T::col_size_t j = 0; j < N; ++j )
+            {
+                ::std::copy
+                    (
+                        network.objects[i][j].weights.begin(),
+                        network.objects[i][j].weights.end(),
+                        ::std::ostream_iterator
+                        <
+                        typename T::value_type::weights_type::value_type
+                        > ( os, sep )
+                    );
+                os << ::std::endl;
+            }
+        }
+        return os;
+    }
 
-	/**
-	 * Function puts values to the stream.
-	 * \param os is a output stream.
-	 * \param value is a value.
-	 * \return modified stream.
-	 */
-	template < typename T >
-	inline ::std::ostream & value_to_ostream ( ::std::ostream & os, T const & value )
-	{
-		os << value;
-		return os;
-	}
+    /**
+     * Function prints structure and results of the neural network.
+     * \param os is output stream.
+     * \param network is a reference to network.
+     * \param value is a value that network will calculate results.
+     * \return modified stream.
+     */
+    template < typename T, typename U >
+    ::std::ostream & print_network ( ::std::ostream & os, T const & network, U const & value )
+    {
+        const typename T::row_size_t M = network.objects.size();
+        const typename T::col_size_t N = network.objects[0].size();
 
-	/**
-	 * Function puts container of any values to the stream.
-	 * \param os is a output stream.
-	 * \param value is a value.
-	 * \return modified stream.
-	 */
-	template < typename T, template < typename T > class CONT >
-	inline ::std::ostream & value_to_ostream ( ::std::ostream & os, CONT<T> const & value )
-	{
-		::std::copy ( value.begin(), value.end(), ::std::ostream_iterator < T > ( os, " " ) );
-		return os;
-	}
-	/*\@}*/
+        for ( typename T::row_size_t i = 0; i < M; ++i )
+        {
+            for ( typename T::col_size_t j = 0; j < N; ++j )
+            {
+                os << "weights[" << i <<"][" << j << "] = ";
+                ::std::copy
+                    (
+                        network.objects[i][j].weights.begin(),
+                        network.objects[i][j].weights.end(),
+                        ::std::ostream_iterator
+                        <
+                        typename T::value_type::weights_type::value_type
+                        > ( os, "\t" )
+                    );
+                os << " ( ";
+                value_to_ostream ( os, value );
+                os << " ) == ";
+                //os << network.objects[i][j] ( value );
+                //os << " == ";
+                os << network.objects [ i ][ j ]( value );
+                os << ::std::endl;
+            }
+            os << ::std::endl;
+        }
+        return os;
+    }
+
+    /**
+     * Function puts values to the stream.
+     * \param os is a output stream.
+     * \param value is a value.
+     * \return modified stream.
+     */
+    template < typename T >
+    inline ::std::ostream & value_to_ostream ( ::std::ostream & os, T const & value )
+    {
+        os << value;
+        return os;
+    }
+
+    /**
+     * Function puts container of any values to the stream.
+     * \param os is a output stream.
+     * \param value is a value.
+     * \return modified stream.
+     */
+    template < typename T, template < typename T > class CONT >
+    inline ::std::ostream & value_to_ostream ( ::std::ostream & os, CONT<T> const & value )
+    {
+        ::std::copy ( value.begin(), value.end(), ::std::ostream_iterator < T > ( os, " " ) );
+        return os;
+    }
+    /*\@}*/
 }// namespace neural_net
 
 #endif // PRINT_NETWORK_HPP_INCLUDED

@@ -29,13 +29,13 @@
  * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
- * OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+* WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+* OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
 
 /*
- * e-mail: habdank AT megapolis DOT pl
+ * e-mail: habdank AT gmail DOT com
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Tue 11 Apr 2006 17:47:44 CEST
@@ -53,36 +53,36 @@
 
 namespace neural_net
 {
-	/**
-	* \addtogroup neural_net
-	*/
-	/*\@{*/
+    /**
+     * \addtogroup neural_net
+     */
+    /*\@{*/
 
-	/**
-	 * Basic_activation_function template class.
-	 * \param Parameters_type is type of parameters.
-	 * \param Value_type is a type of values.
-	 * \param Result_type is a type of results.
-	 */
-	template
-	<
-		typename Parameters_type,
-		typename Value_type,
-		typename Result_type
-	>
-	class Basic_activation_function
-	{
-	public:
-		/** Result type. */
-		typedef Result_type result_type;
+    /**
+     * Basic_activation_function template class.
+     * \param Parameters_type is type of parameters.
+     * \param Value_type is a type of values.
+     * \param Result_type is a type of results.
+     */
+    template
+    <
+        typename Parameters_type,
+        typename Value_type,
+        typename Result_type
+    >
+    class Basic_activation_function
+    {
+    public:
+        /** Result type. */
+        typedef Result_type result_type;
 
-		/** Value type. */
-		typedef Value_type value_type;
+        /** Value type. */
+        typedef Value_type value_type;
 
-		/** Parameters type. */
-		typedef Parameters_type parameters_type;
-	};
-	/*\@}*/
+        /** Parameters type. */
+        typedef Parameters_type parameters_type;
+    };
+    /*\@}*/
 
 } // namespace neural_net
 

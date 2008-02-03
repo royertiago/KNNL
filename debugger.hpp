@@ -12,7 +12,7 @@
  */
 
 /*
- * e-mail: habdank{AT}megapolis{dot}pl
+ * e-mail: habdank{AT}gmail{dot}com
  *
  * File created: Sat 05 Nov 2005 14:20:28 CET
  * Last modified: Wed 08 Aug 2007 17:16:20 CEST
@@ -48,9 +48,9 @@
  * And at the very beginnig of the main function should be placed:
  *
  * #ifdef FTDEBUG
- * 	DEBUGGER_STREAM =
- * 		::std::auto_ptr < ::std::ofstream >
- * 		( new ::std::ofstream ( "_debugger.out" ) );
+ *     DEBUGGER_STREAM =
+ *         ::std::auto_ptr < ::std::ofstream >
+ *         ( new ::std::ofstream ( "_debugger.out" ) );
  * #endif //FTDEBUG
  *
  * if we suppose to use file to make logs.
@@ -88,25 +88,25 @@
 
 #ifdef FTDEBUG
 
-	#include <memory>
-	#include <fstream>
+    #include <memory>
+    #include <fstream>
 
-	#define D(name) *DEBUGGER_STREAM << __FILE__ << " [" << __LINE__ << "] : " << #name << " = " << (name) << ::std::endl
-	extern ::std::auto_ptr < ::std::ofstream > DEBUGGER_STREAM;
+    #define D(name) *DEBUGGER_STREAM << __FILE__ << " [" << __LINE__ << "] : " << #name << " = " << (name) << ::std::endl
+    extern ::std::auto_ptr < ::std::ofstream > DEBUGGER_STREAM;
 
 #elif defined(TDEBUG)
 
-	#include <iostream>
-	#define D(name) ::std::cout << __FILE__ << " [" << __LINE__ << "] : " << #name << " = " << (name) << ::std::endl
+    #include <iostream>
+    #define D(name) ::std::cout << __FILE__ << " [" << __LINE__ << "] : " << #name << " = " << (name) << ::std::endl
 
 #elif defined(ETDEBUG)
 
-	#include <iostream>
-	#define D(name) ::std::cerr << __FILE__ << " [" << __LINE__ << "] : " << #name << " = " << (name) << ::std::endl
+    #include <iostream>
+    #define D(name) ::std::cerr << __FILE__ << " [" << __LINE__ << "] : " << #name << " = " << (name) << ::std::endl
 
 #else
 
-	#define D(name) {}
+    #define D(name) {}
 
 #endif // ..TDEBUG
 

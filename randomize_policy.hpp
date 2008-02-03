@@ -35,7 +35,7 @@
  */
 
 /*
- * e-mail: habdank AT megapolis DOT pl
+ * e-mail: habdank AT gmail DOT com
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Mon 22 May 2006 20:03:59 CEST
@@ -57,50 +57,50 @@
 
 namespace neural_net
 {
-	/**
-	* \addtogroup neural_net
-	*/
-	/*\@{*/
-	class Randomize_policy
-	{
-		typedef Randomize_policy this_type;
-	};
+    /**
+    * \addtogroup neural_net
+    */
+    /*\@{*/
+    class Randomize_policy
+    {
+        typedef Randomize_policy this_type;
+    };
 
-	/**
-	 * \class External_randomize
-	 * \brief This class force not to use srand() in generation proces,
-	 * therefore srand function is initialized externally.
-	 */
-	struct External_randomize
-	: public Randomize_policy
-	{
-		typedef External_randomize this_type;
+    /**
+     * \class External_randomize
+     * \brief This class force not to use srand() in generation proces,
+     * therefore srand function is initialized externally.
+     */
+    struct External_randomize
+    : public Randomize_policy
+    {
+        typedef External_randomize this_type;
 
-		/** Do nothing :-). */
-		void operator() ( void ) const
-		{
-			return;
-		}
-	};
+        /** Do nothing :-). */
+        void operator() ( void ) const
+        {
+            return;
+        }
+    };
 
-	/**
-	 * \class Internal_randomize
-	 * \brief This class force to use srand() in generation proces,
-	 * therefore srand function is NOT initialized.
-	 */
-	struct Internal_randomize
-	: public Randomize_policy
-	{
-		typedef Internal_randomize this_type;
+    /**
+     * \class Internal_randomize
+     * \brief This class force to use srand() in generation proces,
+     * therefore srand function is NOT initialized.
+     */
+    struct Internal_randomize
+    : public Randomize_policy
+    {
+        typedef Internal_randomize this_type;
 
-		/** Initialize random number generator using srand(). */
-		void operator() ( void ) const
-		{
-			::std::srand ( ::std::time ( NULL ) );
-			return;
-		}
-	};
-	/*\@}*/
+        /** Initialize random number generator using srand(). */
+        void operator() ( void ) const
+        {
+            ::std::srand ( ::std::time ( NULL ) );
+            return;
+        }
+    };
+    /*\@}*/
 
 } // namespace neural_net
 

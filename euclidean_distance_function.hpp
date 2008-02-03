@@ -35,7 +35,7 @@
  */
 
 /*
- * e-mail: habdank AT megapolis DOT pl
+ * e-mail: habdank AT gmail DOT com
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
  * File created: Fri 14 Apr 2006 22:42:31 CEST
@@ -60,97 +60,97 @@
 
 namespace distance
 {
-	/**
-	 * \addtogroup distance
-	 */
-	/*\@{*/
+    /**
+     * \addtogroup distance
+     */
+    /*\@{*/
 
-	/**
-	 * Euclidean_distance_function template class.
-	 * \param Value_type is a type of values.
-	 * \f[
-	 * d (x,y) = \sum\limits_{i=0}^{N} cdot (x_i-y_i)^2
-	 * \f]
-	 */
-	template
-	<
-		typename Value_type
-	>
-	class Euclidean_distance_function
-	: public Basic_weak_distance_function
-	<
-		Value_type,
-		Value_type
-	>
-	{
-	public:
-		/**
-		 * Constructor.
-		 */
-		Euclidean_distance_function()
-		{}
+    /**
+     * Euclidean_distance_function template class.
+     * \param Value_type is a type of values.
+     * \f[
+     * d (x,y) = \sum\limits_{i=0}^{N} cdot (x_i-y_i)^2
+     * \f]
+     */
+    template
+    <
+        typename Value_type
+    >
+    class Euclidean_distance_function
+    : public Basic_weak_distance_function
+    <
+        Value_type,
+        Value_type
+    >
+    {
+    public:
+        /**
+         * Constructor.
+         */
+        Euclidean_distance_function()
+        {}
 
-		/**
-		 * Calculation function.
-		 * \param x first input value for the function.
-		 * \param y second input value for the function.
-		 * \return square of the Euclidean distance function.
-		 * \f[
-		 * d (x,y) = \sum\limits_{i=0}^{N} cdot (x_i-y_i)^2
-		 * \f]
-		 */
-		typename Value_type::value_type operator()
-		(
-			Value_type const & x,
-			Value_type const & y
-		) const
-		{
-			return
-			(
-				euclidean_distance_square
-				(
-					x.begin(),
-					x.end(),
-					y.begin(),
-					static_cast < typename Value_type::value_type const & > ( 0 )
-				)
-			);
-		}
+        /**
+         * Calculation function.
+         * \param x first input value for the function.
+         * \param y second input value for the function.
+         * \return square of the Euclidean distance function.
+         * \f[
+         * d (x,y) = \sum\limits_{i=0}^{N} cdot (x_i-y_i)^2
+         * \f]
+         */
+        typename Value_type::value_type operator()
+        (
+            Value_type const & x,
+            Value_type const & y
+        ) const
+        {
+            return
+            (
+                euclidean_distance_square
+                (
+                    x.begin(),
+                    x.end(),
+                    y.begin(),
+                    static_cast < typename Value_type::value_type const & > ( 0 )
+                )
+            );
+        }
 
-	private:
-		typedef typename Value_type::value_type inner_type;
-		
-		/**
-		* Function calculates Euclidean distance between two containers.
-		* \param begin_1 is a begin iterator for the first container.
-		* \param end_1 is an end iterator for the first container.
-		* \param begin_2 is an begin iterator for the second container.
-		* \param init is an initial value.
-		* \result sqare of Euclidean distance.
-		*/
-		inner_type euclidean_distance_square
-		(
-			typename Value_type::const_iterator begin_1,
-			typename Value_type::const_iterator end_1,
-			typename Value_type::const_iterator begin_2,
-			inner_type const & init
-		) const
-		{
-			return ::std::inner_product
-			(
-				begin_1, end_1, begin_2,
-				static_cast < inner_type > ( init ),
-				::std::plus < inner_type >(),
-				::operators::compose_f_gxy_gxy
-				(
-					::std::multiplies < inner_type >(),
-					::std::minus < inner_type >()
-				)
-			);
-		}
+    private:
+        typedef typename Value_type::value_type inner_type;
 
-	};
-	/*\@}*/
+        /**
+        * Function calculates Euclidean distance between two containers.
+        * \param begin_1 is a begin iterator for the first container.
+        * \param end_1 is an end iterator for the first container.
+        * \param begin_2 is an begin iterator for the second container.
+        * \param init is an initial value.
+        * \result sqare of Euclidean distance.
+        */
+        inner_type euclidean_distance_square
+        (
+            typename Value_type::const_iterator begin_1,
+            typename Value_type::const_iterator end_1,
+            typename Value_type::const_iterator begin_2,
+            inner_type const & init
+        ) const
+        {
+            return ::std::inner_product
+            (
+                begin_1, end_1, begin_2,
+                static_cast < inner_type > ( init ),
+                ::std::plus < inner_type >(),
+                ::operators::compose_f_gxy_gxy
+                (
+                    ::std::multiplies < inner_type >(),
+                    ::std::minus < inner_type >()
+                )
+            );
+        }
+
+    };
+    /*\@}*/
 
 } // namespace distance
 
