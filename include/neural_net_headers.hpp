@@ -36,7 +36,7 @@
 
 /*
  * e-mail: habdank AT gmail DOT com
- * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
+ * e-mail: janusz.rybarski AT gmail DOT com
  *
  * File created: Fri 12 May 2006 14:39:01 CEST
  * Last modified: Sat 16 Dec 2006 16:06:28 CET
@@ -44,6 +44,15 @@
 
 #ifndef NEURAL_NET_HEADERS_HPP_INCLUDED
 #define NEURAL_NET_HEADERS_HPP_INCLUDED
+
+/** \mainpage Kohonen Neural Network Library
+ *
+ * \section intro_sec Introduction
+ *
+ * KNNL is header based library for developing Kohonen Neural Networks.
+ *
+ */
+
 
 /**
  * \file neural_net_headers.hpp
