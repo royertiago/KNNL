@@ -91,7 +91,7 @@ namespace distance
         Parameters_type const * parameters;
 
         /** Parameters size. */
-        size_t parameters_size;
+        ::boost::int32_t parameters_size;
 
     public:
         typedef Parameters_type parameters_type;

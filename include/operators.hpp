@@ -406,7 +406,7 @@ namespace operators
         }
     };
 
-    template < typename T, int N >
+    template < typename T, ::boost::int32_t N >
     struct static_power_t;
 
     template < typename T >
@@ -418,7 +418,7 @@ namespace operators
         }
     };
 
-    template < typename T, int N >
+    template < typename T, ::boost::int32_t N >
     struct static_power_t
     {
         T operator()( T const x )
@@ -428,7 +428,7 @@ namespace operators
         }
     };
 
-    template < typename T, int N >
+    template < typename T, ::boost::int32_t N >
     T static_power ( T const x )
     {
         return static_power_t<T,N>()(x);

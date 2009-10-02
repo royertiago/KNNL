@@ -42,6 +42,8 @@
  * Last modified: Wed 08 Aug 2007 18:22:31 CEST
  */
 
+#include <boost/cstdint.hpp>
+
 #include "../include/debugger.hpp"
 
 #include "../include/std_headers.hpp"
@@ -92,7 +94,7 @@
 
 /**
  * \file main.cpp
- * \brief Main file of the program contains int main ( int argc, char * argv[] ) function :-)
+ * \brief Main file of the program contains ::boost::int32_t main ( ::boost::int32_t argc, char * argv[] ) function :-)
  */
 
 /**
@@ -120,7 +122,7 @@
 /**
  * Main function of the program.
  */
-int main ( int argc, char * argv[] )
+::boost::int32_t main ( ::boost::int32_t argc, char * argv[] )
 {
 #ifdef FTDEBUG
     DEBUGGER_STREAM =
@@ -132,7 +134,7 @@ int main ( int argc, char * argv[] )
     CONF.set_program_name ( "Kohonen Network Library Demo" );
     CONF.set_version_number ( "0.0.1" );
 
-    int return_value = 1;
+    ::boost::int32_t return_value = 1;
 
     // flag used when compilation is prepared for the tests using pmap linux command
 #ifdef PMAP
@@ -180,19 +182,19 @@ int main ( int argc, char * argv[] )
         delete file_ptr;
 
         // start random generator
-        ::std::srand ( time ( NULL ) );
+        ::std::srand (static_cast<unsigned int> (time (NULL)));
 
         // it could cause problems
         try
         {
             // set number of rows for network
-            int R = CONF.parameters.no_rows;
+            ::boost::int32_t R = CONF.parameters.no_rows;
             // set number of columns for network
-            int C = CONF.parameters.no_columns;
+            ::boost::int32_t C = CONF.parameters.no_columns;
 
             // set number of the the training epochs
             // one epoch it is training through all data stored in container
-            unsigned int const no_epochs = CONF.parameters.no_epochs;
+            ::boost::int32_t const no_epochs = CONF.parameters.no_epochs;
 
             // example of using macro for debugging
             D ( R );
@@ -221,12 +223,12 @@ int main ( int argc, char * argv[] )
             D ( data.size() );
 
             // configure Cauchy hat function
-            typedef ::neural_net::Cauchy_function < V_d::value_type, V_d::value_type, int > C_a_f;
+            typedef ::neural_net::Cauchy_function < V_d::value_type, V_d::value_type, ::boost::int32_t > C_a_f;
             // Activation function for neurons
             C_a_f c_a_f ( 2.0, 1 );
 
             // configure Gauss hat function
-            typedef ::neural_net::Gauss_function < V_d::value_type, V_d::value_type, int > G_a_f;
+            typedef ::neural_net::Gauss_function < V_d::value_type, V_d::value_type, ::boost::int32_t > G_a_f;
             // Activation function for neurons
             G_a_f g_a_f ( 2.0, 1 );
 
@@ -313,7 +315,7 @@ int main ( int argc, char * argv[] )
                 ( R, C, g_a_f, we_d, data, kohonen_network_w, ER );
 
             // construct WTA training functional
-            typedef ::neural_net::Wta_proportional_training_functional < V_d, double, int > Wta_train_func;
+            typedef ::neural_net::Wta_proportional_training_functional < V_d, double, ::boost::int32_t > Wta_train_func;
 
             // define proper functionals
             // Wta_train_func wta_train_func_0 ( 
@@ -352,7 +354,7 @@ int main ( int argc, char * argv[] )
             Learning_algorithm training_alg ( wta_train_func );
 
             // train network
-            for ( unsigned int i = 0; i < no_epochs; ++i )
+            for ( ::boost::int32_t i = 0; i < no_epochs; ++i )
             {
                 training_alg ( data.begin(), data.end(), &kohonen_network );
                 // beter results are reached if data are sorted in each cycle
@@ -371,7 +373,7 @@ int main ( int argc, char * argv[] )
             Learning_algorithm training_alg_1 ( wta_train_func_1 );
 
             // train network
-            for ( unsigned int i = 0; i < no_epochs; ++i )
+            for ( ::boost::int32_t i = 0; i < no_epochs; ++i )
             {
                 training_alg_1 ( data.begin(), data.end(), &kohonen_network_1 );
                 // beter results are reached if data are sorted in each cycle
@@ -390,7 +392,7 @@ int main ( int argc, char * argv[] )
             Learning_algorithm_w training_alg_w ( wta_train_func_1, l_n_i );
 
             // train network
-            for ( unsigned int i = 0; i < no_epochs; ++i )
+            for ( ::boost::int32_t i = 0; i < no_epochs; ++i )
             {
                 training_alg_w ( data.begin(), data.end(), &kohonen_network_w );
                 // beter results are reached if data are sorted in each cycle
@@ -413,28 +415,28 @@ int main ( int argc, char * argv[] )
             // construct topologies for WTM training algorithm
             // city_top and max_top is not used in examples below,
             // but for tests in this file have to be done
-            ::neural_net::City_topology < size_t > city_top();
-            ::neural_net::Max_topology < size_t > max_top();
+            //::neural_net::City_topology < ::boost::int32_t > city_top;
+            //::neural_net::Max_topology < ::boost::int32_t > max_top;
 
             // Hexagonal topology will be used in further tests
-            typedef ::neural_net::Hexagonal_topology < size_t > Hex_top;
+            typedef ::neural_net::Hexagonal_topology < ::boost::int32_t > Hex_top;
             Hex_top hex_top ( kohonen_network.get_no_rows() );
 
             // construct another functions that are need for WTM algorithm
             // functors below are used for weighting training of neurons
             // with respect to the data space
-            typedef ::neural_net::Gauss_function < V_d::value_type, V_d::value_type, int > G_f_space;
+            typedef ::neural_net::Gauss_function < V_d::value_type, V_d::value_type, ::boost::int32_t > G_f_space;
             G_f_space g_f_space ( 100, 1 );
-            typedef ::neural_net::Cauchy_function < V_d::value_type, V_d::value_type, int > C_f_space;
+            typedef ::neural_net::Cauchy_function < V_d::value_type, V_d::value_type, ::boost::int32_t > C_f_space;
             C_f_space c_f_space ( 100, 1 );
             typedef ::neural_net::Constant_function < V_d::value_type, V_d::value_type > Co_f_space;
             Co_f_space co_f_space ( 1 );
 
             // functors below are used for weighting training of neurons
             // with respect to the neural network topology
-            typedef ::neural_net::Gauss_function < size_t, V_d::value_type, int > G_f_net;
+            typedef ::neural_net::Gauss_function < ::boost::int32_t, V_d::value_type, ::boost::int32_t > G_f_net;
             G_f_net g_f_net ( 10, 1 );
-            typedef ::neural_net::Cauchy_function < size_t, V_d::value_type, int > C_f_net;
+            typedef ::neural_net::Cauchy_function < ::boost::int32_t, V_d::value_type, ::boost::int32_t > C_f_net;
             C_f_net c_f_net ( 10, 1 );
 
             // typedefs for tests
@@ -448,12 +450,12 @@ int main ( int argc, char * argv[] )
             typedef ::neural_net::Classic_training_weight
                 <
                 V_d,
-                int,
+                ::boost::int32_t,
                 Net_func,
                 Space_func,
                 Net_top,
                 Space_top,
-                size_t
+                ::boost::int32_t
                     > Classic_weight;
 
             // define if
@@ -468,12 +470,12 @@ int main ( int argc, char * argv[] )
             typedef ::neural_net::Experimental_training_weight
                 <
                 V_d,
-                int,
+                ::boost::int32_t,
                 Net_func,
                 Space_func,
                 Net_top,
                 Space_top,
-                size_t,
+                ::boost::int32_t,
                 double
                     > Experimental_weight;
 
@@ -484,12 +486,12 @@ int main ( int argc, char * argv[] )
             typedef ::neural_net::Experimental_training_weight
                 <
                 V_d,
-                int,
+                ::boost::int32_t,
                 Net_func,
                 Co_f_space,
                 Net_top,
                 Space_top,
-                size_t,
+                ::boost::int32_t,
                 double
                     > Experimental_weight_co;
 
@@ -501,8 +503,8 @@ int main ( int argc, char * argv[] )
                 <
                 V_d,
                 double,
-                int,
-                size_t,
+                ::boost::int32_t,
+                ::boost::int32_t,
                 Classic_weight
                     > Wtm_c_l_f;
 
@@ -514,8 +516,8 @@ int main ( int argc, char * argv[] )
                 <
                 V_d,
                 double,
-                int,
-                size_t,
+                ::boost::int32_t,
+                ::boost::int32_t,
                 Experimental_weight
                     > Wtm_e_l_f;
 
@@ -527,8 +529,8 @@ int main ( int argc, char * argv[] )
                 <
                 V_d,
                 double,
-                int,
-                size_t,
+                ::boost::int32_t,
+                ::boost::int32_t,
                 Experimental_weight_co
                     > Wtm_e_l_f_co;
 
@@ -546,14 +548,14 @@ int main ( int argc, char * argv[] )
                 V_d,
                 V_v_d::iterator,
                 Wtm_c_l_f,
-                size_t
+                ::boost::int32_t
                     > Wtm_c_training_alg;
 
             // definition
             Wtm_c_training_alg wtm_c_train_alg ( wtm_c_l_f );
 
             // tricky training
-            for ( unsigned int i = 0; i < no_epochs; ++i )
+            for ( ::boost::int32_t i = 0; i < no_epochs; ++i )
             {
                 // train network using data
                 wtm_c_train_alg ( data.begin(), data.end(), &kohonen_network_2 );
@@ -575,7 +577,7 @@ int main ( int argc, char * argv[] )
             //::std::cout << ::std::endl;
 
             // small helping constant to set iteration boundary of the repel function
-            unsigned int const border = 3;
+            ::boost::int32_t const border = 3;
 
             // construct another algorithm
             typedef ::neural_net::Wtm_training_algorithm
@@ -584,13 +586,13 @@ int main ( int argc, char * argv[] )
                 V_d,
                 V_v_d::iterator,
                 Wtm_e_l_f,
-                size_t
+                ::boost::int32_t
                     > Wtm_c_training_alg_e;
 
             // definition
             Wtm_c_training_alg_e wtm_c_train_alg_e ( wtm_e_l_f );
 
-            for ( unsigned int i = 0; i < no_epochs; ++i )
+            for ( ::boost::int32_t i = 0; i < no_epochs; ++i )
             {
                 // repel neurons just at the begining
                 if ( i < border )
@@ -636,7 +638,7 @@ int main ( int argc, char * argv[] )
             wtm_c_train_alg_e_c.training_functional.generalized_training_weight.parameter_0
                 = 0;
 
-            for ( unsigned int i = 0; i < no_epochs; ++i )
+            for ( ::boost::int32_t i = 0; i < no_epochs; ++i )
             {
                 // train
                 wtm_c_train_alg_e_c ( data.begin(), data.end(), &kohonen_network_5 );
@@ -664,7 +666,7 @@ int main ( int argc, char * argv[] )
                 V_d,
                 V_v_d::iterator,
                 Wtm_e_l_f_co,
-                size_t
+                ::boost::int32_t
                     > Wtm_c_training_alg_e_co;
 
             // definition
@@ -676,7 +678,7 @@ int main ( int argc, char * argv[] )
                 = 0;
 
             // similar training
-            for ( unsigned int i = 0; i < no_epochs; ++i )
+            for ( ::boost::int32_t i = 0; i < no_epochs; ++i )
             {
                 wtm_c_train_alg_e_co ( data.begin(), data.end(), &kohonen_network_4 );
 

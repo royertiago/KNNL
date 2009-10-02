@@ -93,10 +93,9 @@ namespace data_parser
          * \throw ::std::runtime_error when after parsing size of data_container is still zero.
          */
         Data_container & operator() ( ::std::istream & is, Data_container & data_container ) const
-        throw ( ::std::runtime_error )
         {
             ::std::string tmp_string;
-            size_t counter = 0;
+            ::boost::int32_t counter = 0;
 
             typename Data_container::value_type tmp_sub_container;
 

@@ -46,6 +46,7 @@
 #define MAX_TYPE_HPP_INCLUDED
 
 #include <boost/type_traits.hpp>
+#include <boost/cstdint.hpp>
 
 /**
  * \file max_type.hpp
@@ -74,10 +75,10 @@ namespace operators
     struct Max_type_private < T1, T2 >\
     { typedef T3 type; };
 
-    MAX_TYPE_3(int,double,double)
+    MAX_TYPE_3(::boost::int32_t,double,double)
+    MAX_TYPE_3(short,::boost::int32_t,::boost::int32_t)
     MAX_TYPE_3(int,long,long)
     MAX_TYPE_3(short,double,double)
-    MAX_TYPE_3(short,long,long)
     MAX_TYPE_3(unsigned char,double,double)
     MAX_TYPE_3(unsigned int,double,double)
     MAX_TYPE_3(unsigned long,double,double)
@@ -92,7 +93,7 @@ namespace operators
     struct Max_type_private < T1, T2 >\
     { typedef T1 type; };
 
-    MAX_TYPE_2(double,int)
+    MAX_TYPE_2(double,::boost::int32_t)
     MAX_TYPE_2(long,int)
     MAX_TYPE_2(long,short)
     MAX_TYPE_2(double,short)
@@ -106,8 +107,8 @@ namespace operators
      * \brief Template that estimates maximal of the mathematical types.
      * \param T_1 first type.
      * \param T_2 second type.
-     * \return type e.g. typeid (typename Max_type <double, int>::type) == typeid (double),
-     * typeid (typename Max_type <::std::complex<int>,double>::type) == typeid (::std::complex<double>).
+     * \return type e.g. typeid (typename Max_type <double, ::boost::int32_t>::type) == typeid (double),
+     * typeid (typename Max_type <::std::complex<::boost::int32_t>,double>::type) == typeid (::std::complex<double>).
      */
     template
     <

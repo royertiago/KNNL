@@ -351,7 +351,8 @@ namespace neural_net
          * \f]
          * where: x is value.
          */
-        result_type operator() ( Value_type const & value ) const
+        result_type operator() ( Value_type const & //value 
+            ) const
         {
             // result
             return ( sigma );

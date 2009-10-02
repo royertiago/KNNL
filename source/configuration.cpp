@@ -52,9 +52,9 @@
 
 namespace config
 {
-    int do_program_options
+    ::boost::int32_t do_program_options
     (
-        int argc, char * argv[],
+        ::boost::int32_t argc, char * argv[],
         Configuration & conf_
     )
     {
@@ -74,22 +74,22 @@ namespace config
         config_opts.add_options()
             (
                 "verbose,v",
-                bpo::value<int> ( &conf_.parameters.verbosity )->default_value ( 0 ),
+                bpo::value< ::boost::int32_t > ( &conf_.parameters.verbosity )->default_value ( 0 ),
                 "verbosity level"
             )
             (
                 "no-rows,r",
-                bpo::value<size_t> ( &conf_.parameters.no_rows )->default_value ( 2 ),
+                bpo::value< ::boost::int32_t > ( &conf_.parameters.no_rows )->default_value ( 2 ),
                 "number of rows in kohonen network"
             )
             (
                 "no-columns,c",
-                bpo::value<size_t> ( &conf_.parameters.no_columns )->default_value ( 3 ),
+                bpo::value< ::boost::int32_t > ( &conf_.parameters.no_columns )->default_value ( 3 ),
                 "number of columns in kohonen network"
             )
             (
                 "no-epochs,e",
-                bpo::value<unsigned long> ( &conf_.parameters.no_epochs )->default_value ( 20 ),
+                bpo::value< ::boost::int32_t > ( &conf_.parameters.no_epochs )->default_value ( 20 ),
                 "number of training epochs"
             );
 

@@ -162,7 +162,7 @@ namespace neural_net
          * \param data_end is end iterator.
          * \return error code.
          */
-        int operator()
+        ::boost::int32_t operator()
         (
             Data_iterator_type data_begin,
             Data_iterator_type data_end,
@@ -227,8 +227,8 @@ namespace neural_net
             typename Network_type::column_iterator c_iter;
 
             // set ranges for iteration procedure
-            size_t r_counter = 0;//network->objects.size();
-            size_t c_counter = 0;//network->objects[0].size();
+            ::boost::int32_t r_counter = 0;//network->objects.size();
+            ::boost::int32_t c_counter = 0;//network->objects[0].size();
 
             for ( r_iter = network->objects.begin();
                   r_iter != network->objects.end();

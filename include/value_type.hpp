@@ -45,6 +45,8 @@
 #ifndef VALUE_TYPE_HPP_INCLUDED
 #define VALUE_TYPE_HPP_INCLUDED
 
+#include <boost/cstdint.hpp>
+
 /**
  * \file value_type.hpp
  * \brief File contains template to recognize type of value.
@@ -69,21 +71,15 @@ namespace operators
 	{
 		typedef double type;
 	};
-
+	
 	template <>
-	struct Value_type < int >
+	struct Value_type < unsigned int >
 	{
 		typedef double type;
 	};
 	
-	template <>
-	struct Value_type < long >
-	{
-		typedef double type;
-	};
-
-	template <>
-	struct Value_type < unsigned int >
+    template <>
+    struct Value_type < ::boost::int32_t >
 	{
 		typedef double type;
 	};
