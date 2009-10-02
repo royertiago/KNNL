@@ -46,6 +46,7 @@
 #define CONFIGURATION_HPP_INCLUDED
 
 #include <iostream>
+#include <boost/cstdint.hpp>
 #include <boost/program_options.hpp>
 
 /**
@@ -69,19 +70,19 @@
 namespace config
 {
     /**
-     * Base for calculation major number as unsigned int.
+     * Base for calculation major number as ::boost::int32_t.
      */
-    unsigned int const BASE_MAJOR = 16777216;
+    ::boost::int32_t const BASE_MAJOR = 16777216;
 
     /**
-     * Base for calculation minor number as unsigned int.
+     * Base for calculation minor number as ::boost::int32_t.
      */
-    unsigned int const BASE_MINOR = 16384;
+    ::boost::int32_t const BASE_MINOR = 16384;
 
     /**
      * Width of screen for displaying options.
      */
-    unsigned int const screen_width = 80;
+    ::boost::int32_t const screen_width = 80;
 
     /** Exit status. */
     enum
@@ -100,9 +101,9 @@ namespace config
      */
     struct Version_struct
     {
-        unsigned int major;        /**< Number on the first position in the string */
-        unsigned int minor;        /**< Number on the second position in the string */
-        unsigned int release;    /**< Number on the third position in the string */
+        ::boost::int32_t major;        /**< Number on the first position in the string */
+        ::boost::int32_t minor;        /**< Number on the second position in the string */
+        ::boost::int32_t release;    /**< Number on the third position in the string */
         ::std::string quantifier;    /**< Rest of version number string */
     };
 
@@ -116,7 +117,7 @@ namespace config
         /**
          * Verbosity level.
          */
-        int verbosity;
+        ::boost::int32_t verbosity;
 
         /**
          * Input file name.
@@ -126,19 +127,19 @@ namespace config
         /**
          * Number of rows in kohonen network.
          */
-        size_t no_rows;
+        ::boost::int32_t no_rows;
 
         /**
          * Number of columns in kohonen network.
          */
-        size_t no_columns;
+        ::boost::int32_t no_columns;
 
         /**
          * Number of epochs of the training algorithm.
          * In this demo program the <b>one</b> epoch is
          * <b>one</b> pass through the all training data.
          */
-        unsigned long no_epochs;
+        ::boost::int32_t no_epochs;
 
     };
 
@@ -215,10 +216,10 @@ namespace config
             // initialize stringstream
             ::std::stringstream s_v_s ( v_s );
             // and table for temporal data
-            int tmp_tab[3];
+            ::boost::int32_t tmp_tab[3];
 
             // "parse" stringstream
-            for ( int i = 0; i < 3; ++i )
+            for ( ::boost::int32_t i = 0; i < 3; ++i )
             {
                 tmp_tab[i] = 0;
                 s_v_s >> tmp_tab[i];
@@ -266,9 +267,9 @@ namespace config
 
         /**
          * Get version number.
-         * \return unsigned int it is needed by the ::boost::serialisation package.
+         * \return ::boost::int32_t it is needed by the ::boost::serialisation package.
          */
-        inline unsigned int get_version_number()
+        inline ::boost::int32_t get_version_number()
         {
             return version_number;
         }
@@ -289,19 +290,19 @@ namespace config
         ::std::string version_string;
 
         /** Version number. */
-        unsigned int version_number;
+        ::boost::int32_t version_number;
 
         /**
          * Calculate version number from data in Version_struct.
          * \param version_struct_ contains version information.
-         * \return unsigned int value of the version.
+         * \return ::boost::int32_t value of the version.
          */
-        inline unsigned int calculate_version_number ( Version_struct & version_struct_ )
+        inline ::boost::int32_t calculate_version_number ( Version_struct & version_struct_ )
         {
-            // calculate version as a unsigned int number
-            return version_struct.major * BASE_MAJOR
-                + version_struct.minor * BASE_MINOR
-                + version_struct.release;
+            // calculate version as a ::boost::int32_t number
+            return version_struct_.major * BASE_MAJOR
+                + version_struct_.minor * BASE_MINOR
+                + version_struct_.release;
         }
 
         /**
@@ -334,7 +335,7 @@ namespace config
      * \param conf_ is a configuration object.
      * \return exit status.
      */
-    int do_program_options ( int argc, char * argv[], Configuration & conf_ );
+    ::boost::int32_t do_program_options ( ::boost::int32_t argc, char * argv[], Configuration & conf_ );
 
 } // namespace config
 /*\@}*/

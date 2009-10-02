@@ -96,7 +96,7 @@ namespace neural_net
         /** Initialize random number generator using srand(). */
         void operator() ( void ) const
         {
-            ::std::srand ( ::std::time ( NULL ) );
+            ::std::srand (static_cast<unsigned int> (::std::time (NULL)));
             return;
         }
     };

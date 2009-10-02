@@ -95,6 +95,20 @@ namespace neural_net
     }
 
     /**
+     * Function puts container of any values to the stream.
+     * \param os is a output stream.
+     * \param value is a value.
+     * \return modified stream.
+     */
+    template < typename T >
+    inline ::std::ostream & container_to_ostream ( ::std::ostream & os, T const & container )
+    {
+        typedef typename T::value_type Value;
+        ::std::copy ( container.begin(), container.end(), ::std::ostream_iterator < Value > ( os, " " ) );
+        return os;
+    }
+
+    /**
      * Function prints structure and results of the neural network.
      * \param os is output stream.
      * \param network is a reference to network.
@@ -122,7 +136,9 @@ namespace neural_net
                         > ( os, "\t" )
                     );
                 os << " ( ";
-                value_to_ostream ( os, value );
+                
+                container_to_ostream ( os, value );
+                
                 os << " ) == ";
                 //os << network.objects[i][j] ( value );
                 //os << " == ";
@@ -131,32 +147,6 @@ namespace neural_net
             }
             os << ::std::endl;
         }
-        return os;
-    }
-
-    /**
-     * Function puts values to the stream.
-     * \param os is a output stream.
-     * \param value is a value.
-     * \return modified stream.
-     */
-    template < typename T >
-    inline ::std::ostream & value_to_ostream ( ::std::ostream & os, T const & value )
-    {
-        os << value;
-        return os;
-    }
-
-    /**
-     * Function puts container of any values to the stream.
-     * \param os is a output stream.
-     * \param value is a value.
-     * \return modified stream.
-     */
-    template < typename T, template < typename T > class CONT >
-    inline ::std::ostream & value_to_ostream ( ::std::ostream & os, CONT<T> const & value )
-    {
-        ::std::copy ( value.begin(), value.end(), ::std::ostream_iterator < T > ( os, " " ) );
         return os;
     }
     /*\@}*/

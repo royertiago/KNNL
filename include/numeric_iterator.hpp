@@ -45,6 +45,8 @@
 #ifndef NUMERIC_ITERATOR_HPP_INCLUDED
 #define NUMERIC_ITERATOR_HPP_INCLUDED
 
+#include <boost/cstdint.hpp>
+
 /**
  * \file numeric_iterator.hpp
  * \brief File contains template classes for preparing numeric iterators.
@@ -135,7 +137,8 @@ namespace neural_net
         inline Linear_numeric_iterator < Value_type >
         operator++ ( int )
         {
-            Value_type tmp ( Numeric_iterator < Value_type >::state );
+            typedef Numeric_iterator < Value_type > Value_numeric_iterator;
+            Value_type tmp ( Value_numeric_iterator::state );
             Numeric_iterator < Value_type >::state += step;
             return tmp;
         }
@@ -150,7 +153,7 @@ namespace neural_net
         Value_type step;
     };
 
-    typedef Linear_numeric_iterator < int > linear_numeric_iterator;
+    typedef Linear_numeric_iterator < ::boost::int32_t > linear_numeric_iterator;
     /*\@}*/
 
 } // namespace neural_net

@@ -172,7 +172,8 @@ namespace neural_net
         (
             Value_type const & weight,
             Value_type const & value,
-            Iteration_type const & iteration,
+            Iteration_type const & //iteration
+            ,
             Index_type const & c_1,
             Index_type const & c_2,
             Index_type const & v_1,
@@ -292,8 +293,8 @@ namespace neural_net
         typename Space_topology,
         typename Index_type,
         typename Parameter_type,
-        unsigned int n_power = 1,
-        unsigned int s_power = 1
+        ::boost::int32_t n_power = 1,
+        ::boost::int32_t s_power = 1
     >
     class Experimental_training_weight
     : public Basic_generalized_training_weight
@@ -309,8 +310,8 @@ namespace neural_net
     {
     public:
 
-        //unsigned int const s_power;
-        //unsigned int const n_power;
+        //::boost::int32_t const s_power;
+        //::boost::int32_t const n_power;
 
         /** Scaling parameter. */
         Parameter_type parameter_1;
@@ -348,8 +349,8 @@ namespace neural_net
             Space_topology const & s_t,
             Parameter_type const & parameter_0_,
             Parameter_type const & parameter_1_//,
-//            unsigned int const s_power_ = 1,
-//            unsigned int const n_power_ = 1
+//            ::boost::int32_t const s_power_ = 1,
+//            ::boost::int32_t const n_power_ = 1
         )
         : //s_power ( s_power_ ),
         //n_power ( n_power_ ),
@@ -426,14 +427,15 @@ namespace neural_net
         (
             Value_type & weight,
             Value_type const & value,
-            Iteration_type const & iteration,
+            Iteration_type const & //iteration
+            ,
             Index_type const & c_1,
             Index_type const & c_2,
             Index_type const & v_1,
             Index_type const & v_2
         ) const
         {
-            //::operators::power < typename Space_function_type::value_type, unsigned int > power_v;
+            //::operators::power < typename Space_function_type::value_type, ::boost::int32_t > power_v;
             // calculate result
             return
             (

@@ -159,7 +159,7 @@ namespace neural_net
          * \param data_end is end iterator.
          * \return error code.
          */
-        int operator()
+        ::boost::int32_t operator()
         (
             Data_iterator_type data_begin,
             Data_iterator_type data_end,
