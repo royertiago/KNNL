@@ -36,7 +36,7 @@
 
 /*
  * e-mail: habdank AT gmail DOT com
- * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
+ * e-mail: janusz.rybarski AT gmail DOT com
  *
  * File created: Mon 06 Feb 2006 17:51:24 CET
  * Last modified: Wed 08 Aug 2007 18:28:01 CEST
