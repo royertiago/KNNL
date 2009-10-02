@@ -16,8 +16,7 @@ GCC=g++
  
 ## Libraries to link against
 ## example:
-LIBS+=-lboost_program_options-gcc
-LIBS+=-lboost_filesystem-gcc
+LIBS+=-lboost_program_options-mt
 
 ## Local include paths
 INCLUDE=-I.
@@ -50,7 +49,7 @@ endef
 
 define core_info
 	## Compilation flags
-	CFLAGS+= -Wall -pedantic -ansi 
+	CFLAGS+= -pedantic -ansi 
 	#CFLAGS+= -Wconversion -Wpointer-arith 
 	#CFLAGS+= -Wcast-align
 	#CFLAGS+= -Wwrite-strings 
@@ -63,12 +62,11 @@ define core_info
 	#CFLAGS+= -ftree-vectorize 
 	#CFLAGS+= -ftree-vectorizer-verbose=5
 	CFLAGS+= -fno-strict-aliasing 
-	eFLAGS+= -fPIC
+	CFLAGS+= -fPIC
 	CFLAGS+= -msse
-	CFLAGS+= $(shell ./gcccpuopt.sh)
-	## example:
-	# CFLAGS+=$(shell pkg-config --cflags gtkmm-2.4)
 endef
+
+CFLAGS+= -Wall 
 
 release:
 	@ echo ""
@@ -116,8 +114,8 @@ CC=${GCC} ${INCLUDE} ${CFLAGS} ${GFLAGS}
 LINK=${GCC} ${GFLAGS} ${LFLAGS}
 GENDEP=${GCC} ${GFLAGS} ${CFLAGS} -MM ${INCLUDE} 
 
-OBJS:=$(patsubst %.${EXT},%.o, $(wildcard *.${EXT}))
-DEPS:=$(patsubst %.${EXT},.%.d, $(wildcard *.${EXT}))
+OBJS:=../../source/main.o ../../source/configuration.o
+DEPS:=../../source/main.d ../../source/configuration.d
 
 .PHONY: program
 program: ${PROGS}
@@ -144,7 +142,7 @@ ${PROGS}: ${DEP} ${OBJS}
 
 ${OBJS}: %.o: %.${EXT}
 	@ echo CC $<
-	@ ${CC} -c $<
+	@ ${CC} -c $< -o $@
 
 REALDEPS:=$(wildcard .*.d)
 ifneq ($(strip $(REALDEPS)),)
@@ -162,3 +160,4 @@ clean:
 
 	@ echo CLEAN ${DEPS}
 	@ rm -f ${DEPS}
+
