@@ -49,7 +49,6 @@
 
 #include "operators.hpp"
 #include "basic_weak_distance_function.hpp"
-
 #include "value_type.hpp"
 
 /**

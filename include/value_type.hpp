@@ -35,55 +35,68 @@
  */
 
 /*
- * e-mail: habdank AT gmail DOT com
+ * e-mail: habdank AT megapolis DOT pl
  * e-mail: janusz.rybarski AT ae DOT krakow DOT pl
  *
- * File created: Tue 11 Apr 2006 17:47:44 CEST
- * Last modified: Mon 22 May 2006 13:28:47 CEST
+ * File created: Thu 08 Jun 2006 18:12:00 CEST
+ * Last modified: Thu 08 Jun 2006 18:18:00 CEST
  */
 
-#ifndef BASIC_ACTIVATION_FUNCTION_HPP_INCLUDED
-#define BASIC_ACTIVATION_FUNCTION_HPP_INCLUDED
+#ifndef VALUE_TYPE_HPP_INCLUDED
+#define VALUE_TYPE_HPP_INCLUDED
 
 /**
- * \file basic_activation_function.hpp
- * \brief File contains template class Basic_activation_function.
- * \ingroup neural_net
+ * \file value_type.hpp
+ * \brief File contains template to recognize type of value.
+ * \ingroup operators
  */
 
-namespace neural_net
+namespace operators
 {
-    /**
-     * \addtogroup neural_net
-     */
-    /*\@{*/
+	/**
+	 * \addtogroup operators
+	 */
+	/*\@{*/
 
-    /**
-     * Basic_activation_function template class.
-     * \param Parameters_type is type of parameters.
-     * \param Value_type is a type of values.
-     * \param Result_type is a type of results.
-     */
-    template
-    <
-        typename Parameters_type,
-        typename Value_type,
-        typename Result_type
-    >
-    class Basic_activation_function
-    {
-    public:
-        /** Result type. */
-        typedef Result_type result_type;
+	template < typename T >
+	struct Value_type
+	{
+		typedef typename T::value_type type;
+	};
 
-        /** Value type. */
-        typedef Value_type value_type;
+	template <>
+	struct Value_type < double >
+	{
+		typedef double type;
+	};
 
-        /** Parameters type. */
-        typedef Parameters_type parameters_type;
-    };
-    /*\@}*/
+	template <>
+	struct Value_type < int >
+	{
+		typedef double type;
+	};
+	
+	template <>
+	struct Value_type < long >
+	{
+		typedef double type;
+	};
 
-} // namespace neural_net
+	template <>
+	struct Value_type < unsigned int >
+	{
+		typedef double type;
+	};
+	
+	template <>
+	struct Value_type < unsigned long >
+	{
+		typedef double type;
+	};
+	
+	/*\@}*/
 
-#endif // BASIC_ACTIVATION_FUNCTION_HPP_INCLUDED
+} // namespace operators
+
+#endif // VALUE_TYPE_HPP_INCLUDED
+

@@ -156,4 +156,3 @@ namespace data_parser
 /*\@}*/
 
 #endif // DATA_PARSER_HPP_INCLUDED
-
