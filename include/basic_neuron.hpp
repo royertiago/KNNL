@@ -172,4 +172,3 @@ namespace neural_net
 /*\@}*/
 
 #endif // BASIC_NEURON_HPP_INCLUDED
-

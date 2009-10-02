@@ -29,10 +29,10 @@
  * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
-* WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
-* OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+ * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
 /*
  * e-mail: habdank AT gmail DOT com
@@ -42,11 +42,12 @@
  * Last modified: Wed 08 Aug 2007 18:22:31 CEST
  */
 
-#include "debugger.hpp"
+#include "../include/debugger.hpp"
 
-#include "std_headers.hpp"
-#include "neural_net_headers.hpp"
-#include "data_parser.hpp"
+#include "../include/std_headers.hpp"
+#include "../include/neural_net_headers.hpp"
+#include "../include/data_parser.hpp"
+
 #include "configuration.hpp"
 
 // PMAP is used just to hold program for debugging memory usage
@@ -250,7 +251,10 @@ int main ( int argc, char * argv[] )
                   ++pos_max, ++pos_min
             )
             {
-                coefs.push_back ( ::operators::inverse ( ( *pos_max - *pos_min ) * ( *pos_max - *pos_min ) ) ); // weight for i-th axis
+                coefs.push_back (
+                    ::operators::inverse (
+                        ( *pos_max - *pos_min ) * ( *pos_max - *pos_min ) 
+                    ) ); // weight for i-th axis
             }
 
             We_d_t we_d ( &coefs );
@@ -312,7 +316,8 @@ int main ( int argc, char * argv[] )
             typedef ::neural_net::Wta_proportional_training_functional < V_d, double, int > Wta_train_func;
 
             // define proper functionals
-            // Wta_train_func wta_train_func_0 ( static_cast < double > ( R * C ) / static_cast < double > ( data.size() ), 0 );
+            // Wta_train_func wta_train_func_0 ( 
+            //     static_cast < double > ( R * C ) / static_cast < double > ( data.size() ), 0 );
             // Wta_train_func wta_train_func_2 ( 0.3, 1.0 / static_cast<double> (data.size()) );
             Wta_train_func wta_train_func ( 0.2, 0 );
             Wta_train_func wta_train_func_1 ( 0.8, 0 );
@@ -338,8 +343,10 @@ int main ( int argc, char * argv[] )
             //::std::cout << ::std::endl;
 
             // construct WTA training algoritm
-            typedef ::neural_net::Wta_training_algorithm < Kohonen_network, V_d, V_v_d::iterator, Wta_train_func > Learning_algorithm;
-            typedef ::neural_net::Wta_training_algorithm < Kohonen_network_w, V_d, V_v_d::iterator, Wta_train_func > Learning_algorithm_w;
+            typedef ::neural_net::Wta_training_algorithm < 
+                    Kohonen_network, V_d, V_v_d::iterator, Wta_train_func > Learning_algorithm;
+            typedef ::neural_net::Wta_training_algorithm < 
+                    Kohonen_network_w, V_d, V_v_d::iterator, Wta_train_func > Learning_algorithm_w;
 
             // define training algorithm
             Learning_algorithm training_alg ( wta_train_func );

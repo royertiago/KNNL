@@ -112,4 +112,3 @@ namespace distance
 } // namespace distance
 
 #endif // BASIC_WEAK_DISTANCE_FUNCTION_HPP_INCLUDED
-

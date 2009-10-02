@@ -340,4 +340,3 @@ namespace config
 /*\@}*/
 
 #endif // CONFIGURATION_HPP_INCLUDED
-
