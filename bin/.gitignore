@@ -1,0 +1,7 @@
+*
+!.gitignore
+# This repository was built from an existing SVN repository.
+# SVN accepts the inclusion of empty directories; Git doesn't.
+# This .gitignore tells git to ignore every file in this directory,
+# except for this file; it exists solely to keep this directory
+# nonempty, so that git does not refuse to include it in commits.
