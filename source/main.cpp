@@ -44,11 +44,11 @@
 
 #include <boost/cstdint.hpp>
 
-#include "../include/debugger.hpp"
+#include "../include/knnl/debugger.hpp"
 
-#include "../include/std_headers.hpp"
-#include "../include/neural_net_headers.hpp"
-#include "../include/data_parser.hpp"
+#include "../include/knnl/std_headers.hpp"
+#include "../include/knnl/neural_net_headers.hpp"
+#include "../include/knnl/data_parser.hpp"
 
 #include "configuration.hpp"
 
