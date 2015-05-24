@@ -16,7 +16,7 @@ GCC=g++
  
 ## Libraries to link against
 ## example:
-LIBS+=-lboost_program_options-mt
+LIBS+=-lboost_program_options
 
 ## Local include paths
 INCLUDE=-I.
